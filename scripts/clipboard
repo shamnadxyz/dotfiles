@@ -1,0 +1,57 @@
+#!/bin/bash
+
+TRASH="${HOME}/.cache/.clipboard_trash.txt"
+[ ! -f "$TRASH" ] && touch "$TRASH"
+
+print_help(){
+	echo "usage: clipboard [options]"
+	printf "%s\n" "options:"
+	printf -- "  %-5s%-5s\n" "-a" "add content of system clipboard to clipboard file"
+	printf -- "  %-5s%-5s\n" "-d" "delete entry from clipboard file"
+	printf -- "  %-5s%-5s\n" "-p" "paste from clipboard file"
+}
+add_to_clipboard(){
+	text="$(wl-paste)"
+	[ -z "$text" ] && exit 1
+	if ! grep -e "^$text$" "$CLIPBOARD";then
+		wl-paste | awk '{printf "%s\\n", $0}' >> "$CLIPBOARD"
+	fi
+}
+
+delete_from_clipboard(){
+	text="$(cat "$CLIPBOARD" | wofi -d )"
+	if grep -e "^$text$" "$CLIPBOARD";then
+		echo "$text" >> "$TRASH"
+		sed "\|$text|d" -i "$CLIPBOARD"
+	fi
+}
+
+paste_from_clipboard(){
+	text="$(cat "$CLIPBOARD" | wofi -d )"
+	[ -n "$text" ] && wtype "$(echo "$text")"
+}
+
+if pgrep -f "^wofi";then
+	exit 1
+elif [ -z "$CLIPBOARD" ];then
+	notify-send "CLIPBOARD env is not set"
+	exit 1
+fi
+
+while getopts "adp" flag;do
+	case "$flag" in
+		a)
+			add_to_clipboard
+			;;
+		d)
+			delete_from_clipboard
+			;;
+		p)
+			paste_from_clipboard
+			;;
+	esac
+done
+
+if [ -z "$1" ];then
+	print_help
+fi

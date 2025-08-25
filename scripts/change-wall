@@ -1,0 +1,35 @@
+#!/bin/bash
+
+WALLPAPER_PATH="$HOME/.cache/wallpaper"
+
+# Validate required environment variable
+if [ -z "$WALLPAPERS" ];then
+	notify-send "Wallpaper Error" "WALLPAPERS environment variable not set" 
+	exit 1
+fi
+
+# Check if wallpapers directory exists
+if [ ! -d "$WALLPAPERS" ]; then
+    notify-send "Wallpaper Error" "Wallpapers directory does not exist: $WALLPAPERS"
+    exit 1
+fi
+
+# Check dependencies
+for cmd in nsxiv wallust swaybg; do
+    if ! command -v "$cmd" &> /dev/null; then
+        notify-send "Wallpaper Error" "Required command not found: $cmd"
+        exit 1
+    fi
+done
+
+pgrep -f "nsxiv -b "$WALLPAPERS" -rot" > /dev/null && exit 1
+notify-send "Wallpaper Selector" "Press 'Q' to set"
+
+wallpaper="$(nsxiv -b "$WALLPAPERS" -rot)"
+
+if [ -f $wallpaper ]; then
+	ln -s "$wallpaper" "$WALLPAPER_PATH" -f
+	wallust run "$WALLPAPER_PATH" &
+	pkill -f swaybg
+	swaybg -i "$wallpaper" -m fill &
+fi

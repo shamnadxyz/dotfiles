@@ -1,0 +1,12 @@
+allow_images=true
+colors=colors
+no_custom_entry=true
+hide_scroll=true
+image_size=12
+insensitive=true
+line_wrap=word
+no_actions=true
+orientation=vertical
+prompt=Search
+show=dmenu
+term=foot

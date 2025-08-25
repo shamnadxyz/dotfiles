@@ -1,0 +1,90 @@
+set shell bash
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+set drawbox true
+set cursorpreviewfmt "\033[7;2m"
+set ignorecase true
+
+# show the result of execution of previous commands
+map ` !true
+
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/clean
+
+cmd open &{{
+    case $(file --mime-type -Lb $f) in
+        text/*) lf -remote "send $id \$$EDITOR \$fx";;
+        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
+map o &mimeopen $f
+map O $mimeopen --ask $f
+
+cmd extractToDir ${{
+    read -p "Create new directory? [y/N] " create_directory
+    read -p "Name: " directory
+    if [[ "$create_directory" = "y" ]] then
+      mkdir "$directory"
+    fi
+    set -f
+    case $f in
+        *.rar|*.7z|*.zip)
+					7zz x "$f" -o$directory
+					;;
+				*.tar|*.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz)
+					tar -xf "$f" -C "$directory"
+					;;
+    esac
+}}
+
+cmd extract ${{
+    set -f
+    case $f in
+        *.rar|*.7z|*.zip)
+					7zz x "$f"
+					;;
+				*.tar|*.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz)
+					tar -xf "$f"
+					;;
+    esac
+}}
+
+cmd delete ${{
+    set -f
+    printf "$fx\n"
+    read -p "Delete [y/N] " ans
+    [ "$ans" = "y" ] && rm -rf $fx
+}}
+
+cmd archiveToZip ${{
+    set -f
+        printf "$fx\n"
+        printf "archive to zip? [y/N]"
+        read ans
+        if [[ $ans = "y" ]] then
+        read -p "Archive name:" name
+        7zz a ${name}.zip -tzip $fx -mx=0
+        fi
+}}
+
+cmd archiveTo7zip ${{
+    set -f
+        printf "$fx\n"
+        printf "archive to 7zip?[y/n]"
+        read ans
+        if [[ $ans = "y" ]] then
+        read -p "Archive name:" name
+        7zz a ${name}.7z -t7z $fx
+        fi
+}}
+
+map gd cd ~/.config
+
+# Mapping
+map D delete
+map az archiveToZip
+map a7 archiveTo7zip
+map ax extract
+map ad extractToDir

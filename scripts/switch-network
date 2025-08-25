@@ -1,0 +1,14 @@
+#!/bin/bash
+
+selected=$(nmcli -t -f active,name connection | wofi -id -r "printf '%s' | sed 's/yes\:/*/;s/no\://'")
+
+[ "$selected" ] || exit 1
+
+connection="${selected#*:}"
+connected="${selected%%:*}"
+
+if [ "$connected" = "no" ];then
+	nmcli connection up "$connection"
+else
+	nmcli connection down "$connection"
+fi

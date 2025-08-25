@@ -1,0 +1,20 @@
+[global]
+  frame_color = "{{color4}}"
+  highlight = "{{color5}}"
+  separator_color= "{{foreground}}"
+
+[urgency_low]
+  foreground = "{{foreground}}"
+  background = "{{background | darken(0.1)}}E0"
+  frame_color = "{{color15}}"
+
+[urgency_normal]
+  background = "{{background | darken(0.1)}}E0"
+  foreground = "{{foreground}}"
+  frame_color = "{{color15}}"
+
+[urgency_critical]
+  background = "{{background | darken(0.1)}}E0"
+  foreground = "{{foreground}}"
+  frame_color = "#FFA0A0"
+

@@ -1,0 +1,79 @@
+[global]
+  # Appearance
+  font = Hack Nerd Font 12
+  corner_radius = 8
+  corners = all
+  frame_width = 1
+  separator_color = frame
+  separator_height = 5
+  transparency = 0
+
+  # Layout
+  origin = top-right
+  offset = 20x20
+  gap_size = 4
+  padding = 8
+  horizontal_padding = 8
+  text_icon_padding = 8
+  line_height = 4
+  alignment = left
+  vertical_alignment = center
+  ellipsize = end
+
+  # Behavior
+  monitor = 0
+  follow = none
+  enable_posix_regex = true
+  notification_limit = 5
+  show_age_threshold = 60
+  ignore_newline = no
+  sort = update
+  stack_duplicates = true
+  hide_duplicate_count = false
+  show_indicators = true
+  markup = full
+
+  # Icons
+  icon_position = left
+  max_icon_size = 64
+  enable_recursive_icon_lookup = true
+  icon_corner_radius = 8
+  icon_corners = all
+
+  # Progress Bar
+  progress_bar = true
+  progress_bar_height = 10
+  progress_bar_frame_width = 1
+  progress_bar_min_width = 150
+  progress_bar_max_width = 300
+  progress_bar_corner_radius = 2
+  progress_bar_corners = all
+
+  # History
+  sticky_history = yes
+  history_length = 20
+
+  # External
+  dmenu = /usr/bin/wofi -d -p dunst:
+  browser = /usr/bin/xdg-open
+
+  # Script Integration
+  script = ~/private-scripts/gotify-forward
+  always_run_script = true
+
+  # Misc
+  title = Dunst
+  class = Dunst
+  ignore_dbusclose = false
+  force_xwayland = false
+  force_xinerama = false
+
+[urgency_low]
+  timeout = 5
+
+[urgency_normal]
+  timeout = 8
+  override_pause_level = 30
+
+[urgency_critical]
+  timeout = 0
