@@ -37,5 +37,5 @@ export PAGER="less"
 
 # Path
 typeset -U path PATH
-path=("$HOME/scripts" "$HOME/.local/bin" "/usr/local/sbin" "/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/bin") 
+path=("$HOME/scripts" "$HOME/.cargo/bin/" "$HOME/.local/bin" "/usr/local/sbin" "/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/bin") 
 export PATH
