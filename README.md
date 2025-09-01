@@ -1,8 +1,7 @@
 # Arch Linux Dotfiles
 
-## Installation
+## Packages
 
-### Install packages
 
 ```bash
 sudo pacman -S --needed 7zip aria2 brightnessctl btop dunst eza fd foot git \
@@ -15,19 +14,6 @@ sudo pacman -S --needed 7zip aria2 brightnessctl btop dunst eza fd foot git \
              wtype xdg-desktop-portal-hyprland xdg-desktop-portal-wlr \
              yazi zathura zathura-cb zathura-pdf-mupdf zoxide zsh \
              zsh-syntax-highlighting
-```
-
-### Clone the repository
-
-```bash
-git clone https://github.com/yourusername/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-```
-
-### Deploy configurations
-
-```bash
-stow .
 ```
 
 ### Set zsh as default shell
