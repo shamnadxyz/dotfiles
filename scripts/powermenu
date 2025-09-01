@@ -2,7 +2,6 @@
 
 lockscreen() {
 	local lock_app
-	lock_app="$(get_lock_app)" || return 1
 	if command -v hyprlock >/dev/null 2>&1; then
     hyprlock &
 	elif command -v swaylock >/dev/null 2>&1; then
