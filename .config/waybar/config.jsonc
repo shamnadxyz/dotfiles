@@ -245,8 +245,8 @@
 		"scroll-step": 5
 	},
 	"mpd": {
-		"format": " {stateIcon} {title}  ",
-		"format-disconnected": "Disconnected ",
+		"format": " {stateIcon} {title} ",
+		"format-disconnected": " Disconnected ",
 		"format-stopped": "",
 		"interval": 10,
 		"state-icons": {
