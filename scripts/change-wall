@@ -1,35 +1,65 @@
 #!/bin/bash
 
+# Configuration
+WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"  # Default wallpapers directory if not set
 WALLPAPER_PATH="$HOME/.cache/wallpaper"
+DEPENDENCIES=("nsxiv" "swaybg")
 
-# Validate required environment variable
-if [ -z "$WALLPAPERS" ];then
-	notify-send "Wallpaper Error" "WALLPAPERS environment variable not set" 
-	exit 1
-fi
+# Function to notify and exit on error
+error_exit() {
+  notify-send -u critical " Error" "$1"
+  exit 1
+}
 
-# Check if wallpapers directory exists
-if [ ! -d "$WALLPAPERS" ]; then
-    notify-send "Wallpaper Error" "Wallpapers directory does not exist: $WALLPAPERS"
-    exit 1
-fi
-
-# Check dependencies
-for cmd in nsxiv wallust swaybg; do
+# Check required commands
+check_dependencies() {
+  for cmd in "${DEPENDENCIES[@]}"; do
     if ! command -v "$cmd" &> /dev/null; then
-        notify-send "Wallpaper Error" "Required command not found: $cmd"
-        exit 1
+      error_exit "Required command not found: $cmd"
     fi
-done
+  done
+}
 
-pgrep -f "nsxiv -b "$WALLPAPERS" -rot" > /dev/null && exit 1
+# Restart waybar to refresh colorscheme
+restart_waybar() {
+  pkill waybar && waybar &
+}
+
+# Update colorscheme using wallust
+update_colorscheme() {
+  if command -v wallust &> /dev/null; then
+    if wallust run "$WALLPAPER_PATH"; then
+      restart_waybar
+    else
+      notify-send -u critical " Error" "Failed to update colorscheme with wallust"
+      return 1
+    fi
+  else
+    notify-send -u critical " Error" "Wallust not found for updating the colorscheme"
+    return 1
+  fi
+}
+
+# Ensure no other nsxiv instances are running
+if pgrep -x "nsxiv" > /dev/null; then
+  exit 1
+fi
+
+# Verify wallpapers directory exists
+if [ ! -d "$WALLPAPERS" ]; then
+  error_exit "Wallpapers directory does not exist: $WALLPAPERS"
+fi
+
+check_dependencies
+
 notify-send "Wallpaper Selector" "Press 'Q' to set"
 
+# Launch nsxiv to pick wallpaper
 wallpaper="$(nsxiv -b "$WALLPAPERS" -rot)"
 
-if [ -f $wallpaper ]; then
-	ln -s "$wallpaper" "$WALLPAPER_PATH" -f
-	wallust run "$WALLPAPER_PATH" &
-	pkill -f swaybg
-	swaybg -i "$wallpaper" -m fill &
+if [ -f "$wallpaper" ]; then
+  ln -sf "$wallpaper" "$WALLPAPER_PATH"
+  pkill swaybg
+  swaybg -i "$wallpaper" -m fill &
+  update_colorscheme
 fi
