@@ -7,7 +7,7 @@ DEPENDENCIES=("nsxiv" "swaybg")
 
 # Function to notify and exit on error
 error_exit() {
-  notify-send -u critical " Error" "$1"
+  notify-send -u critical "  Error" "$1"
   exit 1
 }
 
