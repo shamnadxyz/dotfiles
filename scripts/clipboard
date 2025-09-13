@@ -1,57 +1,67 @@
 #!/bin/bash
 
-TRASH="${HOME}/.cache/.clipboard_trash.txt"
-[ ! -f "$TRASH" ] && touch "$TRASH"
+# Set clipboard path with default
+CLIPBOARD="${CLIPBOARD:-$HOME/.local/clipboard/clipboard}"
 
-print_help(){
-	echo "usage: clipboard [options]"
-	printf "%s\n" "options:"
-	printf -- "  %-5s%-5s\n" "-a" "add content of system clipboard to clipboard file"
-	printf -- "  %-5s%-5s\n" "-d" "delete entry from clipboard file"
-	printf -- "  %-5s%-5s\n" "-p" "copy to system clipboard"
-}
-add_to_clipboard(){
-	text="$(wl-paste)"
-	[ -z "$text" ] && exit 1
-	if ! grep -e "^$text$" "$CLIPBOARD";then
-		wl-paste | awk '{printf "%s", $0; if (getline > 0) printf "\\n"}' >> "$CLIPBOARD"
-	fi
-}
+# Save clipboard directory path once
+CLIPBOARD_DIR="$(dirname "$CLIPBOARD")"
 
-delete_from_clipboard(){
-	text="$(cat "$CLIPBOARD" | wofi -d )"
-	if grep -e "^$text$" "$CLIPBOARD";then
-		echo "$text" >> "$TRASH"
-		sed "\|$text|d" -i "$CLIPBOARD"
-	fi
+# Create clipboard directory if needed
+mkdir -p "$CLIPBOARD_DIR"
+
+# Define trash file inside the same directory
+TRASH="$CLIPBOARD_DIR/trash.txt"
+
+print_help() {
+  echo "Usage: clipboard [options]"
+  echo "Options:"
+  printf "  %-4s %s\n" "-a" "Add content of system clipboard to clipboard file"
+  printf "  %-4s %s\n" "-d" "Delete entry from clipboard file"
+  printf "  %-4s %s\n" "-p" "Copy clipboard file entry to system clipboard"
+  exit 1
 }
 
-copy_to_clipboard(){
-	text="$(cat "$CLIPBOARD" | wofi -d )"
-	[ -n "$text" ] && wl-copy "$(echo -e "$text")"
+add_to_clipboard() {
+  text="$(wl-paste)"
+  [ -z "$text" ] && exit 1
+  compact_text=$(echo "$text" | awk '{printf "%s%s", (NR>1 ? "\\n" : ""), $0}')
+  if ! grep -Fx "$compact_text" "$CLIPBOARD"; then
+    printf "%s\n" "$compact_text" >>"$CLIPBOARD"
+  fi
 }
 
-if pgrep -f "^wofi";then
-	exit 1
-elif [ -z "$CLIPBOARD" ];then
-	notify-send "CLIPBOARD env is not set"
-	exit 1
+delete_from_clipboard() {
+  text="$(cat "$CLIPBOARD" | wofi -d -E)"
+  sed "\|$text|d" -i "$CLIPBOARD" && echo "$text" >>"$TRASH"
+}
+
+copy_to_clipboard() {
+  text="$(cat "$CLIPBOARD" | wofi -d)"
+  [ -n "$text" ] && wl-copy "$(echo -e "$text")"
+}
+
+if pgrep -f "^wofi"; then
+  exit 1
 fi
 
-while getopts "adp" flag;do
-	case "$flag" in
-		a)
-			add_to_clipboard
-			;;
-		d)
-			delete_from_clipboard
-			;;
-		p)
-			copy_to_clipboard
-			;;
-	esac
+while getopts ":adp" flag; do
+  case "$flag" in
+  a)
+    add_to_clipboard
+    ;;
+  d)
+    delete_from_clipboard
+    ;;
+  p)
+    copy_to_clipboard
+    ;;
+  \?)
+    echo "Invalid option: -$OPTARG" >&2
+    print_help
+    ;;
+  esac
 done
 
-if [ -z "$1" ];then
-	print_help
+if [ -z "$1" ]; then
+  print_help
 fi
