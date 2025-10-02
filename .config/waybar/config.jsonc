@@ -12,7 +12,7 @@
 	"margin-left": 3,
 	"margin-right": 3,
 	"modules-left": [
-		"hyprland/workspaces",
+		"sway/workspaces",
 		"mpd",
 		"custom/media"
 	],
@@ -34,19 +34,22 @@
 		"privacy",
 		"custom/power"
 	],
-	"hyprland/workspaces": {
-		"format": "{icon}",
-		"format-icons": {
-			"1": "",
-			"2": "",
-			"3": "",
-			"4": "",
-			"5": "",
-			"6": "",
-			// "active": "",
-			"default": ""
-		},
-	},
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "warp-on-scroll": false,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      // "active": "",
+      "default": ""
+    }
+  },
 	"clock": {
 		"interval": 60,
 		"format": " {:%d/%m/%y  %I:%M %p}",
