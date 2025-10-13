@@ -2,13 +2,12 @@
 
 * {
 	font-family: Hack Nerd Font;
-	font-weight: bold;
-	font-size: 12px;
+	font-size: 13px;
 	padding: 3px;
 }
 
 window#waybar {
-	background: alpha(@background, 0.8);
+	background: alpha(@background, 0.7);
 	border: 1px solid alpha(@foreground, 0.6);
 	border-radius: 16px;
 	color: @foreground;
