@@ -14,23 +14,3 @@ sudo pacman -S --needed 7zip aria2 brightnessctl btop dunst eza fd foot git \
              yazi zathura zathura-cb zathura-pdf-mupdf zoxide zsh \
              zsh-syntax-highlighting
 ```
-
-## Set zsh as default shell
-
-### Locate zsh file path and append to /etc/shells
-
-```sh
-command -v zsh | sudo tee -a /etc/shells
-```
-
-### Set zsh as default
-
-```sh
-sudo chsh -s $(which zsh) $USER
-```
-
-### Create dirstack file
-
-```sh
-touch $HOME/.cache/dirs
-```
