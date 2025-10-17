@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set clipboard path with default
-CLIPBOARD="${CLIPBOARD:-$HOME/.local/clipboard/clipboard}"
+CLIPBOARD="${CLIPBOARD:-$HOME/.local/share/clipboard/clipboard}"
 
 # Save clipboard directory path once
 CLIPBOARD_DIR="$(dirname "$CLIPBOARD")"
