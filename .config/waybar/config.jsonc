@@ -29,8 +29,8 @@
 		"bluetooth",
 		"battery",
 		"backlight",
-		"wireplumber",
-		"wireplumber#source",
+		"pulseaudio",
+		"pulseaudio#microphone",
 		"privacy",
 		"custom/power"
 	],
@@ -106,6 +106,7 @@
 	"battery": {
 		"format": "{icon} {capacity}%",
 		"format-icons": {
+      "not-charging": "",
 			"charging": [
 				"󰢜",
 				"󰂆",
@@ -133,9 +134,11 @@
 		},
 		"interval": 60,
 		"states": {
-			"warning": 30,
-			"critical": 20
-		}
+      "warning": 30,
+      "critical": 20
+    },
+    "tooltip-format": "<b>Battery Info</b>\nPower Draw: {power}W\n{timeTo}\nBattery Health: {health}%",
+    "tooltip-format-charging": "<b>Battery Info</b>\nPower: {power}W\n{timeTo}\nBattery Health: {health}%\nStatus: {status}",
 	},
 	"backlight": {
 		"device": "intel_backlight",
@@ -221,28 +224,31 @@
 			}
 		]
 	},
-	"wireplumber": {
+	"pulseaudio": {
 		"format": "{icon} {volume}%",
-		"format-muted": "  ",
+		"format-muted": "",
 		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
 		"on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 1%+",
 		"on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
-		"reverse-scrolling": true,
-		"format-icons": [
-			"",
-			"",
-			" "
-		]
+    "reverse-scrolling": true,
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", " "]
+    }
 	},
-	"wireplumber#source": {
-		"node-type": "Audio/Source",
-		"format": "󰍬 {volume}%",
-		"format-muted": " 󰍭 ",
+	"pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": " ",
 		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
 		"on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 1%+",
 		"on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%-",
 		"reverse-scrolling": true,
-		"scroll-step": 5
 	},
 	"mpd": {
 		"format": " {stateIcon} {title} ",

@@ -1,7 +1,7 @@
 @import "colors.css";
 
 * {
-  font-family: Hack Nerd Font;
+  font-family: "MesloLGL Nerd Font";
   font-size: 13px;
   padding: 3px;
 }
@@ -52,7 +52,7 @@ window#waybar {
 #memory,
 #mpd,
 #network,
-#wireplumber,
+#pulseaudio,
 #privacy,
 #temperature,
 #tray,
@@ -84,11 +84,6 @@ window#waybar {
 #custom-power {
   padding: 2px 13px;
   padding-left: 10px;
-}
-
-#wireplumber.sink-muted {
-  padding: 2px 6px;
-  padding-left: 4px;
 }
 
 @keyframes blink {
