@@ -1,6 +1,6 @@
 #!/bin/bash
 
-selected=$(nmcli -t -f active,name connection | wofi -id -r "printf '%s' | sed 's/yes\:/*/;s/no\://'")
+selected=$(nmcli -t -f active,name connection | wofi -id --width 500 -r "printf '%s' | sed 's/yes\:/*/;s/no\://'")
 
 [ "$selected" ] || exit 1
 
