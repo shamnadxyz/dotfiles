@@ -52,7 +52,7 @@ fi
 
 check_dependencies
 
-notify-send "Wallpaper Selector" "Press 'Q' to set"
+notify-send "Wallpaper Selector" "Press 'Q' to select"
 
 # Launch nsxiv to pick wallpaper
 wallpaper="$(nsxiv -b "$WALLPAPERS" -rot)"
