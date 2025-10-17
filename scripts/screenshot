@@ -12,7 +12,7 @@ filename="$(date '+%Y-%m-%d-%H-%M-%S.png')"
 
 # Take screenshot
 if grim "$SCREENSHOT_PATH/$filename"; then
-    notify-send " Screenshot Captured" "$filename"
+    notify-send "  Screenshot Captured" "$filename"
 else
-    notify-send " Screenshot failed" -u critical
+    notify-send "  Screenshot failed" -u critical
 fi
