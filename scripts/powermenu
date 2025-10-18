@@ -28,7 +28,7 @@ get_action() {
 		" Hibernate"
 	)
 
-	selection=$(printf '%s\n' "${menu_items[@]}" | wofi -i --dmenu --width 250 --height 255)
+	selection=$(printf '%s\n' "${menu_items[@]}" | wofi -i --dmenu --width 250 --height 278)
 
 	[[ -z "$selection" ]] && exit 1
 
