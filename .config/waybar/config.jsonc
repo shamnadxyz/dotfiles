@@ -20,11 +20,11 @@
     "clock"
   ],
   "modules-right": [
+    "tray",
     "idle_inhibitor",
     "cpu",
     "memory",
     "temperature",
-    "tray",
     "network",
     "bluetooth",
     "battery",
@@ -99,8 +99,7 @@
     "max-length": 10
   },
   "tray": {
-    "icon-size": 10,
-    "spacing": 6
+    "icon-size": 18,
   },
   "battery": {
     "format": "{icon} {capacity}%",
