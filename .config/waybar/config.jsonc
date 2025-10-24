@@ -14,7 +14,6 @@
   "modules-left": [
     "hyprland/workspaces",
     "mpd",
-    "custom/media"
   ],
   "modules-center": [
     "clock"
@@ -185,21 +184,6 @@
       "reboot": "reboot",
       "suspend": "systemctl suspend",
       "hibernate": "systemctl hibernate"
-    }
-  },
-  "custom/media": {
-    "format": "{icon} {text}",
-    "return-type": "json",
-    "max-length": 40,
-    "escape": true,
-    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
-    "on-click": "$HOME/.config/waybar/mediaplayer.py --action play-pause",
-    "menu": "on-click-right",
-    "menu-file": "$HOME/.config/waybar/mediaplayer.xml",
-    "menu-actions": {
-      "play-pause": "$HOME/.config/waybar/mediaplayer.py --action play-pause",
-      "next": "$HOME/.config/waybar/mediaplayer.py --action next",
-      "previous": "$HOME/.config/waybar/mediaplayer.py --action previous"
     }
   },
   "privacy": {
