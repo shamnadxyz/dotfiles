@@ -1,33 +1,53 @@
 #!/bin/bash
+#
+# A wallpaper selector script for Wayland that allows users to choose a wallpaper
+# from a specified directory, apply it, and update the colorscheme.
 
-# Configuration
-WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"  # Default wallpapers directory if not set
+WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
+mkdir -p "$WALLPAPERS"
+
 WALLPAPER_PATH="$HOME/.cache/wallpaper"
 DEPENDENCIES=("nsxiv" "swaybg")
 
-# Function to notify and exit on error
+#######################################
+# Send notification and exit on error.
+# Arguments:
+#   Error message to display
+#######################################
 error_exit() {
   notify-send -u critical "  Error" "$1"
   exit 1
 }
 
-# Check required commands
+#######################################
+# Check for required commands.
+# Globals:
+#   DEPENDENCIES
+#######################################
 check_dependencies() {
   for cmd in "${DEPENDENCIES[@]}"; do
-    if ! command -v "$cmd" &> /dev/null; then
+    if ! command -v "$cmd" &>/dev/null; then
       error_exit "Required command not found: $cmd"
     fi
   done
 }
 
-# Restart waybar to refresh colorscheme
+#######################################
+# Restart waybar to refresh colorscheme.
+#######################################
 restart_waybar() {
   pkill waybar && waybar &
 }
 
-# Update colorscheme using wallust
+#######################################
+# Update colorscheme using wallust.
+# Globals:
+#   WALLPAPER_PATH
+# Returns:
+#   0 if successful, 1 on error
+#######################################
 update_colorscheme() {
-  if command -v wallust &> /dev/null; then
+  if command -v wallust &>/dev/null; then
     if wallust run "$WALLPAPER_PATH"; then
       restart_waybar
     else
@@ -40,26 +60,37 @@ update_colorscheme() {
   fi
 }
 
-# Ensure no other nsxiv instances are running
-if pgrep -x "nsxiv" > /dev/null; then
-  exit 1
-fi
+#######################################
+# Main function to execute the wallpaper selection process.
+# Globals:
+#   WALLPAPERS
+#   WALLPAPER_PATH
+#######################################
+main() {
+  # Ensure no other nsxiv instances are running
+  if pgrep -x "nsxiv" >/dev/null; then
+    exit 1
+  fi
 
-# Verify wallpapers directory exists
-if [ ! -d "$WALLPAPERS" ]; then
-  error_exit "Wallpapers directory does not exist: $WALLPAPERS"
-fi
+  # Verify wallpapers directory exists
+  if [[ ! -d "$WALLPAPERS" ]]; then
+    error_exit "Wallpapers directory does not exist: $WALLPAPERS"
+  fi
 
-check_dependencies
+  check_dependencies
 
-notify-send "Wallpaper Selector" "Press 'Q' to select"
+  notify-send "Wallpaper Selector" "Press 'Q' to select"
 
-# Launch nsxiv to pick wallpaper
-wallpaper="$(nsxiv -b "$WALLPAPERS" -rot)"
+  # Launch nsxiv to pick wallpaper
+  wallpaper="$(nsxiv -b "$WALLPAPERS" -rot)"
 
-if [ -f "$wallpaper" ]; then
-  ln -sf "$wallpaper" "$WALLPAPER_PATH"
-  pkill swaybg
-  swaybg -i "$wallpaper" -m fill &
-  update_colorscheme
-fi
+  if [[ -f "$wallpaper" ]]; then
+    ln -sf "$wallpaper" "$WALLPAPER_PATH"
+    pkill swaybg
+    swaybg -i "$wallpaper" -m fill &
+    update_colorscheme
+  fi
+}
+
+# Execute main function
+main "$@"
