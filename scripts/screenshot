@@ -3,8 +3,8 @@
 SCREENSHOT_PATH="$HOME/Pictures/Screenshots"
 
 # Ensure directory exists
-if [ ! -d "$SCREENSHOT_PATH" ];then
-	mkdir -p "$SCREENSHOT_PATH" -v
+if [ ! -d "$SCREENSHOT_PATH" ]; then
+  mkdir -p "$SCREENSHOT_PATH" -v
 fi
 
 # Generate timestamped filename
@@ -12,7 +12,7 @@ filename="$(date '+%Y-%m-%d-%H-%M-%S.png')"
 
 # Take screenshot
 if grim "$SCREENSHOT_PATH/$filename"; then
-    notify-send "  Screenshot Captured" "$filename"
+  notify-send "  Screenshot Captured" "$filename"
 else
-    notify-send "  Screenshot failed" -u critical
+  notify-send "  Screenshot failed" -u critical
 fi

@@ -1,75 +1,75 @@
 #!/bin/bash
 
 lockscreen() {
-	if command -v hyprlock >/dev/null 2>&1; then
+  if command -v hyprlock >/dev/null 2>&1; then
     hyprlock &
-	elif command -v swaylock >/dev/null 2>&1; then
+  elif command -v swaylock >/dev/null 2>&1; then
     swaylock -c 000000 &
-	else
-		notify-send "Error" "No lock application found" "Install 'swaylock' or 'hyprlock'"
-	fi
+  else
+    notify-send "Error" "No lock application found" "Install 'swaylock' or 'hyprlock'"
+  fi
 }
 
 to_lower() {
-	printf '%s\n' "${1,,}"
+  printf '%s\n' "${1,,}"
 }
 
 # Launch menu to select the action
 get_action() {
-	local menu_items selection action
+  local menu_items selection action
 
-	# Define menu items as array for better structure
-	menu_items=(
-		" Poweroff"
-		" Reboot"
-		" Suspend"
-		" Lock"
-		" Hibernate"
-	)
+  # Define menu items as array for better structure
+  menu_items=(
+    " Poweroff"
+    " Reboot"
+    " Suspend"
+    " Lock"
+    " Hibernate"
+  )
 
-	selection=$(printf '%s\n' "${menu_items[@]}" \
-    | rofi -dmenu -theme-str 'window {width: 11%;height: 23%;}' -p 'Action:' -no-custom)
+  selection=$(printf '%s\n' "${menu_items[@]}" |
+    rofi -dmenu -theme-str 'window {width: 11%;height: 23%;}' -p 'Action:' -no-custom)
 
-	[[ -z "$selection" ]] && exit 1
+  [[ -z "$selection" ]] && exit 1
 
-# remove the icon from the selected option
-	action="${selection##* }"
-	echo "$action"
+  # remove the icon from the selected option
+  action="${selection##* }"
+  echo "$action"
 }
 
 # Exits if wofi is not installed.
 if ! command -v wofi >/dev/null 2>&1; then
-	notify-send "Error" "Missing required program: wofi"
-	exit 1
+  notify-send "Error" "Missing required program: wofi"
+  exit 1
 fi
 
 action=$1
 
 if [ -z "$action" ]; then
-	action="$(get_action)" || exit
+  action="$(get_action)" || exit
 fi
 
 action=$(to_lower "$action")
 
 # Executes the corresponding system command based on the user's selection.
 case "$action" in
-	poweroff)
-		poweroff
-		;;
-	reboot)
-		reboot
-		;;
-	suspend)
-		systemctl suspend
-		;;
-	hibernate)
-		systemctl hibernate
-		;;
-	lock)
-		lockscreen
-		;;
-	*)
-		notify-send "Invalid option"
-		exit 1
-		;;
+poweroff)
+  poweroff
+  ;;
+reboot)
+  reboot
+  ;;
+suspend)
+  systemctl suspend
+  ;;
+hibernate)
+  systemctl hibernate
+  ;;
+lock)
+  lockscreen
+  ;;
+*)
+  notify-send "Invalid option"
+  exit 1
+  ;;
 esac
