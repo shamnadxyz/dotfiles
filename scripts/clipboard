@@ -31,12 +31,12 @@ add_to_clipboard() {
 }
 
 delete_from_clipboard() {
-  text="$(cat "$CLIPBOARD" | wofi -d -E)"
+  text="$(cat "$CLIPBOARD" | rofi -dmenu -no-custom -p 'Delete:')"
   sed "\|$text|d" -i "$CLIPBOARD" && echo "$text" >>"$TRASH"
 }
 
 copy_to_clipboard() {
-  text="$(cat "$CLIPBOARD" | wofi -d)"
+  text="$(cat "$CLIPBOARD" | rofi -dmenu -no-custom -p 'Copy:')"
   [ -n "$text" ] && wl-copy "$(echo -e "$text")"
 }
 
