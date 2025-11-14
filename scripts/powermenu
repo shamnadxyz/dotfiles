@@ -28,7 +28,7 @@ get_action() {
   )
 
   selection=$(printf '%s\n' "${menu_items[@]}" |
-    rofi -dmenu -theme-str 'window {width: 200px;height: 235px;}' -p 'Action:' -no-custom)
+    rofi -dmenu -theme-str 'window {width: 200px;height: 235px;}' -p 'Action' -no-custom)
 
   [[ -z "$selection" ]] && exit 1
 
