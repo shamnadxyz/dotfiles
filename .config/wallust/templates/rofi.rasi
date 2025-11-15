@@ -2,37 +2,12 @@
   foreground:  {{foreground}};
   background: {{background}};
   background-color: transparent;
-  backlight:   {{color8}};
   border-color: {{foreground}}33;
   transparent-background: {{background}}CC;
-
   black:       {{color0}};
-  lightblack:  {{color8}};
-  tlightblack:  {{color8}};
-
   red:         #FFA0A0;
   lightred:    {{color9}};
-
-
-  green:       #A0FFA0;
-  lightgreen:  {{color10}};
-
-  yellow:      {{color3}};
-  lightyellow: {{color11}};
-
-  blue:        {{color4}};
   lightblue:   {{color12}};
-
-  magenta:     {{color5}};
-  lightmagenta:{{color13}};
-
-  cyan:        {{color6}};
-  tcyan:       {{color6}};
-  lightcyan:   {{color14}};
-
-  white:       {{color7}};
-  lightwhite:  {{color15}};
-
 }
 
 window {
@@ -62,10 +37,6 @@ message {
   background-color: @transparent-background;
 }
 
-message {
-  color: @black;
-}
-
 inputbar {
   color: @foreground;
   padding: 10px;
@@ -73,11 +44,6 @@ inputbar {
   border: 1px;
   border-radius:  16px 16px 0px 0px;
   border-color: @border-color;
-}
-
-entry,prompt,case-indicator {
-  text-font: inherit;
-  text-color:inherit;
 }
 
 prompt {
@@ -96,20 +62,13 @@ listview {
 
 element {
   padding: 8px;
-  vertical-align: 0.5;
   border-radius: 10px;
   background-color: transparent;
   color: @foreground;
-  font:inherit;
 }
 
 element-icon {
   margin: 0px 0.3em 0px 0px;
-}
-
-element-text {
-  background-color: inherit;
-  text-color:       inherit;
 }
 
 element selected.normal {
@@ -123,9 +82,6 @@ element normal active {
 
 element normal urgent {
   foreground: @lightred;
-}
-
-element alternate normal {
 }
 
 element alternate active {
@@ -144,10 +100,6 @@ element selected active {
 element selected urgent {
   background-color: @foreground;
   foreground: @transparent-background;
-}
-
-element normal normal {
-
 }
 
 vertb {
