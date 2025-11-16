@@ -1,0 +1,7 @@
+@import "current"
+
+element-icon {
+  margin: 0px;
+  size: 0px;
+  padding: 0px;
+}
