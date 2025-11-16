@@ -33,10 +33,10 @@ check_dependencies() {
 }
 
 #######################################
-# Restart waybar to refresh colorscheme.
+# Reload waybar stylesheet
 #######################################
-restart_waybar() {
-  pkill waybar && waybar &
+refresh_waybar() {
+  pkill -SIGUSR2 waybar
 }
 
 #######################################
@@ -48,8 +48,8 @@ restart_waybar() {
 #######################################
 update_colorscheme() {
   if command -v wallust &>/dev/null; then
-    if wallust run "$WALLPAPER_PATH"; then
-      restart_waybar
+    if wallust run "$WALLPAPER_PATH" -q; then
+      refresh_waybar
     else
       notify-send -u critical " Error" "Failed to update colorscheme with wallust"
       return 1
