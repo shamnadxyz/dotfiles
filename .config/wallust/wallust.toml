@@ -45,7 +45,7 @@ check_contrast = true
 # ¡ If either one is a directory, then both SHOULD be one. !
 foot = { template = 'foot.ini', target = '~/.config/foot/colors.ini' }
 dunst = { template = 'dunstrc', target = '~/.config/dunst/dunstrc.d/99-colors.conf' }
-waybar = { src = "waybar.css", dst = "~/.config/waybar/colors.css" }
-hypr = { src = "hyprland.conf", dst = "~/.config/hypr/colors.conf" }
-wofi = { src = "colors", dst = "~/.config/wofi/colors" }
-rofi = { src = "rofi.rasi", dst = "~/.config/rofi/current.rasi" }
+waybar = { src = 'waybar.css', dst = '~/.config/waybar/colors.css' }
+hypr = { src = 'hyprland.conf', dst = '~/.config/hypr/colors.conf' }
+wofi = { src = 'colors', dst = '~/.config/wofi/colors' }
+rofi = { src = 'rofi.rasi', dst = '~/.config/rofi/current.rasi' }
