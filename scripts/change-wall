@@ -33,10 +33,11 @@ check_dependencies() {
 }
 
 #######################################
-# Reload waybar stylesheet
+# Restart waybar
 #######################################
-refresh_waybar() {
-  pkill -SIGUSR2 waybar
+restart_waybar() {
+  pkill waybar && waybar &
+  disown
 }
 
 #######################################
