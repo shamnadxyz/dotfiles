@@ -14,7 +14,6 @@
   "modules-left": [
     "hyprland/workspaces",
     "mpd",
-    "mpris"
   ],
   "modules-center": [
     "clock"
@@ -250,18 +249,6 @@
       "play-pause": "mpc toggle",
       "next": "mpc next",
       "previous": "mpc prev"
-    },
-    "tooltip": false
-  },
-  "mpris": {
-    "format": "{status_icon} {dynamic}",
-    "status-icons": {
-      "paused": " ▶",
-      "playing": " "
-    },
-    "dynamic-order": [
-      "title"
-    ],
-    "max-length": 100
+    }
   }
 }
