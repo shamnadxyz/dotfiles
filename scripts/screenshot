@@ -1,18 +1,79 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-SCREENSHOT_PATH="$HOME/Pictures/Screenshots"
-
-# Ensure directory exists
-if [ ! -d "$SCREENSHOT_PATH" ]; then
-  mkdir -p "$SCREENSHOT_PATH" -v
-fi
+SCREENSHOT_PATH="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
 
 # Generate timestamped filename
-filename="$(date '+%Y-%m-%d-%H-%M-%S.png')"
+FILENAME="$(date '+%Y-%m-%d-%H-%M-%S-%N.png')"
 
-# Take screenshot
-if grim "$SCREENSHOT_PATH/$filename"; then
-  notify-send "  Screenshot Captured" "$filename"
-else
-  notify-send "  Screenshot failed" -u critical
-fi
+DEPENDENCIES=("rofi" "hyprshot" "grim")
+
+check_dependencies() {
+  local missing=()
+  for cmd in "${DEPENDENCIES[@]}"; do
+    if ! command -v "${cmd}" &>/dev/null; then
+      missing+=("$cmd")
+    fi
+  done
+
+  if ((${#missing[@]})); then
+    notify-send -u critical "  Error" "Missing binaries: ${missing[*]}"
+    exit 1
+  fi
+}
+
+pick_mode() {
+  local modes
+  modes="󰍺  Desktop\n󰍹  Output\n  Window\n󰒅  Region"
+
+  local selection
+  selection="$(echo -e "$modes" |
+    rofi -dmenu -theme dmenu \
+      -theme-str 'window {width: 200px;height: 185px;}' \
+      -p 'Capture' -no-custom)" || exit 1
+
+  local mode
+  # Remove the icon from the selected mode
+  mode="${selection#*  }"
+
+  # Make it lowercase
+  printf '%s' "${mode,,}"
+}
+
+take_screenshot() {
+  local mode
+  mode="$1"
+
+  case "$mode" in
+  desktop)
+    sleep 0.3
+    grim "${SCREENSHOT_PATH}/${FILENAME}" &&
+      notify-send " Screenshot Captured" "$FILENAME"
+    ;;
+  output | window | region)
+    hyprshot -m "$mode" -o "$SCREENSHOT_PATH" -f "$FILENAME"
+    ;;
+  *)
+    notify-send "Invalid option" "$mode"
+    exit 1
+    ;;
+  esac
+}
+
+main() {
+  # Ensure directory exists
+  mkdir -p "$SCREENSHOT_PATH"
+
+  check_dependencies
+
+  local mode
+  mode="$1"
+
+  if [ -z "$mode" ]; then
+    mode="$(pick_mode)" || exit 1
+  fi
+
+  take_screenshot "$mode"
+
+}
+
+main "$@"
