@@ -1,7 +1,7 @@
 [global]
   # Appearance
-  corner_radius = 8
   font = Hack 12
+  corner_radius = 12
   corners = all
   frame_width = 1
   separator_color = frame
