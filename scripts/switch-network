@@ -1,14 +1,70 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-selected=$(nmcli -t -f active,name connection | wofi -id --width 500 -r "printf '%s' | sed 's/yes\:/*/;s/no\://'")
+ENTRY_HEIGHT=32
+INPUT_HEIGHT=57
 
-[ "$selected" ] || exit 1
+declare -a connections
 
-connection="${selected#*:}"
-connected="${selected%%:*}"
+get_menu_dimensions() {
+  local number_of_entries="$1"
+  local height
+  local width
 
-if [ "$connected" = "no" ];then
-	nmcli connection up "$connection"
-else
-	nmcli connection down "$connection"
-fi
+  height="$((INPUT_HEIGHT + (ENTRY_HEIGHT * number_of_entries)))"
+  ((height > 500)) && height=500
+
+  width="$((height * 107 / 100))"
+
+  printf "%d %d\n" "$height" "$width"
+}
+
+pick_connection() {
+  readarray -t connections < <(
+    nmcli -t -f TYPE,ACTIVE,NAME connection |
+      grep -Ev "bridge|loopback"
+  )
+
+  number_of_connections="${#connections[@]}"
+
+  if [[ "$number_of_connections" -eq 0 ]]; then
+    notify-send "No connections available"
+    return 1
+  fi
+
+  read -r height width < <(get_menu_dimensions "$number_of_connections")
+
+  connection="$(
+    printf "%s\n" "${connections[@]}" |
+      sed '
+        s/^[^:]*://;
+        s/yes\:/  /;s/no\://;
+        s/^[a-zA-Z]/  &/' |
+      rofi -dmenu -theme dmenu -theme-str \
+        "window {width: ${width}px;height: ${height}px;}" \
+        -p 'Toggle' -no-custom
+  )"
+  [ "$connection" ] || exit 1
+
+  echo "$connection"
+
+}
+
+main() {
+  local connection
+  local status
+  connection_string="$(pick_connection)"
+
+  # Extract the status
+  status="${connection_string%% *}"
+  # Extract the connection name
+  connection="${connection_string#*  }"
+
+  if [ "$status" = "" ]; then
+    nmcli connection up "$connection"
+  elif [ "$status" = "" ]; then
+    nmcli connection down "$connection"
+  fi
+
+}
+
+main
