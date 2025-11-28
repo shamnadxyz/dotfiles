@@ -8,7 +8,7 @@
 		</child>
 		<child>
 			<object class="GtkMenuItem" id="reboot">
-				<property name="label"> Reboot</property>
+				<property name="label"> Reboot</property>
 			</object>
 		</child>
 		<child>
