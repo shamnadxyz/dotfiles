@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-ENTRY_HEIGHT=32
-INPUT_HEIGHT=57
+readonly ENTRY_HEIGHT=32
+readonly INPUT_HEIGHT=57
 
 declare -a connections
 
@@ -28,7 +28,7 @@ pick_connection() {
 
   if [[ "$number_of_connections" -eq 0 ]]; then
     notify-send "No connections available"
-    return 1
+    exit 1
   fi
 
   read -r height width < <(get_menu_dimensions "$number_of_connections")
@@ -42,8 +42,7 @@ pick_connection() {
       rofi -dmenu -theme dmenu -theme-str \
         "window {width: ${width}px;height: ${height}px;}" \
         -p 'Toggle' -no-custom
-  )"
-  [ "$connection" ] || exit 1
+  )" || exit 1
 
   echo "$connection"
 
@@ -52,7 +51,7 @@ pick_connection() {
 main() {
   local connection
   local status
-  connection_string="$(pick_connection)"
+  connection_string="$(pick_connection)" || exit 1
 
   # Extract the status
   status="${connection_string%% *}"
