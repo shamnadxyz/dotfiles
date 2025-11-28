@@ -1,12 +1,17 @@
 #!/bin/bash
 
+# Size of the rofi window used for the action menu
+readonly MENU_HEIGHT=217
+readonly MENU_WIDTH=200
+
 lockscreen() {
   if command -v hyprlock >/dev/null 2>&1; then
     hyprlock &
   elif command -v swaylock >/dev/null 2>&1; then
     swaylock -c 000000 &
   else
-    notify-send "Error" "No lock application found" "Install 'swaylock' or 'hyprlock'"
+    notify-send "Error" "No lock application found" \
+      "Install 'swaylock' or 'hyprlock'"
   fi
 }
 
@@ -15,61 +20,60 @@ to_lower() {
 }
 
 # Launch menu to select the action
-get_action() {
-  local menu_items selection action
+pick_action() {
+  local menu_items
 
-  # Define menu items as array for better structure
   menu_items=(
-    " Poweroff"
-    " Reboot"
-    " Suspend"
-    " Lock"
-    " Hibernate"
+    "  Poweroff"
+    "  Reboot"
+    "  Suspend"
+    "  Lock"
+    "  Hibernate"
   )
 
+  local selection
   selection=$(printf '%s\n' "${menu_items[@]}" |
-    rofi -dmenu -theme dmenu -theme-str 'window {width: 200px;height: 235px;}' -p 'Action' -no-custom)
+    rofi -dmenu -theme dmenu \
+      -theme-str "window {height: ${MENU_HEIGHT}px;width: ${MENU_WIDTH}px;}" \
+      -p 'Action' -no-custom) || exit 1
 
-  [[ -z "$selection" ]] && exit 1
-
-  # remove the icon from the selected option
+  local action
+  # Remove the icon from the selected option
   action="${selection##* }"
-  echo "$action"
+  to_lower "$action"
 }
 
-# Exits if wofi is not installed.
-if ! command -v wofi >/dev/null 2>&1; then
-  notify-send "Error" "Missing required program: wofi"
-  exit 1
-fi
+exec_action() {
+  local action
+  action="$1"
+  # Executes the corresponding system command based on the user's selection.
+  case "$action" in
+  poweroff)
+    poweroff
+    ;;
+  reboot)
+    reboot
+    ;;
+  suspend)
+    systemctl suspend
+    ;;
+  hibernate)
+    systemctl hibernate
+    ;;
+  lock)
+    lockscreen
+    ;;
+  *)
+    notify-send "Invalid option"
+    exit 1
+    ;;
+  esac
+}
 
-action=$1
+main() {
+  action="$(pick_action)" || exit 1
 
-if [ -z "$action" ]; then
-  action="$(get_action)" || exit
-fi
+  exec_action "$action"
+}
 
-action=$(to_lower "$action")
-
-# Executes the corresponding system command based on the user's selection.
-case "$action" in
-poweroff)
-  poweroff
-  ;;
-reboot)
-  reboot
-  ;;
-suspend)
-  systemctl suspend
-  ;;
-hibernate)
-  systemctl hibernate
-  ;;
-lock)
-  lockscreen
-  ;;
-*)
-  notify-send "Invalid option"
-  exit 1
-  ;;
-esac
+main
