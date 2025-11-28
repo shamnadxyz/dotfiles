@@ -3,10 +3,7 @@ export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 export XDG_MUSIC_DIR="$HOME/Music"
-
-export CLIPBOARD="$HOME/.local/.clipboard"
-export NOTES="$HOME/Notes"
-export WALLPAPERS="$HOME/Pictures/Wallpapers"
+export XDG_PICTURES_DIR="$HOME/Pictures"
 
 # Session
 export QT_QPA_PLATFORM="wayland"
