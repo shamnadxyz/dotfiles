@@ -45,9 +45,9 @@ readonly APPEARANCE=(
 install_packages() {
   local -r pkg_list=("$@")
 
-  sudo pacman -Syu --noconfirm
+  sudo pacman -Syu
 
-  sudo pacman -S --needed --noconfirm "${pkg_list[@]}"
+  sudo pacman -S --needed "${pkg_list[@]}"
 }
 
 main() {
