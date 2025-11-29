@@ -1,4 +1,4 @@
-include catppuccin-mocha
+include colors
 
 gaps inner 4
 gaps outer 0
@@ -217,14 +217,14 @@ bar {
   swaybar_command waybar
   # mode hide
 }
-#colors
-# class                 border  backgr. text    indicator child_border
-client.focused           $text $base $text  $rosewater $text
-client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
-client.unfocused         $overlay0 $base $text  $rosewater $overlay0
-client.urgent            $peach    $base $peach $overlay0  $peach
-client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
-client.background        $base
+# colors
+# class                 border          background      text            indicator       child_border
+client.focused           $foreground     $background     $foreground     $color3         $foreground
+client.focused_inactive  $color8         $background     $color8         $color3         $color8
+client.unfocused         $color0         $background     $color8         $color3         $color0
+client.urgent            $color1         $background     $color1         $color3         $color1
+client.placeholder       $color0         $background     $color8         $color0         $color0
+client.background        $background
 
 
 include /etc/sway/config.d/*

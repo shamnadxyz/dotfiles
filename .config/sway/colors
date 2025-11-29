@@ -1,0 +1,22 @@
+# Basic colors
+set $background #17181A
+set $foreground #F1ECE2
+set $cursor #C2B67E
+
+# Palette colors
+set $color0 #424245
+set $color1 #91827D
+set $color2 #93801A
+set $color3 #8598A7
+set $color4 #C2949F
+set $color5 #FF8039
+set $color6 #D8C9AC
+set $color7 #E3DCCD
+set $color8 #9F9A90
+set $color9 #91827D
+set $color10 #93801A
+set $color11 #8598A7
+set $color12 #C2949F
+set $color13 #FF8039
+set $color14 #D8C9AC
+set $color15 #E3DCCD
