@@ -34,7 +34,7 @@ update_colorscheme() {
     return 1
   fi
   if wallust run "$WALLPAPER_PATH" -q; then
-    refresh_waybar
+    restart_waybar
   else
     notify-send -u critical " Error" \
       "Failed to update colorscheme with wallust"
