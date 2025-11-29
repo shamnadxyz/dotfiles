@@ -1,0 +1,7 @@
+.config/gtk-4.0/assets
+.config/gtk-4.0/gtk-dark.css
+.config/gtk-4.0/gtk.css
+
+.config/mpd/database
+.config/mpd/pid
+.config/mpd/sticker.sql
