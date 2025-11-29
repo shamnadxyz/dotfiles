@@ -1,16 +1,24 @@
 # Arch Linux Dotfiles
 
-## Packages
+My personal dotfiles for Arch Linux
 
-```bash
-sudo pacman -S --needed 7zip aria2 brightnessctl btop dunst eza fd foot git \
-             grim hyprland hyprlock libayatana-appindicator libnotify man-db \
-             mpc mpd mpv mpv-mpris ncdu neovim noto-fonts noto-fonts-cjk \
-             noto-fonts-emoji noto-fonts-extra npm nsxiv ntfs-3g nwg-look \
-             orchis-theme papirus-icon-theme pkgfile progress pulsemixer \
-             qt5-wayland rmpc rsync skim slurp starship stow swaybg \
-             tree-sitter-cli ttf-hack-nerd unzip waybar wl-clipboard wofi \
-             wtype xdg-desktop-portal-hyprland xdg-desktop-portal-wlr \
-             yazi zathura zathura-cb zathura-pdf-mupdf zoxide zsh \
-             zsh-syntax-highlighting
-```
+> NOTE: These dotfiles are tailored for my specific workflow.\
+Please review before applying it to your system.
+
+## Screenshot
+
+![Desktop Preview](./Screenshot.webp)
+
+## Programs
+
+- Window manager: [Hyprland](https://github.com/hyprwm/Hyprland)
+- Bar: [Waybar](https://github.com/Alexays/Waybar)
+- Terminal: [Foot](https://codeberg.org/dnkl/foot)
+- Shell: [Zsh](https://www.zsh.org/)
+- Menu: [Rofi](https://github.com/davatorium/rofi)
+- Notification: [Dust](https://github.com/dunst-project/dunst)
+- File Manager: [Yazi](https://github.com/sxyazi/yazi)
+- Text Editor: [Neovim](https://github.com/neovim/neovim)
+- Lockscreen: [Hyprlock](https://github.com/hyprwm/hyprlock)
+- Media Player: [Mpv](https://github.com/mpv-player/mpv)
+- Document Viewer: [Zathura](https://github.com/pwmt/zathura)
