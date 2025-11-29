@@ -49,7 +49,6 @@
     "interval": 60,
     "format": " {:%d/%m/%y  %I:%M %p}",
     "format-alt": " {:L%a, %B %d, %Y  %I:%M %p}",
-    "timezone": "Asia/Calcutta",
     "tooltip-format": "{calendar}",
     "calendar": {
       "mode": "month",
