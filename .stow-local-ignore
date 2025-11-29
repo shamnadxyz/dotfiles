@@ -1,0 +1,10 @@
+install-dependencies.sh
+Screenshot.webp
+
+\.git
+\.gitignore
+\.gitmodules
+
+^/README.*
+^/LICENSE.*
+^/COPYING
