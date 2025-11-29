@@ -51,8 +51,7 @@ install_packages() {
 }
 
 main() {
-  # Check if running on an Arch-based system
-  if [[ ! -f /etc/arch-release ]]; then
+  if ! command -v pacman >/dev/null 2>&1; then
     echo "Error: This script is intended for Arch Linux."
     exit 1
   fi
