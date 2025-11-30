@@ -7,7 +7,7 @@ Please review before applying it to your system.
 
 ## Screenshot
 
-![Desktop Preview](./Screenshot.webp)
+![Desktop Preview](./screenshot.png)
 
 ## Programs
 
