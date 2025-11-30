@@ -11,7 +11,11 @@ get_menu_dimensions() {
   local width
 
   height="$((INPUT_HEIGHT + (ENTRY_HEIGHT * number_of_entries)))"
-  ((height > 500)) && height=500
+  if ((height > 500)); then
+    height=500
+  elif ((height < 250));then
+    height=250
+  fi
 
   width="$((height * 107 / 100))"
 
