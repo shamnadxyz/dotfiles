@@ -8,9 +8,10 @@
   "passthrough": false,
   "gtk-layer-shell": true,
   "spacing": 6,
-  "margin-top": 3,
-  "margin-left": 3,
-  "margin-right": 3,
+  "margin-top": 2,
+  "margin-left": 2,
+  "margin-right": 2,
+  "margin-bottom": 0,
   "modules-left": [
     "hyprland/workspaces",
     "mpd"
