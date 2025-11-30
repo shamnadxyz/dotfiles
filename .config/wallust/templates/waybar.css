@@ -1,5 +1,6 @@
 @define-color background {{background}};
 @define-color foreground {{foreground}};
+@define-color text alpha({{foreground}}, 0.8);
 @define-color cursor {{cursor}};
 @define-color color0 {{color0 }};
 @define-color color1 {{color1 }};
