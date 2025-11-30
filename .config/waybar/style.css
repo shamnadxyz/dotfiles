@@ -14,10 +14,12 @@ window#waybar {
 }
 
 #workspaces * {
-  padding: 0px 2px;
+  padding: 0px;
 }
 
 #workspaces button {
+  padding: 0px 2px;
+  padding-left: 0px;
   color: alpha(@cursor, 0.8);
   background-color: transparent;
 }
