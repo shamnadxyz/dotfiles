@@ -93,10 +93,6 @@ window#waybar {
   }
 }
 
-#window {
-  color: @text;
-}
-
 #privacy {
   padding: 0px 1px;
   background-color: alpha(@red, 0.1);
