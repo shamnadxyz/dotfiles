@@ -1,0 +1,63 @@
+line-length = 79
+indent-width = 4
+
+[format]
+indent-style = "space"
+quote-style = "double"
+line-ending = "auto"
+
+# Enable auto-formatting of code examples inside docstrings.
+docstring-code-format = true 
+
+# Keeping this false allows Ruff to preserve "exploded" list layouts when a trailing comma is present.
+skip-magic-trailing-comma = false
+
+[lint]
+# F:   Pyflakes (General checks)
+# E:   pycodestyle (Errors)
+# W:   pycodestyle (Warnings)
+# I:   isort (Import sorting)
+# N:   pep8-naming (Naming conventions)
+# D:   pydocstyle (Docstring style)
+# UP:  pyupgrade (Upgrade syntax)
+# B:   flake8-bugbear (Bug risks)
+# C4:  flake8-comprehensions (Better comprehensions)
+# SIM: flake8-simplify (Code simplification)
+# ISC: flake8-implicit-str-concat (String concatenation)
+# RUF: Ruff specific rules
+# ANN: flake8-annotations (Type annotations)
+select = [
+    "F",
+    "E",
+    "W",
+    "I",
+    "N",
+    "D",
+    "UP",
+    "B",
+    "C4",
+    "SIM",
+    "ISC",
+    "RUF",
+    "ANN",
+]
+
+# ANN101: Missing type annotation for `self`
+# ANN102: Missing type annotation for `cls`
+# ISC001: Conflicts with the formatter
+ignore = [
+    "ANN101",
+    "ANN102",
+    "ISC001",
+]
+
+[lint.pydocstyle]
+convention = "pep257"
+
+[lint.isort]
+# Combines imports from the same package onto one line.
+combine-as-imports = true
+
+[lint.pep8-naming]
+# Treat these specific decorators as class methods.
+classmethod-decorators = ["classmethod", "pydantic.validator"]
