@@ -31,8 +31,15 @@ add_to_clipboard() {
 }
 
 delete_from_clipboard() {
+  local text match line_number
   text="$(cat "$CLIPBOARD" | rofi -dmenu -theme dmenu -no-custom -p 'Delete')"
-  sed "\|$text|d" -i "$CLIPBOARD" && echo "$text" >>"$TRASH"
+  match="$(grep -Fx "$text" -n "$CLIPBOARD")"
+  if [[ -n "$match" ]]; then
+    line_number="${match%%:*}"
+    sed -i "${line_number}d" "$CLIPBOARD"
+    printf "%s\n" "$text" >>"$TRASH"
+  fi
+
 }
 
 copy_to_clipboard() {
