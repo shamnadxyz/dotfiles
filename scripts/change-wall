@@ -5,21 +5,30 @@
 
 WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
 
-WALLPAPER_PATH="$HOME/.cache/wallpaper"
-DEPENDENCIES=("nsxiv" "swaybg")
+readonly WALLPAPER_PATH="$HOME/.cache/wallpaper"
+readonly DEPENDENCIES=("nsxiv" "swaybg")
 
-# Send notification and exit on error.
-send_error_notification() {
-  notify-send -u critical "  Error" "$1"
-  exit 1
+# Send message to STDERR and as notification
+err() {
+  echo "$*" >&2
+  notify-send -u critical "  Error" "$*"
 }
 
+# Check for missing dependencies
 check_dependencies() {
-  for cmd in "${DEPENDENCIES[@]}"; do
+  declare -a missing_deps
+
+  for cmd in "$@"; do
     if ! command -v "$cmd" &>/dev/null; then
-      send_error_notification "Required command not found: $cmd"
+      missing_deps+=("$cmd")
     fi
   done
+
+  if [[ "${#missing_deps[@]}" -gt 0 ]]; then
+    err "Missing dependencies: ${missing_deps[*]}"
+    exit 1
+  fi
+
 }
 
 restart_waybar() {
@@ -28,37 +37,24 @@ restart_waybar() {
 }
 
 update_colorscheme() {
+
   if ! command -v wallust &>/dev/null; then
-    notify-send -u critical " Error" \
-      "Wallust not found for updating the colorscheme"
+    err "Wallust not found for updating the colorscheme"
     return 1
   fi
+
   if wallust run "$WALLPAPER_PATH" -q; then
     restart_waybar
   else
-    notify-send -u critical " Error" \
-      "Failed to update colorscheme with wallust"
+    err "Failed to update colorscheme with wallust"
     return 1
   fi
 }
 
-main() {
-  # Ensure no other nsxiv instances are running
-  if pgrep -x "nsxiv" >/dev/null; then
-    exit 1
-  fi
-
-  # Verify wallpapers directory exists
-  if [[ ! -d "$WALLPAPERS" ]]; then
-    send_error_notification "Wallpapers directory does not exist: $WALLPAPERS"
-  fi
-
-  check_dependencies
-
-  notify-send "Wallpaper Selector" "Press 'Q' to select"
-
-  # Launch nsxiv to pick wallpaper
-  wallpaper="$(nsxiv -b "$WALLPAPERS" -rot)"
+# Update wallpaper using swaybg
+set_wallpaper() {
+  local wallpaper="${1:?"Wallpaper path required"}"
+  echo "$?"
 
   if [[ -f "$wallpaper" ]]; then
     ln -sf "$wallpaper" "$WALLPAPER_PATH"
@@ -67,6 +63,35 @@ main() {
     disown
     update_colorscheme
   fi
+}
+
+main() {
+
+  check_dependencies "${DEPENDENCIES[@]}"
+
+  local wallpaper="$1"
+
+  if [[ -f "$wallpaper" ]]; then
+    set_wallpaper "$wallpaper"
+    return 0
+  fi
+
+  # Ensure no other nsxiv instances are running
+  if pgrep -x "nsxiv" >/dev/null; then
+    exit 1
+  fi
+
+  # Ensure wallpapers directory exists
+  if [[ ! -d "$WALLPAPERS" ]]; then
+    err "Wallpapers directory does not exist: $WALLPAPERS"
+  fi
+
+  notify-send "Wallpaper Selector" "Press 'Q' to select"
+
+  # Launch nsxiv to pick wallpaper
+  wallpaper="$(nsxiv -b "$WALLPAPERS" -rot)"
+  set_wallpaper "$wallpaper"
+
 }
 
 main "$@"
