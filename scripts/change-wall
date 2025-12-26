@@ -3,10 +3,9 @@
 # A wallpaper selector script for setting the wallpaper using swaybg
 # and update the colorscheme using wallust
 
-WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
+readonly WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
 
 readonly WALLPAPER_PATH="$HOME/.cache/wallpaper"
-readonly DEPENDENCIES=("nsxiv" "swaybg")
 
 # Send message to STDERR and as notification
 err() {
@@ -18,17 +17,18 @@ err() {
 check_dependencies() {
   declare -a missing_deps
 
-  for cmd in "$@"; do
-    if ! command -v "$cmd" &>/dev/null; then
-      missing_deps+=("$cmd")
-    fi
-  done
+  if ! command -v "nsxiv" &>/dev/null; then
+    missing_deps+=("nsxiv")
+  fi
+
+  if ! command -v "swaybg" &>/dev/null; then
+    missing_deps+=("swaybg")
+  fi
 
   if [[ "${#missing_deps[@]}" -gt 0 ]]; then
     err "Missing dependencies: ${missing_deps[*]}"
     exit 1
   fi
-
 }
 
 restart_waybar() {
@@ -67,7 +67,7 @@ set_wallpaper() {
 
 main() {
 
-  check_dependencies "${DEPENDENCIES[@]}"
+  check_dependencies
 
   local wallpaper="$1"
 
