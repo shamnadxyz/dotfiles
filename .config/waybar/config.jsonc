@@ -214,15 +214,15 @@
     "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
     "reverse-scrolling": true,
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
+      "headphone": " ",
+      "hands-free": " ",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
       "default": [
-        "",
-        "",
+        " ",
+        " ",
         " "
       ]
     }
