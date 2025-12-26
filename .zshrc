@@ -131,17 +131,14 @@ zle -N down-line-or-beginning-search
 [[ -n "${key[Up]}"   ]] && bindkey -- "${key[Up]}"   up-line-or-beginning-search
 [[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search
 
-imports=(
-	"${HOME}/.config/zsh/.alias"
-	"/usr/share/skim/key-bindings.zsh"
-	"/usr/share/skim/completion.zsh"
-	"/usr/share/doc/pkgfile/command-not-found.zsh"
-	"/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-	"/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-)
+function safe_source() {
+    [[ -f "$1" ]] && source "$1"
+}
 
-for file in "${imports[@]}";do
-	if [ -s "$file" ];then
-		source "$file"
-	fi
-done
+safe_source "/usr/share/doc/pkgfile/command-not-found.zsh"
+safe_source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+safe_source "$HOME/.alias"
+
+unset -f safe_source
+
+(( $+commands[fzf] )) && source <(fzf --zsh)
