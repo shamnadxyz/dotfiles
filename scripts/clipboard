@@ -1,74 +1,120 @@
 #!/bin/bash
 
-# Set clipboard path with default
-CLIPBOARD="${CLIPBOARD:-$HOME/.local/share/clipboard/clipboard}"
+readonly DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/clipboard"
+readonly CLIPBOARD="${DATA_HOME}/clipboard"
+readonly TRASH="${DATA_HOME}/trash"
 
-# Save clipboard directory path once
-CLIPBOARD_DIR="$(dirname "$CLIPBOARD")"
-
-# Create clipboard directory if needed
-mkdir -p "$CLIPBOARD_DIR"
-
-# Define trash file inside the same directory
-TRASH="$CLIPBOARD_DIR/trash.txt"
-
-print_help() {
-  echo "Usage: clipboard [options]"
-  echo "Options:"
-  printf "  %-4s %s\n" "-a" "Add content of system clipboard to clipboard file"
-  printf "  %-4s %s\n" "-d" "Delete entry from clipboard file"
-  printf "  %-4s %s\n" "-p" "Copy clipboard file entry to system clipboard"
-  exit 1
+err() {
+  echo "$@" >&2
 }
 
-add_to_clipboard() {
+check_dependencies() {
+  declare -a missing_deps
+
+  if ! command -v "rofi" &>/dev/null; then
+    missing_deps+=("rofi")
+  fi
+
+  if ! command -v "wl-copy" &>/dev/null; then
+    missing_deps+=("wl-clipboard")
+  fi
+
+  if [[ "${#missing_deps[@]}" -gt 0 ]]; then
+    err "Missing dependencies: ${missing_deps[*]}"
+    exit 1
+  fi
+}
+
+check_rofi_running() {
+  if pgrep -x "rofi" >/dev/null; then
+    exit 1
+  fi
+}
+
+show_help() {
+  printf "Usage: clipboard <OPTION>
+
+  -a, --add
+                  add clipboard content to the storage
+  -d, --delete
+                  delete entry from the storage
+  -c, --copy
+                  copy from storage to the system clipboard
+  -h, --help
+                  display help\n"
+}
+
+add_to_storage() {
   text="$(wl-paste)"
   [ -z "$text" ] && exit 1
-  compact_text=$(echo "$text" | awk '{printf "%s%s", (NR>1 ? "\\n" : ""), $0}')
-  if ! grep -Fx "$compact_text" "$CLIPBOARD"; then
+
+  # Compress newlines to literal \n for single-line storage
+  compact_text="$(echo "$text" | awk 1 ORS='\\n')"
+
+  if ! grep -Fx "$compact_text" "$CLIPBOARD" >/dev/null 2>&1; then
     printf "%s\n" "$compact_text" >>"$CLIPBOARD"
   fi
 }
 
-delete_from_clipboard() {
+delete_from_storage() {
   local text match line_number
-  text="$(cat "$CLIPBOARD" | rofi -dmenu -theme dmenu -no-custom -p 'Delete')"
+
+  check_rofi_running
+
+  # exit on empty storage
+  [ ! -s "$CLIPBOARD" ] && exit 0
+
+  text="$(rofi -dmenu -theme dmenu -no-custom -p 'Delete' <"$CLIPBOARD")"
+  [ -z "$text" ] && exit 1
+
   match="$(grep -Fx "$text" -n "$CLIPBOARD")"
+
   if [[ -n "$match" ]]; then
     line_number="${match%%:*}"
     sed -i "${line_number}d" "$CLIPBOARD"
     printf "%s\n" "$text" >>"$TRASH"
   fi
-
 }
 
 copy_to_clipboard() {
-  text="$(cat "$CLIPBOARD" | rofi -dmenu -theme dmenu -no-custom -p 'Copy')"
-  [ -n "$text" ] && wl-copy "$(echo -e "$text")"
+
+  check_rofi_running
+
+  # exit on empty storage
+  [ ! -s "$CLIPBOARD" ] && exit 0
+
+  text="$(rofi -dmenu -theme dmenu -no-custom -p 'Copy' <"$CLIPBOARD")"
+  [ -z "$text" ] && exit 1
+
+  wl-copy "$(printf '%b' "$text")"
 }
 
-if pgrep -f "^wofi"; then
-  exit 1
-fi
+main() {
+  check_dependencies
 
-while getopts ":adp" flag; do
-  case "$flag" in
-  a)
-    add_to_clipboard
+  # Create clipboard directory and file if needed
+  mkdir -p "$DATA_HOME"
+  touch "$CLIPBOARD"
+
+  # Enforce exactly one argument
+  if [ "$#" -ne 1 ]; then
+    show_help
+    exit 1
+  fi
+
+  case "$1" in
+  -a | --add) add_to_storage ;;
+  -d | --delete) delete_from_storage ;;
+  -c | --copy) copy_to_clipboard ;;
+  -h | --help)
+    show_help
+    exit 0
     ;;
-  d)
-    delete_from_clipboard
-    ;;
-  p)
-    copy_to_clipboard
-    ;;
-  \?)
-    echo "Invalid option: -$OPTARG" >&2
-    print_help
+  *)
+    show_help
+    exit 1
     ;;
   esac
-done
+}
 
-if [ -z "$1" ]; then
-  print_help
-fi
+main "$@"
