@@ -13,7 +13,7 @@
   "margin-right": 2,
   "margin-bottom": 0,
   "modules-left": [
-    "hyprland/workspaces",
+    "custom/distro",
     "mpd"
   ],
   "modules-center": [
@@ -256,5 +256,9 @@
       "next": "mpc next",
       "previous": "mpc prev"
     }
+  },
+  "custom/distro": {
+    "format": "",
+    "tooltip": false
   }
 }
