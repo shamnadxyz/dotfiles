@@ -1,6 +1,6 @@
 [global]
   # Appearance
-  font = Hack Nerd Font 12
+  font = Hack Nerd Font 10
   corner_radius = 12
   corners = all
   frame_width = 1
