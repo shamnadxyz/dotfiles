@@ -3,12 +3,12 @@
 # Package installation Script
 
 readonly SYSTEM_UTILS=(
-  "7zip" "unzip" "rsync" "wget" "curl" "git" "stow"
-  "man-db" "tealdeer" "zoxide" "fzf" "skim" "fd"
+  "7zip" "unzip" "rsync" "curl" "git" "stow"
+  "man-db" "tealdeer" "zoxide" "fzf" "fd"
   "ripgrep" "eza" "jq" "progress" "ncdu"
   "btop" "brightnessctl" "libnotify" "reflector"
   "pkgfile" "polkit-kde-agent" "xdg-utils"
-  "aria2"
+  "aria2" "bat" "keepassxc"
 )
 
 readonly HARDWARE=(
@@ -26,15 +26,15 @@ readonly HYPRLAND_ENV=(
 
 readonly MEDIA=(
   "pavucontrol" "pulsemixer" "mpd" "mpc" "rmpc"
-  "mpv" "mpv-mpris" "obs-studio"
+  "mpv" "mpv-mpris" "mpd-mpris" "obs-studio"
   "imagemagick" "perl-image-exiftool"
   "zathura" "zathura-cb" "zathura-pdf-mupdf"
   "nsxiv"
 )
 
 readonly DEV_SHELL_TOOLS=(
-  "zsh" "zsh-syntax-highlighting" "starship"
-  "foot" "tmux" "neovim" "yazi" "npm"
+  "zsh" "zsh-syntax-highlighting" "starship" "uv"
+  "foot" "tmux" "neovim" "yazi" "npm" "httpie"
 )
 
 readonly APPEARANCE=(
