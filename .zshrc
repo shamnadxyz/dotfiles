@@ -81,6 +81,9 @@ function precmd {
 
 function preexec {
     print -n "\e]133;C\e\\"
+
+    # Update Window Title
+    print -Pn "\e]2;$1\a"
 }
 
 # create a zkbd compatible hash;
