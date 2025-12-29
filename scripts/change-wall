@@ -32,7 +32,8 @@ check_dependencies() {
 }
 
 restart_waybar() {
-  pkill waybar && waybar &
+  pkill waybar
+  waybar &>/dev/null &
   disown
 }
 
@@ -54,13 +55,18 @@ update_colorscheme() {
 # Update wallpaper using swaybg
 set_wallpaper() {
   local wallpaper="${1:?"Wallpaper path required"}"
-  echo "$?"
 
   if [[ -f "$wallpaper" ]]; then
-    ln -sf "$wallpaper" "$WALLPAPER_PATH"
+    # Resolve the absolute path
+    local absolute_path
+    absolute_path="$(realpath "$wallpaper")"
+
+    ln -sf "$absolute_path" "$WALLPAPER_PATH"
+
     pkill swaybg
-    swaybg -i "$wallpaper" -m fill &
+    swaybg -i "$WALLPAPER_PATH" -m fill &>/dev/null &
     disown
+
     update_colorscheme
   fi
 }
