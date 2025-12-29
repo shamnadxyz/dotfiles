@@ -7,7 +7,7 @@ Please review before applying it to your system.
 
 ## Screenshot
 
-![Desktop Preview](./screenshot.png)
+![Desktop Preview](./screenshot.avif)
 
 ## Programs
 
