@@ -63,6 +63,7 @@ set_wallpaper() {
 
     ln -sf "$absolute_path" "$WALLPAPER_PATH"
 
+    pkill dunst
     pkill swaybg
     swaybg -i "$WALLPAPER_PATH" -m fill &>/dev/null &
     disown
