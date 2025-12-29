@@ -1,5 +1,5 @@
 * {
-  active-background: {{color11}};
+  active-background: transparent;
   active-foreground: {{color5}};
 
   background-color: transparent;
@@ -9,14 +9,14 @@
   foreground: {{foreground}};
   normal-foreground: {{color8}};
 
-  selected-active-background: {{color13}};
-  selected-active-foreground: {{background}};
+  selected-active-background: {{color7}};
+  selected-active-foreground: {{color0}};
 
   selected-normal-background: {{color7}};
   selected-normal-foreground: {{color0}};
 
-  selected-urgent-background: {{color2}};
-  selected-urgent-foreground: {{color6}};
+  selected-urgent-background: #FFA0A022;
+  selected-urgent-foreground: #FFA0A0;
 
   separatorcolor: {{foreground}}22;
   spacing: 2;
@@ -66,9 +66,7 @@ element {
 
 element-icon {
     margin: 0px 0.3em 0px 0px;
-
 }
-
 
 element-text {
   background-color: inherit;
