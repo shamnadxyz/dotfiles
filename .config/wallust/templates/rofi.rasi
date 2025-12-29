@@ -12,8 +12,8 @@
   selected-active-background: {{color7}};
   selected-active-foreground: {{color0}};
 
-  selected-normal-background: {{color7}};
-  selected-normal-foreground: {{color0}};
+  selected-normal-background: {{color7}}11;
+  selected-normal-foreground: {{foreground}};
 
   selected-urgent-background: #FFA0A022;
   selected-urgent-foreground: #FFA0A0;
@@ -69,7 +69,7 @@ element-icon {
 }
 
 element-text {
-  background-color: inherit;
+  background-color: transparent;
   text-color: inherit;
 }
 
