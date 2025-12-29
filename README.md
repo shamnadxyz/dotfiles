@@ -19,6 +19,5 @@ Please review before applying it to your system.
 - Notification: [Dust](https://github.com/dunst-project/dunst)
 - File Manager: [Yazi](https://github.com/sxyazi/yazi)
 - Text Editor: [Neovim](https://github.com/neovim/neovim)
-- Lockscreen: [Hyprlock](https://github.com/hyprwm/hyprlock)
 - Media Player: [Mpv](https://github.com/mpv-player/mpv)
 - Document Viewer: [Zathura](https://github.com/pwmt/zathura)
