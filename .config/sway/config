@@ -71,6 +71,7 @@ input type:keyboard {
 
     # Start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+w exec rofi -show window
 
     # Manual Bindings
     bindsym $mod+e exec $fileManager
