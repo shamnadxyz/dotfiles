@@ -1,6 +1,6 @@
 # Basic colors
 set $background {{background}}
-set $foreground {{foreground}}
+set $foreground {{foreground}}88
 set $cursor {{cursor}}
 
 # Palette colors
