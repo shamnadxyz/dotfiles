@@ -4,8 +4,8 @@ gaps inner 4
 gaps outer 0
 default_border pixel 1
 default_floating_border pixel 2
-# smart_gaps on
-# hide_edge_borders smart
+smart_gaps on
+hide_edge_borders smart
 
 ### Variables
 #
@@ -74,7 +74,7 @@ input type:keyboard {
 
     # Manual Bindings
     bindsym $mod+e exec $fileManager
-    bindsym $mod+Shift+v exec clipboard -p
+    bindsym $mod+Shift+v exec clipboard -c
     bindsym $mod+Shift+c exec clipboard -a
     bindsym $mod+Shift+x exec clipboard -d
     bindsym $mod+Shift+m exec $terminal rmpc
@@ -90,6 +90,7 @@ input type:keyboard {
     bindsym XF86MonBrightnessUp exec brightnessctl s 5%+
     bindsym XF86MonBrightnessDown exec brightnessctl s 5%- --min-value=4800
     bindsym $mod+shift+n exec connmenu
+    bindsym Mod4+w exec pkill -SIGUSR1 waybar
 
     floating_modifier $mod normal
 
