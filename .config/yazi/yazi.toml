@@ -58,7 +58,10 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 # 	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 # ]
 #
-# [open]
+[open]
+prepend_rules = [
+  { name = "*.cbz", use = "open"}
+]
 # rules = [
 # 	# Folder
 # 	{ name = "*/", use = [ "edit", "open", "reveal" ] },
