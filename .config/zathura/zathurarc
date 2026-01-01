@@ -1,3 +1,2 @@
-set sandbox strict
 set statusbar-basename true
 map <C-s> toggle_statusbar
