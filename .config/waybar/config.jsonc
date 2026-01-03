@@ -22,15 +22,15 @@
   "modules-right": [
     "tray",
     "idle_inhibitor",
-    "cpu",
     "memory",
+    "cpu",
     "temperature",
     "network",
     "bluetooth",
     "battery",
     "backlight",
-    "pulseaudio",
-    "pulseaudio#microphone",
+    "pulseaudio#sink",
+    "pulseaudio#source",
     "privacy",
     "custom/power"
   ],
@@ -194,7 +194,7 @@
       }
     ]
   },
-  "pulseaudio": {
+  "pulseaudio#sink": {
     "format": "{icon} {volume}%",
     "format-muted": " ",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
@@ -215,7 +215,7 @@
       ]
     }
   },
-  "pulseaudio#microphone": {
+  "pulseaudio#source": {
     "format": "{format_source}",
     "format-source": " {volume}%",
     "format-source-muted": " ",
