@@ -34,14 +34,13 @@ check_rofi_running() {
 show_help() {
   printf "Usage: clipboard <OPTION>
 
-  -a, --add
-                  add clipboard content to the storage
-  -d, --delete
-                  delete entry from the storage
-  -c, --copy
-                  copy from storage to the system clipboard
-  -h, --help
-                  display help\n"
+  -a, --add       add clipboard content to the storage
+
+  -d, --delete    delete entry from the storage
+
+  -c, --copy      copy from storage to the system clipboard
+
+  -h, --help      display help\n"
 }
 
 add_to_storage() {
