@@ -36,7 +36,7 @@
   ],
   "clock": {
     "interval": 60,
-    "format": " {:%d/%m/%y  %I:%M %p}",
+    "format": "{:%I:%M %p}",
     "format-alt": " {:L%a, %B %d, %Y  %I:%M %p}",
     "tooltip-format": "{calendar}",
     "calendar": {
@@ -66,7 +66,7 @@
     }
   },
   "network": {
-    "format": "{ifname}",
+    "format": "󰛳 {ifname}",
     "format-wifi": "  {essid}",
     "format-ethernet": " {ipaddr}/{cidr}",
     "format-disconnected": "",
