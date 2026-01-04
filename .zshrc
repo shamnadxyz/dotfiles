@@ -3,8 +3,9 @@ PS1=" %F{green}%1~%f %F{blue}❯%f "
 
 # History
 HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=20000
+HISTSIZE=100000
+SAVEHIST=200000
+setopt EXTENDED_HISTORY
 
 # Starship
 eval "$(starship init zsh)"
