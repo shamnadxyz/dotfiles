@@ -34,7 +34,7 @@ bindkey -v '^?' backward-delete-char
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    alias ls='ls --indicator-style=classify --color=always'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -42,6 +42,8 @@ if [ -x /usr/bin/dircolors ]; then
     #alias fgrep='fgrep --color=auto'
     #alias egrep='egrep --color=auto'
 fi
+
+alias mv='mv -vi'
 
 # if a command is the name of a directory, perform the cd command to that directory.
 setopt auto_cd
