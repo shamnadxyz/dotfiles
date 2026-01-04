@@ -5,7 +5,7 @@
 readonly SYSTEM_UTILS=(
   "7zip" "unzip" "rsync" "curl" "git" "stow"
   "man-db" "tealdeer" "zoxide" "fzf" "fd"
-  "ripgrep" "eza" "jq" "progress" "ncdu"
+  "ripgrep" "jq" "progress" "ncdu"
   "btop" "brightnessctl" "libnotify" "reflector"
   "pkgfile" "polkit-kde-agent" "xdg-utils"
   "aria2" "bat" "keepassxc"
