@@ -1,28 +1,28 @@
 * {
-  active-background: #313244;
-  active-foreground: #89B4FA;
+  active-background: transparent;
+  active-foreground: #6ABCD4;
 
   background-color: transparent;
-  border-color: #FDFBE633;
-  base: #1E1E2E;
+  border-color: #FAF3F122;
+  base: #100D10CC;
 
-  foreground: #CDD6F4;
-  normal-foreground: #A6ADC8;
+  foreground: #FAF3F1;
+  normal-foreground: #A7A19F;
 
-  selected-active-background: #4491ED;
-  selected-active-foreground: #FDF9F9;
+  selected-active-background: #EFE6E3;
+  selected-active-foreground: #3B383B;
 
-  selected-normal-background: #B4BEFE;
-  selected-normal-foreground: #11111b;
+  selected-normal-background: #EFE6E311;
+  selected-normal-foreground: #FAF3F1;
 
-  selected-urgent-background: #EBA0AC;
-  selected-urgent-foreground: #F5E0DC;
+  selected-urgent-background: #FFA0A022;
+  selected-urgent-foreground: #FFA0A0;
 
-  separatorcolor: #FDFBE633;
+  separatorcolor: #FAF3F122;
   spacing: 2;
 
-  urgent-background: #313244;
-  urgent-foreground: #F38BA8;
+  urgent-background: #3B383B;
+  urgent-foreground: #5F84A1;
 }
 
 window {
@@ -64,8 +64,12 @@ element {
   border-radius: 10px;
 }
 
+element-icon {
+    margin: 0px 0.3em 0px 0px;
+}
+
 element-text {
-  background-color: inherit;
+  background-color: transparent;
   text-color: inherit;
 }
 
