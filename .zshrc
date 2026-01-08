@@ -43,8 +43,6 @@ if [ -x /usr/bin/dircolors ]; then
     #alias egrep='egrep --color=auto'
 fi
 
-alias mv='mv -vi'
-
 # if a command is the name of a directory, perform the cd command to that directory.
 setopt auto_cd
 # in order to use #, ~ and ^ for filename generation grep word

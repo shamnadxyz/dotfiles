@@ -21,4 +21,5 @@ export FZF_DEFAULT_OPTS=" \
 --color=border:#6C7086,label:#CDD6F4"
 
 alias ls='eza --icons=always'
+alias mv='mv -vi'
 export EDITOR=nvim
