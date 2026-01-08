@@ -33,7 +33,7 @@ readonly MEDIA=(
 )
 
 readonly DEV_SHELL_TOOLS=(
-  "zsh" "zsh-syntax-highlighting" "starship" "uv"
+  "zsh" "starship" "uv"
   "foot" "tmux" "neovim" "yazi" "npm" "httpie"
 )
 

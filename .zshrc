@@ -122,7 +122,6 @@ function safe_source() {
 }
 
 safe_source "/usr/share/doc/pkgfile/command-not-found.zsh"
-safe_source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 safe_source "$HOME/.alias"
 
 unset -f safe_source
