@@ -20,6 +20,7 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475A \
 --color=border:#6C7086,label:#CDD6F4"
 
-alias ls='eza --icons=always'
+alias ls='eza --icons --color --group-directories-first'
+alias mkdir='mkdir -pv'
 alias mv='mv -vi'
 export EDITOR=nvim
