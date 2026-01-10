@@ -45,6 +45,6 @@ command -v fzf &>/dev/null && eval "$(fzf --bash)"
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
-[[ -f "/usr/share/doc/pkgfile/command-not-found.zsh" ]] && . "/usr/share/doc/pkgfile/command-not-found.zsh"
+[[ -f "/usr/share/doc/pkgfile/command-not-found.bash" ]] && . "/usr/share/doc/pkgfile/command-not-found.bash"
 [[ -f "/usr/share/bash-completion/bash_completion" ]] && . "/usr/share/bash-completion/bash_completion"
 [[ -f "${HOME}/.alias" ]] && . "${HOME}/.alias"
