@@ -5,5 +5,5 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 
 # Path
 typeset -U path PATH
-path=("$HOME/.cargo/bin/" "$HOME/.local/bin" "/usr/local/sbin" "/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/bin") 
+path+=("$HOME/.cargo/bin/" "$HOME/.local/bin")
 export PATH
