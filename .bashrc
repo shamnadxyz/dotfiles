@@ -33,12 +33,12 @@ PROMPT_COMMAND=update_prompt
 shopt -s autocd
 shopt -s checkwinsize
 shopt -s cmdhist
+shopt -s extglob
 shopt -s histappend
 
 # History
 HISTSIZE=100000
 
-command -v starship &>/dev/null && eval "$(starship init bash)"
 command -v zoxide &>/dev/null && eval "$(zoxide init bash)"
 command -v fzf &>/dev/null && eval "$(fzf --bash)"
 
