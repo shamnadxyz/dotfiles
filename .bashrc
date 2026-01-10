@@ -38,6 +38,7 @@ shopt -s histappend
 
 # History
 HISTSIZE=100000
+HISTFILESIZE=200000
 
 command -v zoxide &>/dev/null && eval "$(zoxide init bash)"
 command -v fzf &>/dev/null && eval "$(fzf --bash)"
