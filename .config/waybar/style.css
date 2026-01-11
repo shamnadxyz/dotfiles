@@ -4,13 +4,11 @@
   font-family: "Commit Mono Nerd Font";
   font-size: 12px;
   font-weight: bold;
-  border-radius: 24px;
   padding: 4px;
 }
 
 window#waybar {
   background: @background;
-  border-radius: 0px;
   color: @text;
 }
 
@@ -89,6 +87,7 @@ window#waybar {
   padding: 0px 1px;
   background-color: alpha(@red, 0.1);
   color: @red;
+  border-radius: 24px;
   margin: 0px 4px;
 }
 
