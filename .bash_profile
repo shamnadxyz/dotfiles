@@ -1,5 +1,8 @@
 export PATH="$PATH:${HOME}/.cargo/bin:${HOME}/.local/bin"
 
+export EDITOR=nvim
+export VISUAL=nvim
+
 # Start WM automatically on tty1
 if [[ "$(tty)" == "/dev/tty1" ]]; then
   if command -v start-hyprland >/dev/null 2>&1; then
