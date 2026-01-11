@@ -4,7 +4,8 @@
 # To stop logging of consecutive identical commands
 export HISTCONTROL=ignoredups
 
-PS1='\n\[\e[1;38;2;180;190;254m\]\w\n\[\e[38;2;137;180;250m\]\u\[\e[38;2;205;214;244m\] \$ \[\e[0m\]'
+# Neovim default colorscheme
+PS1='\n\[\e[1;38;2;224;226;234m\]\w\n\[\e[38;2;166;219;255m\]\u\[\e[38;2;224;226;234m\] \$ \[\e[0m\]'
 
 update_prompt() {
   local status=$?
@@ -12,20 +13,20 @@ update_prompt() {
   local dir_color user_color sym_color
 
   # Lavender
-  dir_color='\[\e[1;38;2;180;190;254m\]'
+  dir_color='\[\e[1;224;226;234;254m\]'
   # Blue
-  user_color='\[\e[38;2;137;180;250m\]'
+  user_color='\[\e[38;2;166;219;255m\]'
 
   if ((status == 0)); then
     # Green
-    # sym_color='\[\e[38;2;166;227;161m\]'
+    # sym_color='\[\e[38;2;179;246;192m\]'
 
     # Text
-    sym_color='\[\e[38;2;205;214;244m\]'
+    sym_color='\[\e[38;2;224;226;234m\]'
 
   else
     # Red
-    sym_color='\[\e[38;2;243;139;168m\]'
+    sym_color='\[\e[38;2;255;192;185m\]'
   fi
 
   PS1="\n${dir_color}\w\n${user_color}\u${sym_color} \$ \[\e[0m\]"

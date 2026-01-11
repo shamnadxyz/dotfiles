@@ -1,28 +1,28 @@
 * {
   active-background: transparent;
-  active-foreground: #6ABCD4;
+  active-foreground: #91A5A3;
 
   background-color: transparent;
-  border-color: #FAF3F122;
-  base: #100D10CC;
+  border-color: #F6F8EB22;
+  base: #14161B;
 
-  foreground: #FAF3F1;
-  normal-foreground: #A7A19F;
+  foreground: #E0E2EA;
+  normal-foreground: #E0E2EA;
 
-  selected-active-background: #EFE6E3;
-  selected-active-foreground: #3B383B;
+  selected-active-background: #A6DBFF;
+  selected-active-foreground: #444548;
 
-  selected-normal-background: #EFE6E311;
-  selected-normal-foreground: #FAF3F1;
+  selected-normal-background: #FFFFFF11;
+  selected-normal-foreground: #F6F8EB;
 
   selected-urgent-background: #FFA0A022;
   selected-urgent-foreground: #FFA0A0;
 
-  separatorcolor: #FAF3F122;
+  separatorcolor: #F6F8EB22;
   spacing: 2;
 
-  urgent-background: #3B383B;
-  urgent-foreground: #5F84A1;
+  urgent-background: #444548;
+  urgent-foreground: #8F755A;
 }
 
 window {
@@ -75,7 +75,7 @@ element-text {
 
 element.normal.normal {
   background-color: transparent;
-  text-color: @normal-foreground;
+  text-color: #9B9EA4;
 }
 
 element.normal.urgent {
@@ -90,7 +90,7 @@ element.normal.active {
 
 element.selected.normal {
   background-color: @selected-normal-background;
-  text-color: @selected-normal-foreground;
+  text-color: @foreground;
 }
 
 element.selected.urgent {
@@ -105,7 +105,7 @@ element.selected.active {
 
 element.alternate.normal {
   background-color: transparent;
-  text-color: @normal-foreground;
+  text-color: #9B9EA4;
 }
 
 element.alternate.urgent {

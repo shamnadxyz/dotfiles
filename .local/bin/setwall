@@ -41,21 +41,6 @@ restart_waybar() {
   disown
 }
 
-update_colorscheme() {
-
-  if ! command -v wallust &>/dev/null; then
-    err "Wallust not found for updating the colorscheme"
-    return 1
-  fi
-
-  if wallust run "$WALLPAPER_PATH" -q; then
-    restart_waybar
-  else
-    err "Failed to update colorscheme with wallust"
-    return 1
-  fi
-}
-
 # Update wallpaper using swaybg
 set_wallpaper() {
   local wallpaper="${1:?"Wallpaper path required"}"
@@ -72,7 +57,6 @@ set_wallpaper() {
     swaybg -i "$WALLPAPER_PATH" -m fill &>/dev/null &
     disown
 
-    update_colorscheme
   fi
 }
 
