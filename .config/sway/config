@@ -220,8 +220,8 @@ for_window [class="Nsxiv"] floating enable
 # exec /usr/lib/polkit-kde-authentication-agent-1
 
 exec $terminal
-# exec mpd
-exec_always swaybg -i ~/.cache/wallpaper -m fill
+exec mpd
+exec swaybg -i ~/.cache/wallpaper -m fill
 
 
 # Status Bar:
