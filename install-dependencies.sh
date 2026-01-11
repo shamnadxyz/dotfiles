@@ -6,22 +6,22 @@ readonly SYSTEM_UTILS=(
   "7zip" "unzip" "rsync" "curl" "git" "stow"
   "man-db" "tealdeer" "zoxide" "fzf" "fd"
   "ripgrep" "jq" "progress" "ncdu"
-  "btop" "brightnessctl" "libnotify" "reflector"
   "pkgfile" "polkit-kde-agent" "xdg-utils"
+  "btop" "brightnessctl" "libnotify"
   "aria2" "bat" "keepassxc"
 )
 
 readonly HARDWARE=(
-  "bluez" "bluez-utils" "networkmanager"
-  "network-manager-applet" "ntfs-3g"
+  "bluez" "bluez-utils"
+  "networkmanager" "ntfs-3g"
 )
 
 readonly HYPRLAND_ENV=(
   "hyprland" "hyprlock" "hyprshot" "waybar" "rofi" "wofi"
   "dunst" "swaybg" "grim" "slurp" "wl-clipboard"
   "nwg-look" "xdg-desktop-portal-hyprland"
-  "xdg-desktop-portal-wlr"
-  "qt5-wayland" "qt6-wayland" "libayatana-appindicator"
+  "xdg-desktop-portal-wlr" "libayatana-appindicator"
+  "qt5-wayland" "qt6-wayland"
 )
 
 readonly MEDIA=(
@@ -33,8 +33,8 @@ readonly MEDIA=(
 )
 
 readonly DEV_SHELL_TOOLS=(
-  "zsh" "starship" "uv"
-  "foot" "tmux" "neovim" "yazi" "npm" "httpie"
+  "foot" "httpie" "neovim"
+  "npm" "tmux" "uv" "yazi"
 )
 
 readonly APPEARANCE=(
