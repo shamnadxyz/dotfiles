@@ -6,9 +6,9 @@ export VISUAL=nvim
 # Start WM automatically on tty1
 if [[ "$(tty)" == "/dev/tty1" ]]; then
   if command -v sway >/dev/null 2>&1; then
-    sway
+    exec sway
   elif command -v start-hyprland >/dev/null 2>&1; then
-    start-hyprland
+    exec start-hyprland
   else
     echo "No compatible Wayland compositor found (Hyprland or sway)."
   fi
