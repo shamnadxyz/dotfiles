@@ -1,8 +1,8 @@
 # Neovim Default Colorscheme
 #
 # Basic colors
-set $background 07080D # NvimDarkGray1
-set $foreground 4F5258 # NvimDarkGrey4
+set $background 07080D
+set $foreground 9B9EA4
 
 # Palette colors
 set $color0 2c2e33
