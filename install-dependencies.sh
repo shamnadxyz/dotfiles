@@ -39,7 +39,7 @@ readonly DEV_SHELL_TOOLS=(
 
 readonly APPEARANCE=(
   "noto-fonts" "noto-fonts-cjk" "noto-fonts-emoji" "noto-fonts-extra"
-  "papirus-icon-theme" "orchis-theme" "ttf-hack-nerd"
+  "papirus-icon-theme" "orchis-theme" "otf-commit-mono-nerd"
 )
 
 install_packages() {
