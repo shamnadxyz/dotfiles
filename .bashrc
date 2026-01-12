@@ -1,3 +1,6 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
 # To stop logging of consecutive identical commands
 export HISTCONTROL=ignoredups
 

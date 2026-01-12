@@ -14,6 +14,4 @@ if [[ "$(tty)" == "/dev/tty1" ]]; then
   fi
 fi
 
-if [ -f "${HOME}/.bashrc" ]; then
-  . "${HOME}/.bashrc"
-fi
+[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
