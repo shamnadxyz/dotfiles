@@ -1,22 +1,23 @@
+# Neovim Default Colorscheme
+#
 # Basic colors
-set $background #17181A
-set $foreground #F1ECE2
-set $cursor #C2B67E
+set $background 07080D # NvimDarkGray1
+set $foreground 4F5258 # NvimDarkGrey4
 
 # Palette colors
-set $color0 #424245
-set $color1 #91827D
-set $color2 #93801A
-set $color3 #8598A7
-set $color4 #C2949F
-set $color5 #FF8039
-set $color6 #D8C9AC
-set $color7 #E3DCCD
-set $color8 #9F9A90
-set $color9 #91827D
-set $color10 #93801A
-set $color11 #8598A7
-set $color12 #C2949F
-set $color13 #FF8039
-set $color14 #D8C9AC
-set $color15 #E3DCCD
+set $color0 2c2e33
+set $color1 FFC0B9
+set $color2 B3F6C0
+set $color3 FCE094
+set $color4 A6DBFF
+set $color5 FFCAFF
+set $color6 8CF8F7
+set $color7 E0E2EA
+set $color8 4F5258
+set $color9 590008
+set $color10 005523
+set $color11 6B5300
+set $color12 004C73
+set $color13 470045
+set $color14 007373
+set $color15 9B9EA4
