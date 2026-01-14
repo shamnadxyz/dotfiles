@@ -27,9 +27,8 @@ readonly HYPRLAND_ENV=(
 readonly MEDIA=(
   "pavucontrol" "pulsemixer" "mpd" "mpc" "rmpc"
   "mpv" "mpv-mpris" "mpd-mpris" "obs-studio"
-  "imagemagick" "perl-image-exiftool"
+  "imagemagick" "perl-image-exiftool" "swayimg"
   "zathura" "zathura-cb" "zathura-pdf-mupdf"
-  "nsxiv"
 )
 
 readonly DEV_SHELL_TOOLS=(
