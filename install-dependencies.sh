@@ -5,10 +5,10 @@
 readonly SYSTEM_UTILS=(
   "7zip" "unzip" "rsync" "curl" "git" "stow"
   "man-db" "tealdeer" "zoxide" "fzf" "fd"
-  "ripgrep" "jq" "progress" "ncdu"
-  "pkgfile" "polkit-kde-agent" "xdg-utils"
-  "btop" "brightnessctl" "libnotify"
-  "aria2" "bat" "keepassxc"
+  "ripgrep" "jq" "ncdu" "btop" "xdg-utils"
+  "brightnessctl" "libnotify"
+  "pkgfile" "polkit-kde-agent"
+  "aria2" "keepassxc"
 )
 
 readonly HARDWARE=(
@@ -16,29 +16,28 @@ readonly HARDWARE=(
   "networkmanager" "ntfs-3g"
 )
 
-readonly HYPRLAND_ENV=(
-  "hyprland" "hyprlock" "hyprshot" "waybar" "rofi" "wofi"
-  "dunst" "swaybg" "grim" "slurp" "wl-clipboard"
-  "nwg-look" "xdg-desktop-portal-hyprland"
-  "xdg-desktop-portal-wlr" "libayatana-appindicator"
-  "qt5-wayland" "qt6-wayland"
+readonly DESKTOP_ENV=(
+  "waybar" "rofi" "sway" "dunst"
+  "swaybg" "grim" "slurp" "wl-clipboard"
+  "nwg-look" "xdg-desktop-portal-wlr"
+  "qt6-wayland" "libayatana-appindicator"
 )
 
 readonly MEDIA=(
-  "pavucontrol" "pulsemixer" "mpd" "mpc" "rmpc"
-  "mpv" "mpv-mpris" "mpd-mpris" "obs-studio"
-  "imagemagick" "perl-image-exiftool" "swayimg"
+  "pulsemixer" "mpd" "mpc" "rmpc"
+  "mpv" "mpv-mpris" "imagemagick"
+  "perl-image-exiftool" "nsxiv"
   "zathura" "zathura-cb" "zathura-pdf-mupdf"
 )
 
 readonly DEV_SHELL_TOOLS=(
-  "foot" "httpie" "neovim"
-  "npm" "tmux" "uv" "yazi"
+  "uv" "tmux" "npm" "bash-completion"
+  "foot" "neovim" "yazi"
 )
 
 readonly APPEARANCE=(
-  "noto-fonts" "noto-fonts-cjk" "noto-fonts-emoji" "noto-fonts-extra"
-  "papirus-icon-theme" "orchis-theme" "otf-commit-mono-nerd"
+  "ttf-dejavu" "orchis-theme"
+  "otf-commit-mono-nerd"
 )
 
 install_packages() {
@@ -58,7 +57,7 @@ main() {
   local -a all_packages=(
     "${SYSTEM_UTILS[@]}"
     "${HARDWARE[@]}"
-    "${HYPRLAND_ENV[@]}"
+    "${DESKTOP_ENV[@]}"
     "${MEDIA[@]}"
     "${DEV_SHELL_TOOLS[@]}"
     "${APPEARANCE[@]}"
