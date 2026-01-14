@@ -208,11 +208,11 @@ bindswitch --reload --locked lid:off output $laptop enable
 
 # Assigning apps to specific workspaces
 # Use `swaymsg -t get_tree` to retrieve the app_id and class
-assign [class="Thunar"] 3
-assign [class="Brave-browser"] 2
-assign [class="Signal"] 4
+assign [app_id="brave-browser"] 2
+assign [app_id="signal"] 4
 assign [app_id="mpv"] 5
-for_window [class="Nsxiv"] floating enable
+for_window [app_id="swayimg"] floating enable
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
 
 # Autostart apps
 #
