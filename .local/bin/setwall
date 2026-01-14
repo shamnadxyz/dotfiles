@@ -97,7 +97,7 @@ main() {
     err "Wallpapers directory does not exist: $WALLPAPERS"
   fi
 
-  notify-send "Wallpaper Selector" "Press 'Q' to select"
+  notify-send "Wallpaper Selector" "Press 'Shift+Return' to select"
 
   # Launch swayimg to pick wallpaper
   wallpaper="$(swayimg -rgf "$WALLPAPERS" -s fill)"
