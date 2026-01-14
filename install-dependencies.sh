@@ -26,7 +26,7 @@ readonly DESKTOP_ENV=(
 readonly MEDIA=(
   "pulsemixer" "mpd" "mpc" "rmpc"
   "mpv" "mpv-mpris" "imagemagick"
-  "perl-image-exiftool" "nsxiv"
+  "perl-image-exiftool" "swayimg"
   "zathura" "zathura-cb" "zathura-pdf-mupdf"
 )
 
