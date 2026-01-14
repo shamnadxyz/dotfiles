@@ -100,7 +100,7 @@ main() {
   notify-send "Wallpaper Selector" "Press 'Shift+Return' to select"
 
   # Launch swayimg to pick wallpaper
-  wallpaper="$(swayimg -rgf "$WALLPAPERS" -s fill)"
+  wallpaper="$(swayimg -rg "$WALLPAPERS" -s fill)"
   set_wallpaper "$wallpaper"
 
 }
