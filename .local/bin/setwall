@@ -1,7 +1,11 @@
 #!/bin/bash
 #
 # A wallpaper selector script for setting the wallpaper using swaybg
-# and update the colorscheme using wallust
+# swayimg is used for picker and wallust to generate colorscheme
+# Dependencies:
+#   swaybg and swayimg
+# Optional dependencies:
+#   libnotify, dunst, and wallust
 
 readonly WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
 
@@ -17,8 +21,8 @@ err() {
 check_dependencies() {
   declare -a missing_deps
 
-  if ! command -v "nsxiv" &>/dev/null; then
-    missing_deps+=("nsxiv")
+  if ! command -v "swayimg" &>/dev/null; then
+    missing_deps+=("swayimg")
   fi
 
   if ! command -v "swaybg" &>/dev/null; then
@@ -83,8 +87,8 @@ main() {
     return 0
   fi
 
-  # Ensure no other nsxiv instances are running
-  if pgrep -x "nsxiv" >/dev/null; then
+  # Ensure no other instances are running
+  if pgrep -x "swayimg" >/dev/null; then
     exit 1
   fi
 
@@ -95,8 +99,8 @@ main() {
 
   notify-send "Wallpaper Selector" "Press 'Q' to select"
 
-  # Launch nsxiv to pick wallpaper
-  wallpaper="$(nsxiv -b "$WALLPAPERS" -rot)"
+  # Launch swayimg to pick wallpaper
+  wallpaper="$(swayimg -rgf "$WALLPAPERS" -s fill)"
   set_wallpaper "$wallpaper"
 
 }
