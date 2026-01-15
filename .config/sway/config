@@ -28,6 +28,8 @@ set $fileManager foot yazi
 output HDMI-A-1 mode 1920x1080@75Hz pos 0 0 scale 1.0
 output $laptop mode 1920x1200@60Hz pos 0 0 scale 1.2
 
+output * bg ~/.cache/wallpaper stretch
+
 # focus output HDMI-A1
 
 ### Idle configuration
@@ -216,12 +218,8 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
 
 # Autostart apps
 #
-# exec nm-applet
-# exec /usr/lib/polkit-kde-authentication-agent-1
-
 exec $terminal
 exec mpd
-exec swaybg -i ~/.cache/wallpaper -m fill
 
 
 # Status Bar:
