@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# Size of the rofi window used for the action menu
+readonly MENU_HEIGHT=190
+readonly MENU_WIDTH=300
+
+if pgrep -x 'rofi'; then
+  exit 1
+fi
+
+MESSAGE='You pressed the <b>exit</b> shortcut.
+
+Do you really want to exit sway?'
+
+OPTIONS=$'Cancel\nExit sway'
+
+option="$(
+  printf "%s" "$OPTIONS" | rofi -dmenu -theme dmenu \
+    -p 'Action' -no-custom \
+    -theme-str "window {height: ${MENU_HEIGHT}px;width: ${MENU_WIDTH}px;}" \
+    -mesg "$MESSAGE"
+
+)"
+
+if [[ "$option" == "Exit sway" ]]; then
+  swaymsg exit
+fi
