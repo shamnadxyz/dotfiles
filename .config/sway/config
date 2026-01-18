@@ -28,7 +28,7 @@ set $fileManager foot yazi
 output HDMI-A-1 mode 1920x1080@75Hz pos 0 0 scale 1.0
 output $laptop mode 1920x1200@60Hz pos 0 0 scale 1.2
 
-output * bg ~/.cache/wallpaper stretch
+output * bg ~/.cache/wallpaper fill
 
 # focus output HDMI-A1
 
