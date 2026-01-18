@@ -70,9 +70,9 @@
     "format-wifi": "  {essid}",
     "format-ethernet": " {ipaddr}/{cidr}",
     "format-disconnected": "",
-    "tooltip-format": "{ifname} via {gwaddr}\n {bandwidthDownBits}\n {bandwidthUpBits}",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%) {ifname} {icon}\n {bandwidthDownBits}\n {bandwidthUpBits}\n{ipaddr} via {gwaddr}",
-    "tooltip-format-ethernet": "{ipaddr}/{cidr} {ifname}\n {bandwidthDownBits}\n {bandwidthUpBits}",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) {ifname}\n{ipaddr} via {gwaddr}",
+    "tooltip-format-ethernet": "{ipaddr}/{cidr} {ifname}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 10
   },
