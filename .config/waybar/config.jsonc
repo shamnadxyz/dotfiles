@@ -155,14 +155,14 @@
     "tooltip-format": "Memory: {used}G / {total}G ({percentage}%)\nAvailable: {avail}G\nSwap: {swapUsed}G / {swapTotal}G ({swapPercentage}%)"
   },
   "temperature": {
-    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-    "critical-threshold": 80,
     "format": "{icon} {temperatureC}°C",
     "format-icons": [
       "",
       "",
       ""
     ],
+    // "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input",
+    // "critical-threshold": 80,
     "tooltip": false
   },
   "custom/power": {
