@@ -14,60 +14,15 @@ window#waybar {
 
 .module {
   color: @text;
-  background: alpha(@foreground, 0.05);
-  border-radius: 24px;
-  border: 1px solid alpha(@foreground, 0.05);
-  padding: 0px 12px;
-  margin: 0px 4px;
-}
-
-#idle_inhibitor {
-  padding: 0px 9px;
-}
-
-#clock {
-  padding: 0 16px;
-}
-
-/* Visual grouping - left */
-#pulseaudio.sink,
-#cpu {
-  margin-right: 0px;
-  padding-right: 8px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-}
-
-/* Visual grouping - right */
-#pulseaudio.source,
-#temperature {
-  margin-left: 0px;
-  padding-left: 8px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-}
-
-#custom-power {
-  padding: 8px 14px;
-  padding-left: 11px;
-  margin-right: 2px;
-}
-
-#custom-distro {
-  font-size: 20px;
-  background: none;
-  border: none;
-  box-shadow: none;
+  margin: 0px 6px;
 }
 
 #battery.charging,
 #battery.plugged {
   color: @green;
-  background-color: alpha(@green, 0.2);
 }
 
 #battery.critical:not(.charging) {
-  background-color: alpha(@red, 0.2);
   color: @red;
   animation-name: blink;
   animation-duration: 0.5s;
@@ -76,26 +31,37 @@ window#waybar {
   animation-direction: alternate;
 }
 
+#privacy {
+  padding: 0px;
+  margin: -2px 4px;
+  color: @red;
+}
+
+#privacy-item {
+  margin: 0px;
+  padding: 0px;
+}
+
+#tray {
+  padding: 0px;
+}
+
+#mpd {
+  padding: 0px;
+  margin: 0px;
+}
+
 @keyframes blink {
   to {
-    background-color: @red;
     color: @background;
   }
 }
 
-#privacy {
-  padding: 0px 1px;
-  background-color: alpha(@red, 0.1);
-  color: @red;
-  border-radius: 24px;
-  margin: 0px 4px;
-}
 
 tooltip {
   color: @text;
-  background: alpha(@background, 0.9);
-  border-radius: 16px;
-  border: 1px solid alpha(@foreground, 0.5);
+  background: @background;
+  border: 1px solid alpha(@foreground, 0.1);
 }
 
 tooltip * {
