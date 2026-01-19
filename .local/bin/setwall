@@ -1,11 +1,10 @@
 #!/bin/bash
 #
 # A wallpaper selector script for setting the wallpaper using swaybg
-# swayimg is used for picker and wallust to generate colorscheme
 # Dependencies:
-#   swaybg and swayimg
+#   swaybg swayimg
 # Optional dependencies:
-#   libnotify, dunst, and wallust
+#   libnotify dunst
 
 readonly WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
 
