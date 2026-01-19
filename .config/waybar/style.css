@@ -46,11 +46,6 @@ window#waybar {
   padding: 0px;
 }
 
-#mpd {
-  padding: 0px;
-  margin: 0px;
-}
-
 @keyframes blink {
   to {
     color: @background;
