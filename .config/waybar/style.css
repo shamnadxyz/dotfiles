@@ -34,7 +34,7 @@ window#waybar {
 }
 
 /* Visual grouping - left */
-#pulseaudio.sink,
+#wireplumber.sink,
 #cpu {
   margin-right: 0px;
   padding-right: 8px;
@@ -43,7 +43,7 @@ window#waybar {
 }
 
 /* Visual grouping - right */
-#pulseaudio.source,
+#wireplumber.source,
 #temperature {
   margin-left: 0px;
   padding-left: 8px;
