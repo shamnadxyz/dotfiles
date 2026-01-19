@@ -24,8 +24,8 @@
     "bluetooth",
     "battery",
     "backlight",
-    "pulseaudio#sink",
-    "pulseaudio#source",
+    "wireplumber#sink",
+    "wireplumber#source",
     "privacy",
     "custom/power"
   ],
@@ -147,7 +147,7 @@
       }
     ]
   },
-  "pulseaudio#sink": {
+  "wireplumber#sink": {
     "format": "SNK {volume}%",
     "format-muted": "<span strikethrough=\"true\">SNK</span>",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
@@ -155,10 +155,10 @@
     "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
     "reverse-scrolling": true
   },
-  "pulseaudio#source": {
-    "format": "{format_source}",
-    "format-source": "SRC {volume}%",
-    "format-source-muted": "<span strikethrough=\"true\">SRC</span>",
+  "wireplumber#source": {
+    "node-type": "Audio/Source",
+    "format": "SRC {volume}%",
+    "format-muted": "<span strikethrough=\"true\">SRC</span>",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 1%+",
     "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%-",
