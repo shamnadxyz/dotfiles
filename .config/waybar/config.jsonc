@@ -9,6 +9,7 @@
   "gtk-layer-shell": true,
   "spacing": 0,
   "modules-left": [
+    "user",
     "mpd"
   ],
   "modules-center": [
@@ -183,5 +184,8 @@
       "next": "mpc next",
       "previous": "mpc prev"
     }
+  },
+  "user": {
+    "format": "UP {work_d}d {work_H}h {work_M}m"
   }
 }
