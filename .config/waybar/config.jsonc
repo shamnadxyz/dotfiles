@@ -7,7 +7,8 @@
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,
-  "spacing": 0,
+  "spacing": 16,
+  "height": 32,
   "modules-left": [
     "user",
     "mpd"
@@ -84,7 +85,8 @@
     "max-length": 20
   },
   "tray": {
-    "icon-size": 12
+    "icon-size": 12,
+    "spacing": 12
   },
   "battery": {
     "format": "BAT {capacity}%",
@@ -131,7 +133,7 @@
     }
   },
   "privacy": {
-    "icon-spacing": 0,
+    "icon-spacing": 12,
     "icon-size": 10,
     "transition-duration": 250,
     "modules": [

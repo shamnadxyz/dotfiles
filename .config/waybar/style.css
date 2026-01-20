@@ -4,7 +4,6 @@
   font-family: "Commit Mono Nerd Font";
   font-size: 12px;
   font-weight: bold;
-  padding: 4px;
 }
 
 window#waybar {
@@ -12,9 +11,49 @@ window#waybar {
   color: @text;
 }
 
-.module {
+.modules-left {
+  margin-left: 16px;
+}
+
+.modules-right {
+  margin-right: 16px;
+}
+
+#privacy {
+  color: @red;
+}
+
+tooltip {
   color: @text;
-  margin: 0px 6px;
+  background: @background;
+  border: 1px solid alpha(@foreground, 0.2);
+  border-radius: 0px;
+}
+
+tooltip * {
+  padding: 5px;
+}
+
+menu {
+  color: @foreground;
+  background: @background;
+  border-radius: 0px;
+  padding: 0px;
+}
+
+menuitem {
+  border-radius: 0px;
+  padding: 8px;
+}
+
+menuitem:hover {
+  background: alpha(@foreground, 0.05);
+}
+
+separator {
+  margin: 0px;
+  background-color: transparent;
+  border: none;
 }
 
 #battery.charging,
@@ -31,57 +70,8 @@ window#waybar {
   animation-direction: alternate;
 }
 
-#privacy {
-  padding: 0px;
-  margin: -2px 4px;
-  color: @red;
-}
-
-#privacy-item {
-  margin: 0px;
-  padding: 0px;
-}
-
-#tray {
-  padding: 0px;
-}
-
 @keyframes blink {
   to {
     color: @background;
   }
-}
-
-
-tooltip {
-  color: @text;
-  background: @background;
-  border: 1px solid alpha(@foreground, 0.1);
-}
-
-tooltip * {
-  padding: 5px;
-}
-
-menu {
-  color: @foreground;
-  background: @background;
-  border-radius: 8px;
-}
-
-menuitem {
-  color: @foreground;
-  margin: 2px;
-  border-radius: 8px;
-}
-
-menuitem:hover {
-  background: alpha(@foreground, 0.05);
-}
-
-separator {
-  margin: 0px;
-  background-color: transparent;
-  padding: 0px;
-  border: none;
 }
