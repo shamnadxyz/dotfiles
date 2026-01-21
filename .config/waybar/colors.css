@@ -1,7 +1,7 @@
 /* Neovim default colorscheme */
 @define-color background #14161B;
 @define-color foreground #E0E2EA;
-@define-color text alpha(#E0E2EA, 0.8);
+@define-color text alpha(#C4C6CD, 0.8);
 @define-color color0 #2c2e33;
 @define-color color1 #FFC0B9;
 @define-color color2 #B3F6C0;

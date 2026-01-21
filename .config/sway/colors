@@ -2,7 +2,7 @@
 #
 # Basic colors
 set $background 07080D
-set $foreground 9B9EA4
+set $foreground 4F5258
 
 # Palette colors
 set $color0 2c2e33

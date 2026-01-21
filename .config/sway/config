@@ -230,8 +230,8 @@ bar {
 # colors
 # class                 border          background      text            indicator       child_border
 client.focused           $foreground     $background     $foreground     $color3         $foreground
-client.focused_inactive  $color8         $background     $color8         $color3         $color8
-client.unfocused         $color0         $background     $color8         $color3         $color0
+client.focused_inactive  $background         $background     $color8         $color3        $background
+client.unfocused         $background         $background     $color8         $color3        $background
 client.urgent            $color1         $background     $color1         $color3         $color1
 client.placeholder       $color0         $background     $color8         $color0         $color0
 client.background        $background
