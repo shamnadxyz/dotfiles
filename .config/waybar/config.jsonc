@@ -247,6 +247,8 @@
   },
   "custom/distro": {
     "format": "",
-    "tooltip": false
+    "tooltip": true,
+    "tooltip-format": "Open window switcher",
+    "on-click": "rofi -show window"
   }
 }
