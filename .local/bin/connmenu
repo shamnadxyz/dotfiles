@@ -1,25 +1,22 @@
 #!/usr/bin/env bash
 
-readonly ENTRY_HEIGHT=32
-readonly INPUT_HEIGHT=57
+readonly ENTRY_HEIGHT=40
+readonly INPUT_HEIGHT=44
 
 declare -a connections
 
 get_menu_dimensions() {
   local number_of_entries="$1"
-  local height
-  local width
+  local size
 
-  height="$((INPUT_HEIGHT + (ENTRY_HEIGHT * number_of_entries)))"
-  if ((height > 500)); then
-    height=500
-  elif ((height < 250));then
-    height=250
+  size="$((INPUT_HEIGHT + (ENTRY_HEIGHT * number_of_entries)))"
+  if ((size > 500)); then
+    size=500
+  elif ((size < 244));then
+    size=244
   fi
 
-  width="$((height * 107 / 100))"
-
-  printf "%d %d\n" "$height" "$width"
+  printf "%d %d\n" "$size" "$size"
 }
 
 pick_connection() {
