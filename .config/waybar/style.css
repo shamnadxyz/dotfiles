@@ -94,6 +94,14 @@ window#waybar {
   margin: 0px 4px;
 }
 
+#privacy-item {
+  padding: 0px 3px;
+}
+
+#tray {
+  padding: 0px 3px;
+}
+
 tooltip {
   color: @text;
   background: alpha(@background, 0.9);
