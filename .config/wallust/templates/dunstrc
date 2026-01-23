@@ -4,17 +4,17 @@
   separator_color= "{{foreground}}"
 
 [urgency_low]
-  background = "{{background | darken(0.1)}}E0"
+  background = "{{background | darken(0.1)}}88"
   foreground = "{{foreground}}"
   frame_color = "{{color15}}33"
 
 [urgency_normal]
-  background = "{{background | darken(0.1)}}E0"
+  background = "{{background | darken(0.1)}}88"
   foreground = "{{foreground}}"
   frame_color = "{{color15}}33"
 
 [urgency_critical]
-  background = "{{background | darken(0.1)}}E0"
+  background = "{{background | darken(0.1)}}88"
   foreground = "{{foreground}}"
   frame_color = "#FFA0A033"
 
