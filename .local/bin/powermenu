@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Size of the rofi window used for the action menu
-readonly MENU_HEIGHT=217
-readonly MENU_WIDTH=200
+readonly MENU_HEIGHT=241
+readonly MENU_WIDTH=240
 
 lockscreen() {
   if command -v hyprlock >/dev/null 2>&1; then
