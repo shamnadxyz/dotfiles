@@ -1,6 +1,6 @@
 [global]
   # Appearance
-  font = Commit Mono Nerd Font 11
+  font = JetBrainsMono Nerd Font 11
   corner_radius = 12
   corners = all
   frame_width = 1
