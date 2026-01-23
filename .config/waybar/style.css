@@ -1,7 +1,7 @@
 @import "colors.css";
 
 * {
-  font-family: "Commit Mono Nerd Font";
+  font-family: "JetBrainsMono Nerd Font";
   font-size: 12px;
   font-weight: bold;
   border-radius: 24px;
@@ -26,7 +26,7 @@ window#waybar {
 }
 
 #idle_inhibitor {
-  padding: 0px 9px;
+  padding: 0px 10px;
 }
 
 #clock {
@@ -52,8 +52,8 @@ window#waybar {
 }
 
 #custom-power {
-  padding: 8px 14px;
-  padding-left: 11px;
+  padding: 8px 15px;
+  padding-left: 12px;
   margin-right: 2px;
 }
 
@@ -95,11 +95,11 @@ window#waybar {
 }
 
 #privacy-item {
-  padding: 0px 3px;
+  padding: 0px 4px;
 }
 
 #tray {
-  padding: 0px 3px;
+  padding: 0px 4px;
 }
 
 tooltip {
