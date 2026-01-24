@@ -60,7 +60,7 @@ input type:pointer {
 
 input type:keyboard {
 # Swap Caps Lock and Escape
-  xkb_options caps:swapescape
+  xkb_options caps:ctrl_modifier
 }
 
 ### Key bindings
