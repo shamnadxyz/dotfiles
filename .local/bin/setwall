@@ -34,12 +34,6 @@ check_dependencies() {
   fi
 }
 
-restart_waybar() {
-  pkill waybar
-  waybar &>/dev/null &
-  disown
-}
-
 # Update wallpaper using swaybg
 set_wallpaper() {
   local wallpaper="${1:?"Wallpaper path required"}"
@@ -51,7 +45,6 @@ set_wallpaper() {
 
     ln -sf "$absolute_path" "$WALLPAPER_PATH"
 
-    pkill dunst
     pkill swaybg
     swaybg -i "$WALLPAPER_PATH" -m fill &>/dev/null &
     disown
