@@ -1,10 +1,13 @@
 # Swayimg configuration file.
 
+[gallery]
+pstore = yes
 ################################################################################
 # Viewer mode key binding configuration: key = action [parameters]
 ################################################################################
 [keys.viewer]
 Shift+Delete = exec echo '%' >> ~/.remove_list.txt; skip_file
+Shift+Return = exec echo '%' ; exit
 
 ################################################################################
 # Gallery mode key binding configuration: key = action [parameters]
@@ -15,5 +18,6 @@ l = step_right
 k = step_up
 j = step_down
 Shift+Delete = exec echo '%' >> ~/.remove_list.txt; skip_file
+Shift+Return = exec echo '%' ; exit
 
 # vim: filetype=dosini
