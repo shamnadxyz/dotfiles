@@ -5,31 +5,25 @@
 export HISTCONTROL=ignoredups
 
 # Neovim default colorscheme
-PS1='\n\[\e[1;38;2;224;226;234m\]\w\n\[\e[38;2;166;219;255m\]\u\[\e[38;2;224;226;234m\] \$ \[\e[0m\]'
+PS1='\n\[\e[1;38;2;204;219;255m\]\w\n\[\e[38;2;224;226;234m\]\$ \[\e[0m\]'
 
 update_prompt() {
   local status=$?
 
-  local dir_color user_color sym_color
+  local dir_color sym_color
 
-  # Lavender
-  dir_color='\[\e[1;224;226;234;254m\]'
   # Blue
-  user_color='\[\e[38;2;166;219;255m\]'
+  dir_color='\[\e[1;38;2;204;219;255m\]'
 
   if ((status == 0)); then
     # Green
-    # sym_color='\[\e[38;2;179;246;192m\]'
-
-    # Text
-    sym_color='\[\e[38;2;224;226;234m\]'
-
+    sym_color='\[\e[38;2;179;246;192m\]'
   else
     # Red
     sym_color='\[\e[38;2;255;192;185m\]'
   fi
 
-  PS1="\n${dir_color}\w\n${user_color}\u${sym_color} \$ \[\e[0m\]"
+  PS1="\n${dir_color}\w\n${sym_color}❯ \[\e[0m\]"
 }
 
 PROMPT_COMMAND=update_prompt
