@@ -4,7 +4,7 @@
 # To stop logging of consecutive identical commands
 export HISTCONTROL=ignoredups
 
-PS1='\n\[\e[1;38;2;204;219;255m\]\w\n\[\e[38;2;224;226;234m\]❯ \[\e[0m\]'
+PS1='\n\[\e[1;38;2;204;219;255m\]\w\n\[\e[38;2;224;226;234m\]\$ \[\e[0m\]'
 
 update_prompt() {
   local status=$?
