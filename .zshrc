@@ -5,11 +5,10 @@ PS1=" %F{green}%1~%f %F{blue}❯%f "
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=200000
-setopt EXTENDED_HISTORY
 
-# Starship
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
+command -v fzf &>/dev/null && eval "$(fzf --zsh)"
+command -v starship &>/dev/null && eval "$(starship init zsh)"
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
 # Basic auto/tab complete:
 autoload -U compinit && compinit -u
