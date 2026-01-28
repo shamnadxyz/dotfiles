@@ -32,7 +32,7 @@ readonly MEDIA=(
 
 readonly DEV_SHELL_TOOLS=(
   "uv" "tmux" "npm" "bash-completion"
-  "foot" "neovim" "yazi"
+  "foot" "neovim"
 )
 
 readonly APPEARANCE=(

@@ -19,7 +19,6 @@ set $right l
 
 set $terminal foot
 set $menu rofi -show drun
-set $fileManager foot yazi
 
 ### Output configuration
 #
@@ -76,7 +75,6 @@ input type:keyboard {
     bindsym $mod+w exec rofi -show window
 
     # Manual Bindings
-    bindsym $mod+e exec $fileManager
     bindsym $mod+Shift+v exec clipboard -c
     bindsym $mod+Shift+c exec clipboard -a
     bindsym $mod+Shift+x exec clipboard -d
