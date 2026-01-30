@@ -198,8 +198,6 @@
     "format": "{icon} {volume}%",
     "format-muted": " ",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 1%+",
-    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
     "reverse-scrolling": true,
     "format-icons": {
       "headphone": " ",
@@ -220,8 +218,6 @@
     "format": " {volume}%",
     "format-muted": " ",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-    "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 1%+",
-    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 1%-",
     "reverse-scrolling": true
   },
   "mpd": {
