@@ -10,7 +10,16 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#4F5258 \
 --color=border:#9B9EA4,label:#E0E2EA"
 
-# alias ls='eza --icons --color --group-directories-first'
-alias ls='ls --indicator-style=classify --color=always'
+alias ls='ls \
+  --indicator-style=classify \
+  --color \
+  --group-directories-first \
+  --sort=time'
+if command -v eza >/dev/null;then
+  alias ls='eza \
+  --icons --color \
+  --group-directories-first \
+  --sort modified --reverse'
+fi
 alias mkdir='mkdir -pv'
 alias mv='mv -vi'
