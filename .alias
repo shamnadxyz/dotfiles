@@ -7,16 +7,14 @@ function y() {
 }
 
 # Default options for Fzf
-# Catppuccin colorscheme
 # Reverse layout to show input at the top
 # Use preset style full
-# Append to existing options to avoid overwriting system defaults
 export FZF_DEFAULT_OPTS=" \
 --bind ctrl-y:accept \
 --layout reverse --style full \
---color=bg+:#4F5258,spinner:#E0E2EA,hl:#FFC0B9 \
---color=fg:#E0E2EA,header:#FFC0B9,info:#B3F6C0,pointer:#E0E2EA \
---color=marker:#A6DBFF,fg+:#E0E2EA,prompt:#E0E2EA,hl+:#FFC0B9 \
+--color=bg+:#4F5258,spinner:#E0E2EA,hl:#F4A9A1 \
+--color=fg:#E0E2EA,header:#F4A9A1,info:#9FD0A9,pointer:#E0E2EA \
+--color=marker:#8FCAF2,fg+:#E0E2EA,prompt:#E0E2EA,hl+:#F4A9A1 \
 --color=selected-bg:#4F5258 \
 --color=border:#9B9EA4,label:#E0E2EA"
 
