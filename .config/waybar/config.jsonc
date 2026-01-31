@@ -58,14 +58,14 @@
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-      "activated": "AWK",
-      "deactivated": "IDL"
+      "activated": " ",
+      "deactivated": " "
     }
   },
   "network": {
-    "format": "{ifname}",
-    "format-wifi": "WLAN {essid}",
-    "format-ethernet": "LAN {ipaddr}",
+    "format": "󰛳 ",
+    "format-wifi": " ",
+    "format-ethernet": "󰈀 ",
     "format-disconnected": "",
     "tooltip-format": "{ifname} via {gwaddr}",
     "tooltip-format-wifi": "{essid} ({signalStrength}%) {ifname}\n{ipaddr} via {gwaddr}",
@@ -76,8 +76,8 @@
   "bluetooth": {
     "format": "",
     "format-disabled": "",
-    "format-connected": "BT {device_alias}",
-    "format-connected-battery": "BT {device_alias} {device_battery_percentage}%",
+    "format-connected": "",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
@@ -89,7 +89,34 @@
     "spacing": 12
   },
   "battery": {
-    "format": "BAT {capacity}%",
+    "format": "{icon} {capacity}%",
+    "format-icons": {
+      "not-charging": "󱈑",
+      "charging": [
+        "󰢜",
+        "󰂆",
+        "󰂇",
+        "󰂈",
+        "󰢝",
+        "󰂉",
+        "󰢞",
+        "󰂊",
+        "󰂋",
+        "󰂅"
+      ],
+      "default": [
+        "󰁺",
+        "󰁻",
+        "󰁼",
+        "󰁽",
+        "󰁾",
+        "󰁿",
+        "󰂀",
+        "󰂁",
+        "󰂂",
+        "󰁹"
+      ]
+    },
     "interval": 60,
     "states": {
       "warning": 30,
@@ -100,28 +127,44 @@
   },
   "backlight": {
     "device": "intel_backlight",
-    "format": "BRT {percent}%",
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
     "reverse-scrolling": true,
     "on-scroll-up": "brightnessctl s 1%+",
     "on-scroll-down": "brightnessctl s 1%- --min-value=4800"
   },
   "cpu": {
     "interval": 10,
-    "format": "CPU {usage}%"
+    "format": "  {usage}%"
   },
   "memory": {
     "interval": 30,
-    "format": "MEM {used:0.1f}G",
+    "format": "  {used:0.1f}G",
     "tooltip-format": "Memory: {used}G / {total}G ({percentage}%)\nAvailable: {avail}G\nSwap: {swapUsed}G / {swapTotal}G ({swapPercentage}%)"
   },
   "temperature": {
     // "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input",
     // "critical-threshold": 80,
-    "format": "TEMP {temperatureC}°C",
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
     "tooltip": false
   },
   "custom/power": {
-    "format": "PWR",
+    "format": " ",
     "tooltip-format": "Power Menu",
     "menu": "on-click",
     "menu-file": "$HOME/.config/waybar/power_menu.xml",
@@ -150,15 +193,28 @@
     ]
   },
   "wireplumber#sink": {
-    "format": "SNK {volume}%",
+    "format": "{icon} {volume}%",
+    "format-icons": {
+      "headphone": " ",
+      "hands-free": " ",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
+      "default": [
+        " ",
+        " ",
+        " "
+      ]
+    },
     "format-muted": "<span strikethrough=\"true\">SNK</span>",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "reverse-scrolling": true
   },
   "wireplumber#source": {
     "node-type": "Audio/Source",
-    "format": "SRC {volume}%",
-    "format-muted": "<span strikethrough=\"true\">SRC</span>",
+    "format": " {volume}%",
+    "format-muted": " ",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "reverse-scrolling": true
   },
@@ -168,8 +224,8 @@
     "format-stopped": "",
     "format-disconnected": "<span strikethrough=\"true\">MPD</span>",
     "state-icons": {
-      "paused": "Paused",
-      "playing": "Playing"
+      "paused": "",
+      "playing": ""
     },
     "on-click": "mpc toggle",
     "on-scroll-up": "mpc volume +5",
@@ -185,6 +241,6 @@
     }
   },
   "user": {
-    "format": "UP {work_d}d {work_H}h {work_M}m"
+    "format": "Up {work_d}d {work_H}h {work_M}m"
   }
 }
