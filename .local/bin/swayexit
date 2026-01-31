@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 
 # Size of the rofi window used for the action menu
-readonly MENU_HEIGHT=190
+readonly MENU_HEIGHT=212
 readonly MENU_WIDTH=300
-
-if pgrep -x 'rofi'; then
-  exit 1
-fi
 
 MESSAGE='You pressed the <b>exit</b> shortcut.
 
-Do you really want to exit sway?'
+Do want to exit sway?'
 
 OPTIONS=$'Cancel\nExit sway'
 
