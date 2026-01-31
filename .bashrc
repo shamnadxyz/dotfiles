@@ -4,7 +4,7 @@
 # To stop logging of consecutive identical commands
 export HISTCONTROL=ignoredups
 
-PS1='\n\[\e[1;38;2;204;219;255m\]\w\n\[\e[38;2;224;226;234m\]\$ \[\e[0m\]'
+PS1='\n\w\n\\$ '
 
 update_prompt() {
   local status=$?
@@ -12,14 +12,14 @@ update_prompt() {
   local dir_color sym_color
 
   # Blue
-  dir_color='\[\e[1;38;2;204;219;255m\]'
+  dir_color='\[\e[34m\]'
 
   if ((status == 0)); then
     # Green
-    sym_color='\[\e[38;2;179;246;192m\]'
+    sym_color='\[\e[32m\]'
   else
     # Red
-    sym_color='\[\e[38;2;255;192;185m\]'
+    sym_color='\[\e[31m\]'
   fi
 
   PS1="\n${dir_color}\w\n${sym_color}❯ \[\e[0m\]"
