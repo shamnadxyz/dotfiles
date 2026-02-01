@@ -207,7 +207,7 @@
         " "
       ]
     },
-    "format-muted": "<span strikethrough=\"true\">SNK</span>",
+    "format-muted": " ",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "reverse-scrolling": true
   },
@@ -222,7 +222,7 @@
     "format": "{stateIcon} {title}",
     "interval": 10,
     "format-stopped": "",
-    "format-disconnected": "<span strikethrough=\"true\">MPD</span>",
+    "format-disconnected": "",
     "state-icons": {
       "paused": "",
       "playing": ""
