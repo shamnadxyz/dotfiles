@@ -216,6 +216,16 @@ mode "power" {
 }
 bindsym $mod+Shift+p mode "power"
 
+mode "audio" {
+    bindsym $mod+h exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-
+    bindsym $mod+l exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+a mode "audio"
+
 # Lid closing behaviour
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
