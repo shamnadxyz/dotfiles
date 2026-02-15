@@ -38,7 +38,13 @@ HISTSIZE=100000
 HISTFILESIZE=200000
 
 command -v zoxide &>/dev/null && eval "$(zoxide init bash)"
-command -v fzf &>/dev/null && eval "$(fzf --bash)"
+
+# Fuzzy finder
+if command -v sk &>/dev/null; then
+  eval "$(sk --shell bash --shell-bindings)"
+elif command -v fzf &>/dev/null; then
+  eval "$(fzf --bash)"
+fi
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
