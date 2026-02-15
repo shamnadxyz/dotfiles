@@ -19,6 +19,7 @@ set $right l
 
 set $terminal foot
 set $menu rofi -show drun
+set $music foot -a rmpc -T rmpc rmpc
 
 ### Output configuration
 #
@@ -78,8 +79,8 @@ input type:keyboard {
     bindsym $mod+Shift+v exec clipboard -c
     bindsym $mod+Shift+c exec clipboard -a
     bindsym $mod+Shift+x exec clipboard -d
-    bindsym $mod+Shift+m exec $terminal rmpc
     bindsym $mod+Shift+p exec powermenu
+    bindsym $mod+Shift+m exec $music
     bindsym $mod+Shift+w exec setwall
     bindsym PRINT exec screenshot
     bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
