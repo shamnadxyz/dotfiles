@@ -79,7 +79,6 @@ input type:keyboard {
     bindsym $mod+Shift+v exec clipboard -c
     bindsym $mod+Shift+c exec clipboard -a
     bindsym $mod+Shift+x exec clipboard -d
-    bindsym $mod+Shift+p exec powermenu
     bindsym $mod+Shift+m exec $music
     bindsym $mod+Shift+w exec setwall
     bindsym PRINT exec screenshot
@@ -202,6 +201,20 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# Power management mode
+mode "power" {
+    bindsym $mod+o exec systemctl poweroff
+    bindsym $mod+r exec systemctl reboot
+    bindsym $mod+s exec swaymsg mode "default" && systemctl suspend
+    bindsym $mod+h exec swaymsg mode "default" && systemctl hibernate
+    bindsym $mod+l exec swaymsg mode "default" && swaylock -c 000000
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+p mode "power"
 
 # Lid closing behaviour
 bindswitch --reload --locked lid:on output $laptop disable
