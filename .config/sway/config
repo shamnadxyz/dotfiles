@@ -54,13 +54,13 @@ input type:touchpad {
 }
 
 input type:pointer {
-  accel_profile "flat"
-  dwt enabled
+    accel_profile "flat"
+    dwt enabled
 }
 
 input type:keyboard {
-# Swap Caps Lock and Escape
-  xkb_options caps:ctrl_modifier
+    # Swap Caps Lock and Escape
+    xkb_options caps:ctrl_modifier
 }
 
 ### Key bindings
