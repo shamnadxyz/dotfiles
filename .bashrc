@@ -4,7 +4,6 @@
 # To stop logging of consecutive identical commands
 export HISTCONTROL=ignoredups
 
-# Neovim default colorscheme
 PS1='\n\w\n\\$ '
 
 update_prompt() {
@@ -16,14 +15,14 @@ update_prompt() {
   dir_color='\[\e[34m\]'
 
   if ((status == 0)); then
-    # Green
-    sym_color='\[\e[32m\]'
+    # White
+    sym_color='\[\e[37m\]'
   else
     # Red
     sym_color='\[\e[31m\]'
   fi
 
-  PS1="\n${dir_color}\w\n${sym_color}❯ \[\e[0m\]"
+  PS1="\n${dir_color}\w\n${sym_color}\$ \[\e[0m\]"
 }
 
 PROMPT_COMMAND=update_prompt
