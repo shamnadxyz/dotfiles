@@ -1,28 +1,28 @@
 * {
   active-background: transparent;
-  active-foreground: #5286B8;
+  active-foreground: #F3CA10;
 
   background-color: transparent;
-  border-color: #DBDBEF22;
-  base: #141119CC;
+  border-color: #FCF7F622;
+  base: #0D0E0CCC;
 
-  foreground: #DBDBEF;
-  normal-foreground: #89899D;
+  foreground: #FCF7F6;
+  normal-foreground: #A9A5A3;
 
-  selected-active-background: #C4C3E0;
-  selected-active-foreground: #3F3B45;
+  selected-active-background: #F2EBEA;
+  selected-active-foreground: #383937;
 
-  selected-normal-background: #C4C3E011;
-  selected-normal-foreground: #DBDBEF;
+  selected-normal-background: #F2EBEA11;
+  selected-normal-foreground: #FCF7F6;
 
   selected-urgent-background: #FFA0A022;
   selected-urgent-foreground: #FFA0A0;
 
-  separatorcolor: #DBDBEF22;
+  separatorcolor: #FCF7F622;
   spacing: 2;
 
-  urgent-background: #3F3B45;
-  urgent-foreground: #4B4566;
+  urgent-background: #383937;
+  urgent-foreground: #81593A;
 }
 
 window {
