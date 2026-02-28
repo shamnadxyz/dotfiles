@@ -1,0 +1,11 @@
+set completion-ignore-case on
+set enable-bracketed-paste on
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Uncomment options below for cycling through completions
+# set show-all-if-ambiguous on
+# set menu-complete-display-prefix on
+# "\t": menu-complete
+# "\e[Z": menu-complete-backward
