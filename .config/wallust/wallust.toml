@@ -50,3 +50,4 @@ hypr = { src = 'hyprland.conf', dst = '~/.config/hypr/colors.conf' }
 wofi = { src = 'colors', dst = '~/.config/wofi/colors' }
 rofi = { src = 'rofi.rasi', dst = '~/.config/rofi/current.rasi' }
 sway = { src = 'sway', dst = '~/.config/sway/colors' }
+neovim = { src = 'neovim.lua', dst = '~/.config/nvim/colors/wallust.lua' }
