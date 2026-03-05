@@ -8,10 +8,6 @@
   "passthrough": false,
   "gtk-layer-shell": true,
   "spacing": 0,
-  "margin-top": 4,
-  "margin-left": 4,
-  "margin-right": 4,
-  "margin-bottom": 0,
   "modules-left": [
     "custom/distro",
     "mpd"
@@ -66,9 +62,9 @@
     }
   },
   "network": {
-    "format": "󰛳 {ifname}",
-    "format-wifi": "  {essid}",
-    "format-ethernet": " {ipaddr}/{cidr}",
+    "format": "󰛳 ",
+    "format-wifi": " ",
+    "format-ethernet": " ",
     "format-disconnected": "",
     "tooltip-format": "{ifname} via {gwaddr}",
     "tooltip-format-wifi": "{essid} ({signalStrength}%) {ifname}\n{ipaddr} via {gwaddr}",
@@ -77,10 +73,9 @@
     "max-length": 25
   },
   "bluetooth": {
-    "format": "",
-    "format-disabled": "",
-    "format-connected": " {device_alias}",
-    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "format": "󰂲",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂯",
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
