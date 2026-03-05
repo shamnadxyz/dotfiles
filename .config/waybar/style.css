@@ -21,7 +21,7 @@ window#waybar {
   border: 1px solid alpha(@foreground, 0.06);
   padding: 0px 12px;
   margin: 0px 4px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 #idle_inhibitor {
