@@ -65,7 +65,7 @@
     "format": "󰛳 ",
     "format-wifi": " ",
     "format-ethernet": " ",
-    "format-disconnected": "",
+    "format-disconnected": "󰲛 ",
     "tooltip-format": "{ifname} via {gwaddr}",
     "tooltip-format-wifi": "{essid} ({signalStrength}%) {ifname}\n{ipaddr} via {gwaddr}",
     "tooltip-format-ethernet": "{ipaddr}/{cidr} {ifname}",
