@@ -34,7 +34,8 @@ window#waybar {
 
 /* Visual grouping - left */
 #wireplumber.sink,
-#cpu {
+#cpu,
+#network {
   margin-right: 0px;
   padding-right: 8px;
   border-top-right-radius: 0px;
@@ -43,7 +44,8 @@ window#waybar {
 
 /* Visual grouping - right */
 #wireplumber.source,
-#temperature {
+#temperature,
+#bluetooth {
   margin-left: 0px;
   padding-left: 8px;
   border-top-left-radius: 0px;
