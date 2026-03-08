@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-  background: alpha(@background, 0.7);
+  background: alpha(@background, 0.8);
   border-bottom: 2px solid alpha(@foreground, 0.70);
   color: @text;
 }
