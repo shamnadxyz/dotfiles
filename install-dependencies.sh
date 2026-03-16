@@ -31,7 +31,7 @@ readonly MEDIA=(
 
 readonly DEV_SHELL_TOOLS=(
   "foot" "httpie" "neovim" "npm" "tmux"
-  "uv" "yazi" "starship"
+  "uv" "yazi"
 )
 
 readonly APPEARANCE=(
