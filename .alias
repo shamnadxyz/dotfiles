@@ -1,6 +1,6 @@
 function y() {
   local tmp
-  tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
   command yazi "$@" --cwd-file="$tmp"
   IFS= read -r -d '' cwd <"$tmp"
   [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
