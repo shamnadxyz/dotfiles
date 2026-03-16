@@ -27,8 +27,8 @@
     "temperature",
     "network",
     "bluetooth",
-    "wireplumber#sink",
-    "wireplumber#source",
+    "pulseaudio#sink",
+    "pulseaudio#source",
     "backlight",
     "battery",
     "privacy",
@@ -195,7 +195,7 @@
       }
     ]
   },
-  "wireplumber#sink": {
+  "pulseaudio#sink": {
     "format": "{icon} {volume}%",
     "format-muted": " ",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
@@ -214,10 +214,10 @@
       ]
     }
   },
-  "wireplumber#source": {
-    "node-type": "Audio/Source",
-    "format": " {volume}%",
-    "format-muted": " ",
+  "pulseaudio#source": {
+    "format": "{format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": " ",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "reverse-scrolling": true
   },
