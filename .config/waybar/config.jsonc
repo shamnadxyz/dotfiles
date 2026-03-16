@@ -230,17 +230,17 @@
       "paused": "",
       "playing": ""
     },
-    "on-click": "mpc toggle",
-    "on-scroll-up": "mpc volume +5",
-    "on-scroll-down": "mpc volume -5",
+    "on-click": "rmpc togglepause",
+    "on-scroll-up": "rmpc volume +5",
+    "on-scroll-down": "rmpc volume -5",
     "reverse-scrolling": true,
     "tooltip-format": "Title: {title}\nArtist: {artist}\nAlbum: {album}\nVolume: {volume}%\nQueue: {songPosition}/{queueLength}\n{elapsedTime:%M:%S}/{totalTime:%M:%S}",
     "menu": "on-click-right",
     "menu-file": "$HOME/.config/waybar/mediaplayer.xml",
     "menu-actions": {
-      "play-pause": "mpc toggle",
-      "next": "mpc next",
-      "previous": "mpc prev"
+      "play-pause": "rmpc togglepause",
+      "next": "rmpc next",
+      "previous": "rmpc prev"
     }
   },
   "custom/distro": {
