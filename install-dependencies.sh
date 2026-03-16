@@ -6,40 +6,38 @@ readonly SYSTEM_UTILS=(
   "7zip" "unzip" "rsync" "curl" "git" "stow"
   "man-db" "tealdeer" "zoxide" "fzf" "fd"
   "ripgrep" "jq" "progress" "ncdu" "bluetui"
-  "pkgfile" "polkit-kde-agent" "xdg-utils"
-  "btop" "brightnessctl" "libnotify"
-  "aria2" "bat" "keepassxc"
+  "pkgfile" "xdg-utils" "brightnessctl"
+  "btop" "libnotify" "aria2" "bat" "keepassxc"
 )
 
 readonly HARDWARE=(
-  "bluez" "bluez-utils"
-  "networkmanager" "ntfs-3g"
+  "bluez" "bluez-utils" "networkmanager" "ntfs-3g"
 )
 
 readonly HYPRLAND_ENV=(
-  "hyprland" "hyprlock" "hyprshot" "waybar" "rofi" "wofi"
+  "hyprland" "hyprlock" "hyprshot" "waybar" "rofi"
   "dunst" "swaybg" "grim" "slurp" "wl-clipboard"
   "nwg-look" "xdg-desktop-portal-hyprland"
   "xdg-desktop-portal-wlr" "libayatana-appindicator"
-  "qt5-wayland" "qt6-wayland"
+  "qt6-wayland"
 )
 
 readonly MEDIA=(
-  "pavucontrol" "pulsemixer" "mpd" "mpc" "rmpc"
+  "pavucontrol" "wiremix" "mpd" "rmpc"
   "mpv" "mpv-mpris" "mpd-mpris" "obs-studio"
   "imagemagick" "perl-image-exiftool" "swayimg"
   "zathura" "zathura-cb" "zathura-pdf-mupdf"
 )
 
 readonly DEV_SHELL_TOOLS=(
-  "foot" "httpie" "neovim"
-  "npm" "tmux" "uv" "yazi"
-  "starship"
+  "foot" "httpie" "neovim" "npm" "tmux"
+  "uv" "yazi" "starship"
 )
 
 readonly APPEARANCE=(
-  "noto-fonts" "noto-fonts-cjk" "noto-fonts-emoji" "noto-fonts-extra"
-  "papirus-icon-theme" "orchis-theme" "ttf-jetbrains-mono-nerd"
+  "noto-fonts" "noto-fonts-cjk" "noto-fonts-emoji"
+  "noto-fonts-extra" "papirus-icon-theme"
+  "orchis-theme" "ttf-jetbrains-mono-nerd"
 )
 
 install_packages() {
