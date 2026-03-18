@@ -33,7 +33,7 @@ window#waybar {
 }
 
 /* Visual grouping - left */
-#wireplumber.sink,
+#pulseaudio.sink,
 #cpu,
 #network {
   margin-right: 0px;
@@ -43,7 +43,7 @@ window#waybar {
 }
 
 /* Visual grouping - right */
-#wireplumber.source,
+#pulseaudio.source,
 #temperature,
 #bluetooth {
   margin-left: 0px;
