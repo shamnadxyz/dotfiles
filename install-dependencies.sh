@@ -6,14 +6,12 @@ readonly SYSTEM_UTILS=(
   "7zip" "unzip" "rsync" "curl" "git" "stow"
   "man-db" "tealdeer" "zoxide" "fzf" "fd"
   "ripgrep" "jq" "ncdu" "btop" "xdg-utils"
-  "brightnessctl" "libnotify"
-  "pkgfile" "polkit-kde-agent"
+  "brightnessctl" "libnotify" "pkgfile"
   "aria2" "keepassxc"
 )
 
 readonly HARDWARE=(
-  "bluez" "bluez-utils"
-  "networkmanager" "ntfs-3g"
+  "bluez" "bluez-utils" "networkmanager" "ntfs-3g"
 )
 
 readonly DESKTOP_ENV=(
