@@ -1,21 +1,30 @@
-# Default options for Fzf
-# Reverse layout to show input at the top
-# Use preset style full
-export FZF_DEFAULT_OPTS=" \
---bind ctrl-y:accept \
---layout reverse --style full \
---color=bg+:#4F5258,spinner:#E0E2EA,hl:#F4A9A1 \
---color=fg:#E0E2EA,header:#F4A9A1,info:#9FD0A9,pointer:#E0E2EA \
---color=marker:#8FCAF2,fg+:#E0E2EA,prompt:#E0E2EA,hl+:#F4A9A1 \
---color=selected-bg:#4F5258 \
---color=border:#9B9EA4,label:#E0E2EA"
+# FZF CONFIG
+bg_selected="#485f67"
+fg="#d8d4cd"
+accent="#b3daf9"
+accent_soft="#a6e1e2"
+highlight="#b3daf9"
+pointer="#fac5c7"
+marker="#d1cffb"
+border="#d8d4cd"
+
+export FZF_DEFAULT_OPTS="
+  --bind ctrl-y:accept
+  --layout=reverse --style=full
+  --color=spinner:$pointer,hl:$highlight
+  --color=fg:$fg,header:$accent,info:$accent_soft,pointer:$pointer
+  --color=marker:$marker,fg+:$fg,prompt:$accent_soft,hl+:$highlight
+  --color=selected-bg:$bg_selected
+  --color=border:$border,label:$fg
+"
+unset bg bg_alt bg_selected fg accent accent_soft highlight pointer marker border
 
 alias ls='ls \
   --indicator-style=classify \
   --color \
   --group-directories-first \
   --sort=time'
-if command -v eza >/dev/null;then
+if command -v eza >/dev/null; then
   alias ls='eza \
   --icons --color \
   --group-directories-first \
