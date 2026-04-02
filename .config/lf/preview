@@ -5,15 +5,11 @@ h=$3
 x=$4
 y=$5
 
-preview() {
-    kitty +kitten icat --silent --stdin no --transfer-mode file --place "${w}x${h}@${x}x${y}" "$1" < /dev/null > /dev/tty
-}
-
 filetype=$(file -Lb --mime-type "$file")
 
 case "${filetype}" in
-image/*) preview "$file" ;;
-text/*) cat "$file" ;;
-application/zip|application/x-tar|application/x-xz|application/x-rar|application/gzip|application/x-7z-compressed) 7zz l "$file" ;;
+  image/*) chafa -f sixel -s "${w}x${h}" --animate=off -- "$file" ;;
+  text/*) bat -- "$file" ;;
+  application/zip | application/x-tar | application/x-xz | application/x-rar | application/gzip | application/x-7z-compressed) 7zz l "$file" ;;
+  *) : ;;
 esac
-return 1

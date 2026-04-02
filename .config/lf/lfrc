@@ -10,7 +10,6 @@ set ignorecase true
 map ` !true
 
 set previewer ~/.config/lf/preview
-set cleaner ~/.config/lf/clean
 
 cmd open &{{
     case $(file --mime-type -Lb $f) in

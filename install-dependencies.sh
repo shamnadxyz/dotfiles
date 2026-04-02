@@ -8,6 +8,7 @@ readonly SYSTEM_UTILS=(
   "ripgrep" "jq" "progress" "ncdu" "bluetui"
   "pkgfile" "xdg-utils" "brightnessctl"
   "btop" "libnotify" "aria2" "bat" "keepassxc"
+  "chafa"
 )
 
 readonly HARDWARE=(
