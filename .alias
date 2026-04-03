@@ -32,3 +32,6 @@ if command -v eza >/dev/null; then
 fi
 alias mkdir='mkdir -pv'
 alias mv='mv -vi'
+alias vim='nvim'
+alias vi='nvim'
+# vim: ft=bash
