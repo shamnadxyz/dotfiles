@@ -22,15 +22,12 @@ map o &mimeopen $f
 map O $mimeopen --ask $f
 
 cmd extractToDir ${{
-    read -p "Create new directory? [y/N] " create_directory
-    read -p "Name: " directory
-    if [[ "$create_directory" = "y" ]] then
-      mkdir "$directory"
-    fi
+    read -p "Directory: " directory
+    mkdir -p "$directory"
     set -f
     case $f in
         *.rar|*.7z|*.zip)
-					7zz x "$f" -o$directory
+					7zz x "$f" -o"$directory"
 					;;
 				*.tar|*.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz)
 					tar -xf "$f" -C "$directory"
