@@ -79,6 +79,17 @@ cmd archiveTo7zip ${{
         fi
 }}
 
+cmd zi ${{
+    result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+cmd on-cd &{{
+    zoxide add "$PWD"
+}}
+
+map Z zi
+
 map gd cd ~/.config
 
 # Mapping
