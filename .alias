@@ -1,8 +1,8 @@
 # FZF CONFIG
-bg_selected="#485f67"
-fg="#d8d4cd"
+bg_selected="#55586c"
+fg="#c6c8d1"
 accent="#b3daf9"
-accent_soft="#a6e1e2"
+accent_soft="#91acd1"
 highlight="#b3daf9"
 pointer="#fac5c7"
 marker="#d1cffb"
