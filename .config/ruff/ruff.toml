@@ -18,7 +18,6 @@ skip-magic-trailing-comma = false
 # W:   pycodestyle (Warnings)
 # I:   isort (Import sorting)
 # N:   pep8-naming (Naming conventions)
-# D:   pydocstyle (Docstring style)
 # UP:  pyupgrade (Upgrade syntax)
 # B:   flake8-bugbear (Bug risks)
 # C4:  flake8-comprehensions (Better comprehensions)
@@ -32,7 +31,6 @@ select = [
     "W",
     "I",
     "N",
-    "D",
     "UP",
     "B",
     "C4",
