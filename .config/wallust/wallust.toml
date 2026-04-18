@@ -15,7 +15,7 @@ backend = "full"
 
 # What color space to use to produce and select the most prominent colors:
 # lab - labmixed - lch - lchmixed
-color_space = "lch"
+color_space = "lab"
 
 # Use the most prominent colors in a way that makes sense, a scheme color palette:
 # dark - dark16 - darkcomp - darkcomp16
