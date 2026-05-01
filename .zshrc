@@ -6,7 +6,6 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=200000
 
-command -v fzf &>/dev/null && eval "$(fzf --zsh)"
 command -v starship &>/dev/null && eval "$(starship init zsh)"
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
