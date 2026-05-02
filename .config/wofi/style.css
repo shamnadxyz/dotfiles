@@ -13,7 +13,7 @@
   border-radius: 16px 16px 0px 0px;
   background-color: transparent;
   border: 1px solid alpha(--wofi-color1, 0.1);
-  color: #cdd6f4;
+  color: --wofi-color1;
 }
 
 #input:focus {
@@ -33,8 +33,8 @@
 }
 
 #entry:selected {
-  background-color: alpha(--wofi-color1, 1.0);
-  color: black;
+  background-color: alpha(--wofi-color1, 0.05);
+  color: --wofi-color1;
 }
 
 #entry image {
