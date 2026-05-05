@@ -1,9 +1,8 @@
 @import "colors.css";
 
 * {
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "JetBrainsMono NF";
   font-size: 12px;
-  font-weight: bold;
 }
 
 window#waybar {
