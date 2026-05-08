@@ -37,6 +37,7 @@ readonly APPEARANCE=(
   "noto-fonts" "noto-fonts-cjk"
   "noto-fonts-emoji" "noto-fonts-extra"
   "orchis-theme" "ttf-jetbrains-mono-nerd"
+  "ttf-iosevka-nerd"
 )
 
 install_packages() {
