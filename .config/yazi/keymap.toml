@@ -1,6 +1,7 @@
-# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
-# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+# A TOML linter such as https://github.com/tombi-toml/tombi can use this schema to validate your config.
+# If you encounter any problems, please make an issue at https://github.com/yazi-rs/schemas.
+
+#:schema https://yazi-rs.github.io/schemas/keymap.json
 
 [mgr]
 
@@ -8,5 +9,5 @@ prepend_keymap = [
 	{ on = [ "a", "a" ], run = "shell '7z a .zip %s' --cursor=5 --interactive --block", desc = "Add to archive" },
 	{ on = [ "a", "x" ], run = "shell '7z x %s' --block", desc = "Extract archives" },
 	{ on = [ "a", "d" ], run = "shell '7z x %s -o' --cursor=10 --interactive --block", desc = "Extract archives to directory" },
-	{ on = [ "i", "v" ], run = "shell 'nsxiv %s' --orphan", desc = "Open with image viewer" },
+	{ on = [ "i", "v" ], run = "shell 'swayimg %s' --orphan", desc = "Open with image viewer" },
 ]
