@@ -26,11 +26,14 @@
 
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-C-u-scroll t)
   :custom
   (evil-want-keybinding nil)
   (evil-undo-system 'undo-redo)
   :config
   (evil-mode 1))
+
 (use-package evil-collection
   :ensure t
   :config
