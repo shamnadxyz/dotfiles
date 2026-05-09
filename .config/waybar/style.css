@@ -1,7 +1,8 @@
 @import "colors.css";
 
 * {
-  font-family: "JetBrainsMono NF";
+  font-family: "Iosevka NF";
+  font-weight: bold;
   font-size: 12px;
 }
 
