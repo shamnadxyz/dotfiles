@@ -6,7 +6,7 @@
 
 ; Set JetBrainsMono as the default font
 (add-to-list 'default-frame-alist
-             '(font . "Iosevka NF-16"))
+             '(font . "Iosevka NF-14"))
 
 ;; Remove GUI components
 (menu-bar-mode -1)
@@ -19,6 +19,7 @@
 (setq display-line-numbers-type 'relative)
 (setq inhibit-startup-screen t)
 (setq org-log-done 'time)
+(setq vc-follow-symlinks t)
 
 ; (load-theme 'modus-operandi :no-confirm)
 (load-theme 'modus-vivendi :no-confirm)
@@ -51,16 +52,12 @@
   :ensure t
   :bind ("C-c g s" . magit-status))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files '())
- '(package-selected-packages '(evil evil-collection magit orderless vertico)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(use-package company
+  :hook (after-init . global-company-mode)
+  :config
+  ;; trigger completion
+  (define-key evil-insert-state-map (kbd "C-SPC")
+    #'company-complete)
+  ;; accept completion
+  (define-key company-active-map (kbd "C-y")
+    #'company-complete-selection))
