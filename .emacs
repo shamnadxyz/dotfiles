@@ -65,6 +65,20 @@
   ;; accept completion
   (define-key company-active-map (kbd "C-y")
     #'company-complete-selection))
+
+(use-package yasnippet
+  :ensure t
+  :custom
+  (yas-global-mode 1))
+
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(markdown-mode . ("markdown-oxide"))))
+
+(use-package markdown-mode
+  :ensure t
+  :hook (markdown-mode . eglot-ensure))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
