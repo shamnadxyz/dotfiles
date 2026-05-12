@@ -26,6 +26,7 @@ M.apps = {
 		copy = "clipboard -c",
 		delete = "clipboard -d",
 	},
+	music_daemon = "mpd",
 }
 
 M.laptop_monitor_spec = {
