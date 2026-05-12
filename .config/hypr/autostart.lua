@@ -1,0 +1,6 @@
+local var = require("variables")
+hl.on("hyprland.start", function()
+	hl.exec_cmd(var.terminal)
+	hl.exec_cmd(var.apps.bar)
+	hl.exec_cmd(var.wallpaper_cmd)
+end)
