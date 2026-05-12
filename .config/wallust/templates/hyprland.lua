@@ -1,0 +1,4 @@
+return {
+	primary = "rgba({{foreground | strip}}33)",
+	secondary = "rgba({{color0 | strip}}33)",
+}

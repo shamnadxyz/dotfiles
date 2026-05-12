@@ -46,7 +46,7 @@ check_contrast = true
 foot = { template = 'foot.ini', target = '~/.config/foot/colors.ini' }
 dunst = { template = 'dunstrc', target = '~/.config/dunst/dunstrc.d/99-colors.conf' }
 waybar = { src = 'waybar.css', dst = '~/.config/waybar/colors.css' }
-hypr = { src = 'hyprland.conf', dst = '~/.config/hypr/colors.conf' }
+hypr = { src = 'hyprland.lua', dst = '~/.config/hypr/colors.lua' }
 wofi = { src = 'colors', dst = '~/.config/wofi/colors' }
 rofi = { src = 'rofi.rasi', dst = '~/.config/rofi/current.rasi' }
 sway = { src = 'sway', dst = '~/.config/sway/colors' }
