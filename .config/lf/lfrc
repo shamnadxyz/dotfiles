@@ -1,8 +1,10 @@
 set shell bash
 set shellopts '-eu'
 set ifs "\n"
+
 set scrolloff 10
-set drawbox true
+set drawbox false
+# Use the `dim` attribute instead of underline for the cursor in the preview pane
 set cursorpreviewfmt "\033[7;2m"
 set ignorecase true
 
