@@ -29,8 +29,8 @@ readonly MEDIA=(
 )
 
 readonly DEV_SHELL_TOOLS=(
-  "uv" "tmux" "npm" "bash-completion"
-  "foot" "neovim"
+  "bash-completion" "foot" "lf" "neovim"
+  "npm" "tmux" "uv" 
 )
 
 readonly APPEARANCE=(
