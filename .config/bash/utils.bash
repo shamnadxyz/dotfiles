@@ -7,6 +7,10 @@ function y() {
   rm -f -- "$tmp"
 }
 
+f () {
+    cd "$(command lf -print-last-dir "$@")"
+}
+
 gcp() {
   source_code="$1"
   if [[ ! -f "$source_code" ]]; then
