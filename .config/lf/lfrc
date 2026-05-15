@@ -85,6 +85,23 @@ cmd on-cd &{{
     zoxide add "$PWD"
 }}
 
+cmd set-wallpaper ${{
+    if ! command -v setwall 2>/dev/null;
+		  printf "%s\n" "setwall not found" >&2
+      return 1
+    fi
+
+    set -f
+    case $f in
+        *.jpg|*.jpeg|*.png|.*avif|*.webp|*.heif)
+					setwall "$f"
+					;;
+				*)
+					printf "%s\n" "File not supported" >&2
+					;;
+    esac
+}}
+
 map Z zi
 
 map gd cd ~/.config
@@ -94,4 +111,5 @@ map D delete
 map az archiveToZip
 map a7 archiveTo7zip
 map ax extract
+map sw set-wallpaper
 map ad extractToDir
