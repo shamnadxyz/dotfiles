@@ -7,7 +7,7 @@ readonly SYSTEM_UTILS=(
   "man-db" "tealdeer" "zoxide" "fzf" "fd"
   "ripgrep" "jq" "ncdu" "btop" "xdg-utils"
   "brightnessctl" "libnotify" "pkgfile"
-  "aria2" "keepassxc"
+  "aria2" "keepassxc" "chafa"
 )
 
 readonly HARDWARE=(
