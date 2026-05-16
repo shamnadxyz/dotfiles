@@ -1,6 +1,6 @@
 include colors
 
-gaps inner 0
+gaps inner 4
 gaps outer 0
 default_border pixel 1
 default_floating_border pixel 2
@@ -19,7 +19,7 @@ set $right l
 
 set $terminal foot
 set $menu rofi -show drun
-set $music foot -a rmpc -T rmpc rmpc
+set $music $terminal --app-id rmpc -T rmpc rmpc
 
 ### Output configuration
 #
@@ -252,8 +252,8 @@ bar {
 # colors
 # class                 border          background      text            indicator       child_border
 client.focused           $foreground     $background     $foreground     $color3         $foreground
-client.focused_inactive  $background         $background     $color8         $color3        $background
-client.unfocused         $background         $background     $color8         $color3        $background
+client.focused_inactive  $background     $background     $color8         $color3         $background
+client.unfocused         $background     $background     $color8         $color3         $background
 client.urgent            $color1         $background     $color1         $color3         $color1
 client.placeholder       $color0         $background     $color8         $color0         $color0
 client.background        $background
