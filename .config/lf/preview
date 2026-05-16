@@ -9,7 +9,7 @@ filetype=$(file -Lb --mime-type "$file")
 
 case "${filetype}" in
   image/*) chafa -f sixel -s "${w}x${h}" --animate=off -- "$file" ;;
-  text/*) bat -- "$file" ;;
+  text/*) bat --theme ansi --color=always --style=plain -- "$file" ;;
   application/zip | application/x-tar | application/x-xz | application/x-rar | application/gzip | application/x-7z-compressed) 7zz l "$file" ;;
   *) : ;;
 esac
