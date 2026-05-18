@@ -51,3 +51,4 @@ wofi = { src = 'colors', dst = '~/.config/wofi/colors' }
 rofi = { src = 'rofi.rasi', dst = '~/.config/rofi/current.rasi' }
 sway = { src = 'sway', dst = '~/.config/sway/colors' }
 kitty = { src = 'kitty.conf', dst = '~/.config/kitty/colors.conf' }
+nvim = { src = 'wallust.lua', dst = '~/.config/nvim/colors/wallust.lua' }
