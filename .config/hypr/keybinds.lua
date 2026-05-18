@@ -103,14 +103,22 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
-hl.bind(main_mod .. " + SHIFT + O", hl.dsp.submap("clean"), { description = "Turn off keymaps" })
+-- Switches
+hl.bind("switch:on:Lid Switch", function()
+	hl.monitor({ output = var.laptop_monitor, disabled = true })
+end, { locked = true })
 
+hl.bind("switch:off:Lid Switch", function()
+	hl.monitor(var.laptop_monitor_spec)
+end, { locked = true })
+
+-- Submap
+hl.bind(main_mod .. " + SHIFT + O", hl.dsp.submap("clean"), { description = "Turn off keymaps" })
 hl.define_submap("clean", function()
 	hl.bind("ALT + SHIFT + R", hl.dsp.submap("reset"), { description = "Restore keymaps" })
 end)
 
 hl.bind(main_mod .. " + R", hl.dsp.submap("resize", { description = "Resize windows" }))
-
 hl.define_submap("resize", function()
 	-- Set repeating binds for resizing the active window.
 	hl.bind("l", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
