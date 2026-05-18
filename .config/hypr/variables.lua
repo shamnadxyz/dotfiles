@@ -16,7 +16,6 @@ M.pickers = {
 }
 
 M.apps = {
-	terminal = "foot",
 	browser = "brave",
 	music = term_app("rmpc"),
 	file_manager = term_app("lf"),
