@@ -2,6 +2,7 @@ local var = require("variables")
 
 local pickers = var.pickers
 local apps = var.apps
+local cmd = var.commands
 
 local main_mod = "ALT"
 
@@ -14,14 +15,15 @@ hl.bind(main_mod .. " + SHIFT + M", hl.dsp.exec_cmd(apps.music))
 hl.bind(main_mod .. " + SHIFT + P", hl.dsp.exec_cmd(pickers.power))
 hl.bind(main_mod .. " + SHIFT + W", hl.dsp.exec_cmd(pickers.wallpaper))
 hl.bind(main_mod .. " + SHIFT + N", hl.dsp.exec_cmd(pickers.network))
-hl.bind("PRINT", hl.dsp.exec_cmd("screenshot desktop"))
+hl.bind("PRINT", hl.dsp.exec_cmd(cmd.screenshot.desktop))
 
--- Toggle waybar visibility
-hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("pkill -SIGUSR1 waybar"))
+hl.bind(main_mod .. " + SHIFT + E", hl.dsp.exec_cmd(cmd.exit))
 
-hl.bind(main_mod .. "+ SHIFT + C", hl.dsp.exec_cmd(apps.clipboard.add))
-hl.bind(main_mod .. "+ SHIFT + V", hl.dsp.exec_cmd(apps.clipboard.copy))
-hl.bind(main_mod .. "+ SHIFT + X", hl.dsp.exec_cmd(apps.clipboard.delete))
+hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd(cmd.toggle_waybar), { description = "Toggle waybar visibility" })
+
+hl.bind(main_mod .. "+ SHIFT + C", hl.dsp.exec_cmd(cmd.clipboard.add))
+hl.bind(main_mod .. "+ SHIFT + V", hl.dsp.exec_cmd(cmd.clipboard.copy))
+hl.bind(main_mod .. "+ SHIFT + X", hl.dsp.exec_cmd(cmd.clipboard.delete))
 
 hl.bind(main_mod .. " + Q", hl.dsp.window.close())
 hl.bind(
@@ -75,33 +77,18 @@ hl.bind(main_mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind(
-	"XF86AudioRaiseVolume",
-	hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioLowerVolume",
-	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioMicMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
-	{ locked = true, repeating = true }
-)
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(cmd.audio.sink.raise), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(cmd.audio.sink.lower), { locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(cmd.audio.sink.toggle), { locked = true, repeating = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd(cmd.audio.source.toggle), { locked = true, repeating = true })
 
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(cmd.brightness.raise), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(cmd.brightness.lower), { locked = true, repeating = true })
+
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd(cmd.media.next), { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd(cmd.media.toggle), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(cmd.media.toggle), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(cmd.media.previous), { locked = true })
 
 -- Switches
 hl.bind("switch:on:Lid Switch", function()

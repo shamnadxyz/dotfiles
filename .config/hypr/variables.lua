@@ -20,12 +20,44 @@ M.apps = {
 	music = term_app("rmpc"),
 	file_manager = term_app("lf"),
 	bar = "waybar",
+	music_daemon = "mpd",
+}
+
+M.commands = {
+	exit = "wm-exit",
+	toggle_waybar = "pkill -SIGUSR1 waybar",
 	clipboard = {
 		add = "clipboard -a",
 		copy = "clipboard -c",
 		delete = "clipboard -d",
 	},
-	music_daemon = "mpd",
+	screenshot = {
+		desktop = "screenshot desktop",
+		region = "screenshot region",
+		output = "screenshot output",
+	},
+	audio = {
+		sink = {
+			raise = "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+			lower = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+			toggle = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+		},
+		source = {
+			raise = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+			lower = "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+			toggle = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+		},
+	},
+	brightness = {
+		raise = "brightnessctl -e4 -n2 set 5%+",
+		lower = "brightnessctl -e4 -n2 set 5%-",
+	},
+	media = {
+		next = "playerctl next",
+		toggle = "playerctl play-pause",
+		previous = "playerctl previous",
+		stop = "playerctl stop",
+	},
 }
 
 M.laptop_monitor_spec = {
