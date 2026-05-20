@@ -5,7 +5,7 @@ SCREENSHOT_PATH="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
 # Generate timestamped filename
 FILENAME="$(date '+%Y-%m-%d-%H-%M-%S-%N.png')"
 
-DEPENDENCIES=("rofi" "hyprshot" "grim")
+DEPENDENCIES=("rofi" "slurp" "grim")
 
 check_dependencies() {
   local missing=()
@@ -26,14 +26,13 @@ pick_mode() {
   modes=(
     "󰍺  Desktop"
     "󰍹  Output"
-    "  Window"
     "󰒅  Region"
   )
 
   local selection
   selection="$(printf '%s\n' "${modes[@]}" |
     rofi -dmenu -theme dmenu \
-      -theme-str 'window {width: 200px;height: 185px;}' \
+      -theme-str 'window {width: 200px;height: 170px;}' \
       -p 'Capture' -no-custom)" || exit 1
 
   local mode
@@ -51,38 +50,41 @@ take_screenshot() {
   case "$mode" in
   desktop)
     sleep 0.3
-    grim "${SCREENSHOT_PATH}/${FILENAME}" &&
-      notify-send " Screenshot Captured" "$FILENAME"
+    grim "${SCREENSHOT_PATH}/${FILENAME}"
     ;;
-  output | window | region)
-    hyprshot -m "$mode" -o "$SCREENSHOT_PATH" -f "$FILENAME"
+  output)
+    grim -g "$(slurp -o)" "${SCREENSHOT_PATH}/${FILENAME}"
+    ;;
+  region)
+    grim -g "$(slurp)" "${SCREENSHOT_PATH}/${FILENAME}"
     ;;
   *)
     notify-send "Invalid option" "$mode"
     exit 1
     ;;
   esac
+
+  status=$?
+
+  if [[ "$status" -eq 0 ]]; then
+    notify-send " Screenshot Captured" "$FILENAME"
+  fi
 }
 
 main() {
   # Ensure directory exists
   mkdir -p "$SCREENSHOT_PATH"
 
-  check_dependencies || exit 1
+  check_dependencies
 
   local mode
   mode="$1"
-
-  if [[ -n "$SWAYSOCK" ]];then
-    mode="desktop"
-  fi
 
   if [ -z "$mode" ]; then
     mode="$(pick_mode)" || exit 1
   fi
 
   take_screenshot "$mode"
-
 }
 
 main "$@"

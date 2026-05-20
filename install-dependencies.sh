@@ -16,7 +16,7 @@ readonly HARDWARE=(
 )
 
 readonly HYPRLAND_ENV=(
-  "hyprland" "hyprlock" "hyprshot" "waybar" "rofi"
+  "hyprland" "hyprlock" "waybar" "rofi"
   "dunst" "swaybg" "grim" "slurp" "wl-clipboard"
   "nwg-look" "xdg-desktop-portal-hyprland"
   "xdg-desktop-portal-wlr" "libayatana-appindicator"
