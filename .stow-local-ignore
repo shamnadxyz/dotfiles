@@ -5,6 +5,8 @@ screenshot.avif
 \.gitignore
 \.gitmodules
 
+\.luarc.json
+
 ^/README.*
 ^/LICENSE.*
 ^/COPYING
