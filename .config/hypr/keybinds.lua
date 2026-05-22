@@ -91,13 +91,16 @@ hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(cmd.media.toggle), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(cmd.media.previous), { locked = true })
 
 -- Switches
-hl.bind("switch:on:Lid Switch", function()
+local lid_close_bind = hl.bind("switch:on:Lid Switch", function()
 	hl.monitor({ output = var.laptop_monitor, disabled = true })
 end, { locked = true })
 
-hl.bind("switch:off:Lid Switch", function()
+local lid_open_bind = hl.bind("switch:off:Lid Switch", function()
 	hl.monitor(var.laptop_monitor_spec)
 end, { locked = true })
+
+lid_close_bind:set_enabled(false)
+lid_open_bind:set_enabled(false)
 
 -- Submap
 hl.bind(main_mod .. " + SHIFT + O", hl.dsp.submap("clean"), { description = "Turn off keymaps" })
