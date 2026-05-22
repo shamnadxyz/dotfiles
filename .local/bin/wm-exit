@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# Size of the rofi window used for the action menu
+readonly MENU_HEIGHT=212
+readonly MENU_WIDTH=300
+
+readonly WM="${WM:-Hyprland}"
+
+check_wm() {
+  local error_message="Unknown WM: $WM"
+  if [[ ! "$WM" =~ ^(Hyprland|sway)$ ]]; then
+    echo "$error_message" >&2
+    notify-send "$error_message"
+  fi
+}
+
+PROMPT="You pressed the <b>exit</b> shortcut.
+
+Do want to exit <b>$WM</b>?"
+
+OPTIONS=$'No\nYes'
+
+pick_option() {
+  printf "%s" "$OPTIONS" | rofi -dmenu -theme dmenu \
+    -p '>' -no-custom \
+    -theme-str "window {height: ${MENU_HEIGHT}px;width: ${MENU_WIDTH}px;}" \
+    -mesg "$PROMPT"
+}
+
+exit_wm() {
+  case "$WM" in
+  sway)
+    swaymsg exit
+    ;;
+  Hyprland)
+    hyprctl dispatch 'hl.dsp.exit()'
+    ;;
+  esac
+}
+
+main() {
+  local option
+
+  check_wm
+
+  option="$(pick_option)"
+
+  if [[ "$option" == "Yes" ]]; then
+    exit_wm
+  fi
+}
+
+main
