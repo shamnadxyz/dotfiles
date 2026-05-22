@@ -1,20 +1,45 @@
 #!/usr/bin/env bash
-file=$1
-w=$2
-h=$3
-x=$4
-y=$5
 
-filetype=$(file -Lb --mime-type "$file")
+handle_binary() {
+  local file mime_type width height
+  file="$1"
+  mime_type="$2"
+  width="$3"
+  height="$4"
 
-case "${filetype}" in
-image/*)
-  chafa -f sixel -s "${w}x${h}" --animate=off -- "$file"
-  ;;
-text/*)
-  bat --theme ansi --color=always --style=plain -- "$file"
-  ;;
-application/zip | application/x-tar | application/x-xz | application/x-rar | application/gzip | application/x-7z-compressed)
-  7z l -- "$file" || 7zz l -- "$file"
-  ;;
-esac
+  case "$mime_type" in
+    image/*)
+      chafa -s "${width}x${height}" --animate=off -- "$file"
+      ;;
+    application/zip | application/x-tar | application/x-xz | application/x-rar | application/gzip | application/x-7z-compressed)
+      7z l -- "$file" || 7zz l -- "$file"
+      ;;
+  esac
+}
+
+preview_text() {
+  bat --theme ansi --color=always --style=plain -- "$file" || cat -- "$file"
+}
+
+main() {
+  local file width height x_offset y_offset
+
+  file=$1
+  width=$2
+  height=$3
+  x_offset=$4
+  y_offset=$5
+
+  mime_encoding="$(file -Lb --mime-type --mime-encoding "$file")"
+
+  encoding="${mime_encoding##*charset=}"
+  mime_type="${mime_encoding%%;*}"
+
+  if [[ "$encoding" = "binary" ]]; then
+    handle_binary "$file" "$mime_type" "$width" "$height"
+  else
+    preview_text "$file"
+  fi
+}
+
+main "$@"
