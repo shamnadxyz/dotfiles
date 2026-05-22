@@ -3,7 +3,7 @@
 # Use preset style full
 export FZF_DEFAULT_OPTS=" \
 --bind ctrl-y:accept \
---layout reverse --style full \
+--layout reverse --style minimal \
 --color=bg+:#4F5258,spinner:#E0E2EA,hl:#F4A9A1 \
 --color=fg:#E0E2EA,header:#F4A9A1,info:#9FD0A9,pointer:#E0E2EA \
 --color=marker:#8FCAF2,fg+:#E0E2EA,prompt:#E0E2EA,hl+:#F4A9A1 \
@@ -15,6 +15,7 @@ alias ls='ls \
   --color \
   --group-directories-first \
   --sort=time'
+
 if command -v eza >/dev/null; then
   alias ls='eza \
   --icons --color \
