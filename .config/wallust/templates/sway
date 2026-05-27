@@ -1,7 +1,10 @@
 # Basic colors
 set $background {{background}}
-set $foreground {{foreground}}88
+set $foreground {{foreground}}33
 set $cursor {{cursor}}
+
+set $indicator {{foreground}}55
+set $inactive {{foreground}}22
 
 # Palette colors
 set $color0 {{color0}}
