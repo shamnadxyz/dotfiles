@@ -205,6 +205,13 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Diable all keybinds
+mode "passthrough" {
+  bindsym $mod+Shift+o mode "default"
+}
+
+bindsym $mod+Shift+o mode "passthrough"
+
 # Lid closing behaviour
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
