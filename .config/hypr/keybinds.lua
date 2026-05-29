@@ -37,7 +37,10 @@ hl.bind(
 		long_press = true,
 	}
 )
-hl.bind(main_mod .. "+ F", hl.dsp.window.fullscreen({ action = "toggle" }))
+hl.bind(main_mod .. "+ F", function()
+	hl.dispatch(hl.dsp.window.fullscreen({ action = "toggle" }))
+	hl.exec_cmd(var.commands.toggle_waybar)
+end, { description = "Toggle fullscreen and waybar" })
 hl.bind(main_mod .. "+ SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(main_mod .. " + S", hl.dsp.layout("togglesplit"))
