@@ -51,6 +51,12 @@ hl.bind(main_mod .. " + l", hl.dsp.focus({ direction = "right" }))
 hl.bind(main_mod .. " + k", hl.dsp.focus({ direction = "up" }))
 hl.bind(main_mod .. " + j", hl.dsp.focus({ direction = "down" }))
 
+-- Swap windows within workspace
+hl.bind(main_mod .. " + SHIFT + j", hl.dsp.window.swap({direction = "down"}))
+hl.bind(main_mod .. " + SHIFT + k", hl.dsp.window.swap({ direction = "up" }))
+hl.bind(main_mod .. " + SHIFT + h", hl.dsp.window.swap({ direction = "left" }))
+hl.bind(main_mod .. " + SHIFT + l", hl.dsp.window.swap({ direction = "right" }))
+
 hl.bind(
 	main_mod .. " + space",
 	hl.dsp.focus({ last = true }),
