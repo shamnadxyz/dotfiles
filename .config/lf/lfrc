@@ -88,14 +88,14 @@ cmd on-cd &{{
 }}
 
 cmd set-wallpaper ${{
-    if ! command -v setwall 2>/dev/null;
+    if ! command -v setwall &>/dev/null; then
 		  printf "%s\n" "setwall not found" >&2
       return 1
     fi
 
     set -f
     case $f in
-        *.jpg|*.jpeg|*.png|.*avif|*.webp|*.heif)
+        *.jpg|*.jpeg|*.png|*.avif|*.webp|*.heif)
 					setwall "$f"
 					;;
 				*)
