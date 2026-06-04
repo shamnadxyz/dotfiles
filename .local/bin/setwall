@@ -7,17 +7,13 @@
 # Optional dependencies:
 #   libnotify, dunst, and wallust
 
-readonly WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
-
 readonly WALLPAPER_PATH="$HOME/.cache/wallpaper"
 
-# Send message to STDERR and as notification
-err() {
+notify_error() {
   echo "$*" >&2
   notify-send -u critical "  Error" "$*"
 }
 
-# Check for missing dependencies
 check_dependencies() {
   declare -a missing_deps
 
@@ -30,7 +26,7 @@ check_dependencies() {
   fi
 
   if [[ "${#missing_deps[@]}" -gt 0 ]]; then
-    err "Missing dependencies: ${missing_deps[*]}"
+    notify_error "Missing dependencies: ${missing_deps[*]}"
     exit 1
   fi
 }
@@ -42,67 +38,67 @@ restart_waybar() {
 }
 
 update_colorscheme() {
-
   if ! command -v wallust &>/dev/null; then
-    err "Wallust not found for updating the colorscheme"
+    notify_error "Wallust not found"
     return 1
   fi
 
-  if wallust run "$WALLPAPER_PATH" -q; then
-    restart_waybar
-  else
-    err "Failed to update colorscheme with wallust"
+  if ! wallust run "$WALLPAPER_PATH" -q &>/dev/null; then
+    notify_error "Failed to update colorscheme"
     return 1
   fi
+
+  restart_waybar
 }
 
-# Update wallpaper using swaybg
 set_wallpaper() {
-  local wallpaper="${1:?"Wallpaper path required"}"
+  local wallpaper="$1"
 
-  if [[ -f "$wallpaper" ]]; then
-    # Resolve the absolute path
-    local absolute_path
-    absolute_path="$(realpath "$wallpaper")"
+  local absolute_path
+  absolute_path="$(realpath "$wallpaper")"
 
-    ln -sf "$absolute_path" "$WALLPAPER_PATH"
+  ln -sf "$absolute_path" "$WALLPAPER_PATH"
 
-    pkill dunst
-    pkill swaybg
-    swaybg -i "$WALLPAPER_PATH" -m fill &>/dev/null &
-    disown
+  pkill dunst
+  pkill swaybg
 
-    update_colorscheme
-  fi
+  swaybg -i "$WALLPAPER_PATH" -m fill &>/dev/null &
+  disown
+
+  update_colorscheme
 }
 
 main() {
-
   check_dependencies
 
-  local wallpaper="$1"
+  local wallpapers_path="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
 
-  if [[ -f "$wallpaper" ]]; then
-    set_wallpaper "$wallpaper"
+  local path="$1"
+
+  if [[ -f "$path" ]]; then
+    set_wallpaper "$path"
     return 0
+  elif [[ -d "$path" ]]; then
+    wallpapers_path="$path"
   fi
 
-  # Ensure no other instances are running
-  if pgrep -x "swayimg" >/dev/null; then
+  if pgrep --exact "swayimg" >/dev/null; then
     exit 1
   fi
 
-  # Ensure wallpapers directory exists
-  if [[ ! -d "$WALLPAPERS" ]]; then
-    err "Wallpapers directory does not exist: $WALLPAPERS"
+  if [[ ! -d "$wallpapers_path" ]]; then
+    notify_error "Wallpapers directory does not exist: $wallpapers_path"
+    exit 1
   fi
 
   notify-send "Wallpaper Selector" "Press 'Shift+Return' to select"
 
   # Launch swayimg to pick wallpaper
-  wallpaper="$(swayimg -g "$WALLPAPERS" --config ~/.config/swayimg/pick.lua)"
-  set_wallpaper "$wallpaper"
+  wallpaper="$(swayimg -g "$wallpapers_path" --config ~/.config/swayimg/pick.lua)"
 
+  if [[ -f "$wallpaper" ]]; then
+    set_wallpaper "$wallpaper"
+  fi
 }
 
 main "$@"
