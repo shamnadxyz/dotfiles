@@ -1,6 +1,6 @@
 set shell bash
-set shellopts '-eu'
 set ifs "\n"
+set incsearch true
 
 set scrolloff 10
 set drawbox false
@@ -51,9 +51,9 @@ cmd extract ${{
 
 cmd delete ${{
     set -f
-    printf "$fx\n"
-    read -p "Delete [y/N] " ans
-    [ "$ans" = "y" ] && rm -rf $fx
+    printf "%s\n" "$fx"
+    read -p "Delete [y/N] " -n 1 -r ans
+    [[ "$ans" =~ ^[Yy]$ ]] && rm -rf $fx || :
 }}
 
 cmd archiveToZip ${{
