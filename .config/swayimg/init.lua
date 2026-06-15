@@ -57,11 +57,11 @@ swayimg.viewer.on_key("r", function()
   swayimg.viewer.reset()
 end)
 
--- Switch images in viewer using Ctrl-[pn]
-swayimg.viewer.on_key("Ctrl-n", function()
+-- Switch images in viewer using [np]
+swayimg.viewer.on_key("n", function()
   swayimg.viewer.switch_image("next")
 end)
-swayimg.viewer.on_key("Ctrl-p", function()
+swayimg.viewer.on_key("p", function()
   swayimg.viewer.switch_image("prev")
 end)
 
