@@ -29,7 +29,7 @@ cmd extractToDir ${{
     set -f
     case $f in
         *.rar|*.7z|*.zip)
-					7zz x "$f" -o"$directory"
+					7z x "$f" -o"$directory"
 					;;
 				*.tar|*.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz)
 					tar -xf "$f" -C "$directory"
@@ -41,7 +41,7 @@ cmd extract ${{
     set -f
     case $f in
         *.rar|*.7z|*.zip)
-					7zz x "$f"
+					7z x "$f"
 					;;
 				*.tar|*.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz)
 					tar -xf "$f"
@@ -63,7 +63,7 @@ cmd archiveToZip ${{
         read ans
         if [[ $ans = "y" ]] then
         read -p "Archive name:" name
-        7zz a ${name}.zip -tzip $fx -mx=0
+        7z a ${name}.zip -tzip $fx -mx=0
         fi
 }}
 
@@ -74,7 +74,7 @@ cmd archiveTo7zip ${{
         read ans
         if [[ $ans = "y" ]] then
         read -p "Archive name:" name
-        7zz a ${name}.7z -t7z $fx
+        7z a ${name}.7z -t7z $fx
         fi
 }}
 
