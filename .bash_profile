@@ -14,11 +14,11 @@ if [[ "$(tty)" == "/dev/tty1" ]]; then
   case "$WM" in
     Hyprland)
       command -v start-hyprland &>/dev/null \
-        && dbus-run-session start-hyprland
+        && exec start-hyprland
       ;;
     sway) 
       command -v sway &>/dev/null \
-        && dbus-run-session sway
+        && exec sway
       ;;
   esac
 fi
