@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Size of the rofi window used for the action menu
 readonly MENU_HEIGHT=241
