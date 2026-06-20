@@ -94,7 +94,8 @@ main() {
   notify-send "Wallpaper Selector" "Press 'Shift+Return' to select"
 
   # Launch swayimg to pick wallpaper
-  wallpaper="$(swayimg -g "$wallpapers_path" --config ~/.config/swayimg/pick.lua)"
+  wallpaper="$(swayimg -g "$wallpapers_path" --config ~/.config/swayimg/pick.lua)" \
+    || notify_error "Unexpected Error"
 
   if [[ -f "$wallpaper" ]]; then
     set_wallpaper "$wallpaper"
