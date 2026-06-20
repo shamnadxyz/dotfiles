@@ -246,8 +246,10 @@
     }
   },
   "custom/distro": {
-    "format": "",
+    "format": "{}",
     "tooltip": true,
+    "exec": "distro-icon",
+    "interval": "once",
     "tooltip-format": "Open window switcher",
     "on-click": "rofi -show window"
   }
