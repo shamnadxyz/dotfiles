@@ -1,6 +1,6 @@
 [global]
   # Appearance
-  font = monospace 11
+  font = IosevkaTerm Nerd Font 12
   corner_radius = 12
   corners = all
   frame_width = 1
