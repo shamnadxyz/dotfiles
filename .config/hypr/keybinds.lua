@@ -10,30 +10,28 @@ local waybar_visible = true
 
 -- UTILS
 local function toggle_waybar()
-  hl.exec_cmd(var.commands.toggle_waybar)
-  waybar_visible = not waybar_visible
+	hl.exec_cmd(var.commands.toggle_waybar)
+	waybar_visible = not waybar_visible
 end
 
 --- Toggle fullscreen mode
 --- Hides waybar in fullscreen mode and shows it otherwise
 local function toggle_fullscreen()
-  local window = hl.get_active_window()
-
-  if window == nil then
-    return
-  end
-
-  local is_fullscreen = window.fullscreen == 2
-
-  if is_fullscreen and not waybar_visible then
-    toggle_waybar()
-  end
-
-  if not is_fullscreen and waybar_visible then
-    toggle_waybar()
-  end
+	local FULLSCREEN <const> = 2
 
 	hl.dispatch(hl.dsp.window.fullscreen({ action = "toggle" }))
+
+	local window = hl.get_active_window()
+
+	if window == nil then
+		return
+	end
+
+	local show_waybar = window.fullscreen ~= FULLSCREEN
+
+	if waybar_visible ~= show_waybar then
+		toggle_waybar()
+	end
 end
 
 -- KEYBINDS
@@ -81,7 +79,7 @@ hl.bind(main_mod .. " + k", hl.dsp.focus({ direction = "up" }))
 hl.bind(main_mod .. " + j", hl.dsp.focus({ direction = "down" }))
 
 -- Swap windows within workspace
-hl.bind(main_mod .. " + SHIFT + j", hl.dsp.window.swap({direction = "down"}))
+hl.bind(main_mod .. " + SHIFT + j", hl.dsp.window.swap({ direction = "down" }))
 hl.bind(main_mod .. " + SHIFT + k", hl.dsp.window.swap({ direction = "up" }))
 hl.bind(main_mod .. " + SHIFT + h", hl.dsp.window.swap({ direction = "left" }))
 hl.bind(main_mod .. " + SHIFT + l", hl.dsp.window.swap({ direction = "right" }))
