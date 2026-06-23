@@ -22,6 +22,7 @@ if command -v eza >/dev/null; then
   --group-directories-first \
   --sort modified --reverse'
 fi
+
 alias mkdir='mkdir -pv'
 alias mv='mv -vi'
 alias vim='nvim'

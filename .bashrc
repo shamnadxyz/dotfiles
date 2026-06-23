@@ -27,7 +27,7 @@ update_prompt() {
     hostname=" 󰖟 \h"
   fi
 
-  PS1="\n${dir_color}\w${hostname}\n${sym_color}\$ \[\e[0m\]"
+  PS1="\n${dir_color}\w${hostname}\n${sym_color}\\$ \[\e[0m\]"
 }
 
 PROMPT_COMMAND=update_prompt
