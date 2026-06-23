@@ -1,6 +1,8 @@
 install-dependencies.sh
 screenshot.avif
 
+^res$
+
 \.git
 \.gitignore
 \.gitmodules
