@@ -96,7 +96,7 @@ cmd set-wallpaper ${{
     set -f
     case $f in
         *.jpg|*.jpeg|*.png|*.avif|*.webp|*.heif)
-					setwall "$f"
+					nohup setwall "$f" &>/dev/null & disown
 					;;
 				*)
 					printf "%s\n" "File not supported" >&2
