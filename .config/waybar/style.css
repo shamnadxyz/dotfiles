@@ -65,8 +65,7 @@ window#waybar {
   box-shadow: none;
 }
 
-#battery.charging,
-#battery.plugged {
+#battery.charging {
   color: @green;
   background-color: alpha(@green, 0.2);
 }
@@ -74,18 +73,6 @@ window#waybar {
 #battery.critical:not(.charging) {
   background-color: alpha(@red, 0.2);
   color: @red;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-@keyframes blink {
-  to {
-    background-color: @red;
-    color: @background;
-  }
 }
 
 #privacy {

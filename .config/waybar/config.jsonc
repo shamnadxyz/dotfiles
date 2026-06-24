@@ -94,6 +94,7 @@
     "format": "{icon} {capacity}%",
     "format-icons": {
       "not-charging": "",
+      "plugged": "",
       "charging": [
         "󰢜",
         "󰂆",
