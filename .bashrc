@@ -9,25 +9,29 @@ PS1='\n\w\n\\$ '
 update_prompt() {
   local status=$?
 
-  local dir_color sym_color hostname
+  local red blue sym_color end_seq remote 
 
-  # Blue
-  dir_color='\[\e[34m\]'
+  red='\[\e[31m\]'
+  blue='\[\e[34m\]'
+  white='\[\e[37m\]'
+  end_seq="\[\e[0m\]"
 
   if ((status == 0)); then
     # White
-    sym_color='\[\e[37m\]'
+    sym_color="$white"
   else
     # Red
-    sym_color='\[\e[31m\]'
+    sym_color="$red"
   fi
+
 
   # Display hostname if connected via ssh
   if [[ -n "$SSH_CONNECTION" ]]; then
-    hostname=" 󰖟 \h"
+    remote=" 󰖟 \h"
   fi
 
-  PS1="\n${dir_color}\w${hostname}\n${sym_color}\\$ \[\e[0m\]"
+
+  PS1="\n\w${blue}${remote}${end_seq}\n${sym_color}\\$ ${end_seq}"
 }
 
 PROMPT_COMMAND=update_prompt
