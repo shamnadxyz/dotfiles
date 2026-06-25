@@ -25,7 +25,6 @@ M.apps = {
 
 M.commands = {
 	exit = "wm-exit",
-	toggle_waybar = "pkill -SIGUSR1 waybar",
 	clipboard = {
 		add = "clipboard -a",
 		copy = "clipboard -c",

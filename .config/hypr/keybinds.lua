@@ -1,4 +1,5 @@
 local var = require("variables")
+local utils = require("utils")
 
 local pickers = var.pickers
 local apps = var.apps
@@ -6,35 +7,6 @@ local cmd = var.commands
 
 local main_mod = "ALT"
 
-local waybar_visible = true
-
--- UTILS
-local function toggle_waybar()
-	hl.exec_cmd(var.commands.toggle_waybar)
-	waybar_visible = not waybar_visible
-end
-
---- Toggle fullscreen mode
---- Hides waybar in fullscreen mode and shows it otherwise
-local function toggle_fullscreen()
-	local FULLSCREEN <const> = 2
-
-	hl.dispatch(hl.dsp.window.fullscreen({ action = "toggle" }))
-
-	local window = hl.get_active_window()
-
-	if window == nil then
-		return
-	end
-
-	local show_waybar = window.fullscreen ~= FULLSCREEN
-
-	if waybar_visible ~= show_waybar then
-		toggle_waybar()
-	end
-end
-
--- KEYBINDS
 hl.bind(main_mod .. " + RETURN", hl.dsp.exec_cmd(var.terminal))
 hl.bind(main_mod .. " + D", hl.dsp.exec_cmd(pickers.app))
 hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(apps.file_manager))
@@ -48,7 +20,7 @@ hl.bind("PRINT", hl.dsp.exec_cmd(cmd.screenshot.desktop))
 
 hl.bind(main_mod .. " + SHIFT + E", hl.dsp.exec_cmd(cmd.exit))
 
-hl.bind("SUPER + SUPER_L", toggle_waybar, { description = "Toggle waybar visibility" })
+hl.bind("SUPER + SUPER_L", utils.toggle_waybar, { description = "Toggle waybar visibility" })
 
 hl.bind(main_mod .. "+ SHIFT + C", hl.dsp.exec_cmd(cmd.clipboard.add))
 hl.bind(main_mod .. "+ SHIFT + V", hl.dsp.exec_cmd(cmd.clipboard.copy))
@@ -67,7 +39,7 @@ hl.bind(
 	}
 )
 
-hl.bind(main_mod .. "+ F", toggle_fullscreen, { description = "Toggle fullscreen and waybar" })
+hl.bind(main_mod .. "+ F", utils.toggle_fullscreen, { description = "Toggle fullscreen and waybar" })
 hl.bind(main_mod .. "+ SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(main_mod .. " + S", hl.dsp.layout("togglesplit"))
