@@ -1,70 +1,55 @@
 #!/usr/bin/env bash
 
-readonly ENTRY_HEIGHT=40
-readonly INPUT_HEIGHT=44
+declare -a CONNECTIONS
 
-declare -a connections
-
-get_menu_dimensions() {
-  local number_of_entries="$1"
-  local size
-
-  size="$((INPUT_HEIGHT + (ENTRY_HEIGHT * number_of_entries)))"
-  if ((size > 500)); then
-    size=500
-  elif ((size < 244));then
-    size=244
-  fi
-
-  printf "%d %d\n" "$size" "$size"
-}
-
-pick_connection() {
-  readarray -t connections < <(
-    nmcli -t -f TYPE,ACTIVE,NAME connection |
-      grep -Ev "bridge|loopback"
+# Populates the global array with network connections.
+# Globals:
+#  CONNECTIONS
+get_connections() {
+  local count
+  readarray -t CONNECTIONS < <(
+    nmcli -t -f TYPE,NAME,ACTIVE connection |
+      awk -F ':' '$1 != "bridge" && $1 != "loopback" {print $2 ":" $3}'
   )
 
-  number_of_connections="${#connections[@]}"
+  count="${#CONNECTIONS[@]}"
 
-  if [[ "$number_of_connections" -eq 0 ]]; then
+  if ((count == 0)); then
     notify-send "No connections available"
     exit 1
   fi
+}
 
-  read -r height width < <(get_menu_dimensions "$number_of_connections")
-
-  connection="$(
-    printf "%s\n" "${connections[@]}" |
-      sed '
-        s/^[^:]*://;
-        s/yes\:/  /;s/no\://;
-        s/^[a-zA-Z]/  &/' |
-      rofi -dmenu -theme dmenu -theme-str \
-        "window {width: ${width}px;height: ${height}px;}" \
-        -p 'Toggle' -no-custom
+# Opens the available connections in dmenu.
+# Output:
+#  writes connection name and active to stdout
+pick_connection() {
+  local connection name active index
+  index="$(
+    printf "%s\n" "${CONNECTIONS[@]}" |
+      awk -F ':' '{print ($2 == "yes" ? " " : " "), $1}' |
+      fuzzel --dmenu --index
   )" || exit 1
 
-  echo "$connection"
+  connection="${CONNECTIONS[$index]}"
 
+  # connection='name:active'
+  name="${connection%%:*}"
+  active="${connection##*:}"
+
+  printf "%s %s\n" "$name" "$active"
 }
 
 main() {
-  local connection
-  local status
-  connection_string="$(pick_connection)" || exit 1
+  get_connections || exit 1
+  local name active
+  read -r name active < <(pick_connection)
 
-  # Extract the status
-  status="${connection_string%% *}"
-  # Extract the connection name
-  connection="${connection_string#*  }"
-
-  if [ "$status" = "" ]; then
-    nmcli connection up "$connection"
-  elif [ "$status" = "" ]; then
-    nmcli connection down "$connection"
+  if [ "$active" = "no" ]; then
+    nmcli connection up "$name"
+  elif [ "$active" = "yes" ]; then
+    nmcli connection down "$name"
   fi
-
 }
 
 main
