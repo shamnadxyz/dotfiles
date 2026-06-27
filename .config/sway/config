@@ -18,7 +18,7 @@ set $up k
 set $right l
 
 set $terminal foot
-set $menu rofi -show drun
+set $menu fuzzel
 set $fileManager $terminal --app-id lf -T lf lf
 
 ### Output configuration

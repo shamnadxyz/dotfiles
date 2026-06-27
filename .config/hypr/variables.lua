@@ -8,7 +8,7 @@ local function term_app(app)
 end
 
 M.pickers = {
-	app = "rofi -show drun",
+	app = "fuzzel",
 	window = "rofi -show window",
 	network = "connmenu",
 	power = "powermenu",
