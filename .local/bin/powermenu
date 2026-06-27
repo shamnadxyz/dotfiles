@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# Size of the rofi window used for the action menu
-readonly MENU_HEIGHT=241
-readonly MENU_WIDTH=240
-
 lockscreen() {
   if command -v hyprlock >/dev/null 2>&1; then
     hyprlock &
@@ -33,9 +29,7 @@ pick_action() {
 
   local selection
   selection=$(printf '%s\n' "${menu_items[@]}" |
-    rofi -dmenu -theme dmenu \
-      -theme-str "window {height: ${MENU_HEIGHT}px;width: ${MENU_WIDTH}px;}" \
-      -p 'Action' -no-custom) || exit 1
+    fuzzel --dmenu --width 20 --minimal-lines --only-match) || exit 1
 
   local action
   # Remove the icon from the selected option

@@ -28,7 +28,7 @@ pick_connection() {
   index="$(
     printf "%s\n" "${CONNECTIONS[@]}" |
       awk -F ':' '{print ($2 == "yes" ? " " : " "), $1}' |
-      fuzzel --dmenu --index
+      fuzzel --dmenu --index --only-match
   )" || exit 1
 
   connection="${CONNECTIONS[$index]}"

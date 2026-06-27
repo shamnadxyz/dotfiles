@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# Size of the rofi window used for the action menu
-readonly MENU_HEIGHT=212
-readonly MENU_WIDTH=300
-
 readonly WM="${WM:-Hyprland}"
 
 check_wm() {
@@ -14,17 +10,13 @@ check_wm() {
   fi
 }
 
-PROMPT="You pressed the <b>exit</b> shortcut.
-
-Do want to exit <b>$WM</b>?"
+PROMPT="You pressed the exit shortcut.
+Do want to exit $WM?"
 
 OPTIONS=$'No\nYes'
 
 pick_option() {
-  printf "%s" "$OPTIONS" | rofi -dmenu -theme dmenu \
-    -p '>' -no-custom \
-    -theme-str "window {height: ${MENU_HEIGHT}px;width: ${MENU_WIDTH}px;}" \
-    -mesg "$PROMPT"
+  printf "%s" "$OPTIONS" | fuzzel --dmenu --minimal-lines --only-match --mesg "$PROMPT"
 }
 
 exit_wm() {

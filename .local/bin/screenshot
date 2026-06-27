@@ -5,7 +5,7 @@ SCREENSHOT_PATH="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
 # Generate timestamped filename
 FILENAME="$(date '+%Y-%m-%d-%H-%M-%S-%N.png')"
 
-DEPENDENCIES=("rofi" "slurp" "grim")
+DEPENDENCIES=("fuzzel" "slurp" "grim")
 
 check_dependencies() {
   local missing=()
@@ -31,9 +31,7 @@ pick_mode() {
 
   local selection
   selection="$(printf '%s\n' "${modes[@]}" |
-    rofi -dmenu -theme dmenu \
-      -theme-str 'window {width: 200px;height: 170px;}' \
-      -p 'Capture' -no-custom)" || exit 1
+    fuzzel --dmenu --minimal-lines --only-match --width 20)" || exit 1
 
   local mode
   # Remove the icon from the selected mode
