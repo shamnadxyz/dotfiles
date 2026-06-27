@@ -119,6 +119,13 @@ hl.layer_rule({
 })
 
 hl.layer_rule({
+	name = "fuzzel",
+	blur = true,
+	ignore_alpha = 0,
+	match = { namespace = "launcher" },
+})
+
+hl.layer_rule({
 	name = "rofi-blur",
 	blur = true,
 	ignore_alpha = 0,
