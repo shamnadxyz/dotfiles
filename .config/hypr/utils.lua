@@ -1,6 +1,9 @@
 local M = {}
 
+local var = require("variables")
+
 M.waybar_visible = true
+M.display_enabled = true
 
 M.toggle_waybar = function()
 	local toggle_waybar_cmd = "pkill -SIGUSR1 waybar"
@@ -23,6 +26,25 @@ M.toggle_fullscreen = function()
 	local show_waybar = window.fullscreen ~= FULLSCREEN
 	if M.waybar_visible ~= show_waybar then
 		M.toggle_waybar()
+	end
+end
+
+M.handle_lid_close = function()
+	local monitors = hl.get_monitors()
+	local laptop_monitor_spec = var.laptop_monitor_spec
+	laptop_monitor_spec.disabled = true
+	if #monitors > 1 then
+		hl.monitor(laptop_monitor_spec)
+		M.display_enabled = false
+	end
+end
+
+M.handle_lid_open = function()
+	local laptop_monitor_spec = var.laptop_monitor_spec
+	laptop_monitor_spec.disabled = false
+	if M.display_enabled == false then
+		hl.monitor(laptop_monitor_spec)
+		M.display_enabled = true
 	end
 end
 
