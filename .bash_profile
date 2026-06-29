@@ -6,7 +6,7 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 
 export EDITOR=nvim
 export VISUAL=nvim
-export PAGER=less
+export PAGER='nvim +Man!'
 export WM=Hyprland
 
 # Start WM automatically on tty1
