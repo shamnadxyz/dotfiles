@@ -1,0 +1,5 @@
+--theme="ansi"
+--style='changes,numbers'
+--paging=auto
+--tabs=2
+--color=always
