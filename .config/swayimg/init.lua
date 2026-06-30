@@ -73,6 +73,14 @@ swayimg.viewer.on_key("p", function()
   swayimg.viewer.switch_image("prev")
 end)
 
+-- Switch images in viewer using C-[jk]
+swayimg.viewer.on_key("Ctrl+j", function()
+  swayimg.viewer.switch_image("next")
+end)
+swayimg.viewer.on_key("Ctrl+k", function()
+  swayimg.viewer.switch_image("prev")
+end)
+
 -- Vim navigation in gallery mode
 swayimg.gallery.on_key("j", function()
   swayimg.gallery.switch_image("down")
