@@ -2,19 +2,27 @@
 swayimg.imagelist.set_order("mtime")
 
 -- set font size
-swayimg.text.set_size(16)
+swayimg.text.set_size(12)
 -- set font color to fully opaque red color
 swayimg.text.set_foreground(0xe0e2eaff)
 
--- set top left text block scheme for viewer mode
-swayimg.viewer.set_text("topleft", {
-  "File: {name}",
-  "Format: {format}",
-  "File size: {sizehr}",
-  "File time: {time}",
-  "EXIF date: {meta.Exif.Photo.DateTimeOriginal}",
-  "EXIF camera: {meta.Exif.Image.Model}",
+swayimg.viewer.set_text("bottomleft", {
+  "{name}",
 })
+swayimg.viewer.set_text("bottomright", {
+  "{list.index}/{list.total}",
+})
+swayimg.viewer.set_text("topleft", {})
+swayimg.viewer.set_text("topright", {})
+
+swayimg.gallery.set_text("bottomleft", {
+  "{name}",
+})
+swayimg.gallery.set_text("bottomright", {
+  "{list.index}/{list.total}",
+})
+swayimg.gallery.set_text("topleft", {})
+swayimg.gallery.set_text("topright", {})
 
 -- Move image position using [hljk]
 swayimg.viewer.on_key("h", function()
