@@ -1,7 +1,7 @@
 local M = {}
 
 M.laptop_monitor = "eDP-1"
-M.terminal = "foot"
+M.terminal = "kitty"
 
 local function term_app(app)
 	return string.format("%s --app-id %s -T %s %s", M.terminal, app, app, app)
@@ -18,7 +18,7 @@ M.pickers = {
 M.apps = {
 	browser = "brave",
 	music = term_app("rmpc"),
-	file_manager = term_app("lf"),
+	file_manager = term_app("yazi"),
 	bar = "waybar",
 	music_daemon = "mpd",
 }
