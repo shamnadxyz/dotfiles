@@ -31,10 +31,8 @@ check_dependencies() {
   fi
 }
 
-restart_waybar() {
-  pkill waybar
-  waybar &>/dev/null &
-  disown
+reload_waybar() {
+  pkill -SIGUSR2 waybar
 }
 
 update_colorscheme() {
@@ -48,7 +46,7 @@ update_colorscheme() {
     return 1
   fi
 
-  restart_waybar
+  reload_waybar
 }
 
 set_wallpaper() {
