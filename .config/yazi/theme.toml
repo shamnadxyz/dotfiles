@@ -1,0 +1,48 @@
+#:schema https://yazi-rs.github.io/schemas/theme.json
+
+[mgr]
+border_symbol = " "
+border_style  = { fg = "gray" }
+
+[tabs]
+sep_inner = { open = "█", close = "█" }
+sep_outer = { open = "█", close = "█" }
+
+[mode]
+normal_main = { bg = "reset", bold = true }
+normal_alt  = { fg = "white", bg = "reset" }
+
+# Select mode
+select_main = { bg = "reset", bold = true }
+select_alt  = { fg = "white", bg = "reset" }
+
+# Unset mode
+unset_main = { bg = "reset", bold = true }
+unset_alt  = { fg = "white", bg = "reset" }
+
+[indicator]
+parent  = { reversed = true }
+current = { reversed = true }
+preview = { underline = true }
+padding = { open = "█", close = "█" }
+
+[status]
+overall   = {}
+sep_left  = { open = " ", close = " " }
+sep_right = { open = " ", close = " " }
+
+[confirm]
+border     = { fg = "white" }
+title      = { fg = "white" }
+body       = {}
+list       = {}
+btn_yes    = { reversed = true }
+btn_no     = {}
+btn_labels = [ "  [Y]es  ", "  (N)o  " ]
+
+[icon]
+globs = []
+dirs  = []
+files = []
+exts = []
+conds = []
