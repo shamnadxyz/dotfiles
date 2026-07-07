@@ -4,30 +4,33 @@ readonly DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/clipboard"
 readonly CLIPBOARD="${DATA_HOME}/clipboard"
 readonly TRASH="${DATA_HOME}/trash"
 
-err() {
-  echo "$@" >&2
+ENTRY=""
+
+notify_error() {
+  echo "$*" >&2
+  notify-send "Error" "$*"
+  exit 1
+}
+
+bin_exist() {
+  command -v "$1" &>/dev/null
+  return $?
 }
 
 check_dependencies() {
   declare -a missing_deps
 
-  if ! command -v "fuzzel" &>/dev/null; then
-    missing_deps+=("fuzzel")
-  fi
+  bin_exist "fuzzel" || missing_deps+=("fuzzel")
+  bin_exist "wl-copy" || missing_deps+=("wl-clipboard")
 
-  if ! command -v "wl-copy" &>/dev/null; then
-    missing_deps+=("wl-clipboard")
-  fi
-
-  if [[ "${#missing_deps[@]}" -gt 0 ]]; then
-    err "Missing dependencies: ${missing_deps[*]}"
-    exit 1
+  if ((${#missing_deps[@]})); then
+    notify_error "Missing dependencies: ${missing_deps[*]}"
   fi
 }
 
 check_fuzzel_running() {
   if pgrep -x "fuzzel" >/dev/null; then
-    exit 1
+    notify_error "Fuzzel is already running"
   fi
 }
 
@@ -43,31 +46,33 @@ show_help() {
   -h, --help      display help\n"
 }
 
+select_entry() {
+  ENTRY="$(fuzzel --dmenu --only-match --prompt 'Copy > ' <"$CLIPBOARD")"
+  [ -z "$ENTRY" ] && exit 1
+}
+
 add_to_storage() {
   text="$(wl-paste)"
   [ -z "$text" ] && exit 1
 
-  # Compress newlines to literal \n for single-line storage
-  compact_text="$(echo "$text" | awk 1 ORS='\\n')"
+  # replace newlines with literal \n
+  compact_text="$(printf "%s" "$text" | awk 'NR>1 {printf "\\n" {printf "%s", $0')"
 
-  if ! grep -Fx "$compact_text" "$CLIPBOARD" >/dev/null 2>&1; then
+  if ! grep -Fx "$compact_text" "$CLIPBOARD" &>/dev/null; then
     printf "%s\n" "$compact_text" >>"$CLIPBOARD"
   fi
 }
 
+exit_on_empty() {
+  [ ! -s "$CLIPBOARD" ] && notify_error "Clipboard is empty"
+}
+
 delete_from_storage() {
+  exit_on_empty
   local text match line_number
 
-  check_fuzzel_running
-
-  # exit on empty storage
-  [ ! -s "$CLIPBOARD" ] && exit 0
-
-  text="$(fuzzel --dmenu --only-match --prompt 'Delete > ' <"$CLIPBOARD")"
-  [ -z "$text" ] && exit 1
-
-  match="$(grep -Fx "$text" -n "$CLIPBOARD")"
-
+  select_entry
+  match="$(grep -Fx "$ENTRY" -n "$CLIPBOARD")"
   if [[ -n "$match" ]]; then
     line_number="${match%%:*}"
     sed -i "${line_number}d" "$CLIPBOARD"
@@ -76,25 +81,12 @@ delete_from_storage() {
 }
 
 copy_to_clipboard() {
-
-  check_fuzzel_running
-
-  # exit on empty storage
-  [ ! -s "$CLIPBOARD" ] && exit 0
-
-  text="$(fuzzel --dmenu --only-match --prompt 'Copy > ' <"$CLIPBOARD")"
-  [ -z "$text" ] && exit 1
-
-  wl-copy "$(printf '%b' "$text")"
+  exit_on_empty
+  select_entry
+  wl-copy "$(printf '%b' "$ENTRY")"
 }
 
-main() {
-  check_dependencies
-
-  # Create clipboard directory and file if needed
-  mkdir -p "$DATA_HOME"
-  touch "$CLIPBOARD"
-
+handle_args() {
   # Enforce exactly one argument
   if [ "$#" -ne 1 ]; then
     show_help
@@ -114,6 +106,13 @@ main() {
     exit 1
     ;;
   esac
+}
+
+main() {
+  check_fuzzel_running
+  check_dependencies
+  mkdir -p "$DATA_HOME"
+  handle_args "$@"
 }
 
 main "$@"
