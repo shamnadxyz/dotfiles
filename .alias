@@ -13,14 +13,12 @@ export FZF_DEFAULT_OPTS=" \
 alias ls='ls \
   --indicator-style=classify \
   --color \
-  --group-directories-first \
-  --sort=time'
+  --group-directories-first'
 
 if command -v eza >/dev/null; then
   alias ls='eza \
   --icons --color \
-  --group-directories-first \
-  --sort modified --reverse'
+  --group-directories-first'
 fi
 
 alias mkdir='mkdir -pv'
