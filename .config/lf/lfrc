@@ -13,6 +13,8 @@ map ` !true
 
 set previewer ~/.config/lf/preview
 
+map D delete
+
 cmd open &{{
   case $(file --mime-type -Lb $f) in
     text/*) lf -remote "send $id \$$EDITOR \$fx";;
@@ -23,8 +25,8 @@ cmd open &{{
 map o &mimeopen $f
 map O $mimeopen --ask $f
 
-cmd extractToDir ${{
-  read -p "Directory: " directory
+cmd extract-to-dir ${{
+  read -p "Extract to: " directory
   mkdir -p "$directory"
   set -f
   case $f in
@@ -36,8 +38,9 @@ cmd extractToDir ${{
       ;;
   esac
 }}
+map ad extract-to-dir
 
-cmd extract ${{
+cmd extract-here ${{
   set -f
   case $f in
     *.rar|*.7z|*.zip)
@@ -48,63 +51,46 @@ cmd extract ${{
       ;;
   esac
 }}
+map ax extract-here
 
-cmd archiveToZip ${{
+cmd add-to-archive ${{
   set -f
   printf "$fx\n"
-  printf "archive to zip? [y/N]"
-  read ans
-  if [[ $ans = "y" ]] then
-    read -p "Archive name:" name
-    7z a ${name}.zip -tzip $fx -mx=0
-  fi
+  read -p "Archive name:" name
+  7z a "$name" "$fx"
 }}
-
-cmd archiveTo7zip ${{
-  set -f
-  printf "$fx\n"
-  printf "archive to 7zip?[y/n]"
-  read ans
-  if [[ $ans = "y" ]] then
-    read -p "Archive name:" name
-    7z a ${name}.7z -t7z $fx
-  fi
-}}
+map aa add-to-archive
 
 cmd zi ${{
   result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
   lf -remote "send $id cd \"$result\""
 }}
+map Z zi 
 
 cmd on-cd &{{
   zoxide add "$PWD"
 }}
 
-cmd set-wallpaper ${{
-  if ! command -v setwall &>/dev/null; then
-    printf "%s\n" "setwall not found" >&2
-    return 1
-  fi
+# Sort
+cmd sort-by-access :{{ set sortby atime; set info atime; }}
+map sa sort-by-access
 
-  set -f
-  case $f in
-    *.jpg|*.jpeg|*.png|*.avif|*.webp|*.heif)
-      nohup setwall "$f" &>/dev/null & disown
-      ;;
-    *)
-      printf "%s\n" "File not supported" >&2
-      ;;
-  esac
-}}
+cmd sort-by-creation :{{ set sortby btime; set info btime; }}
+map sc sort-by-creation
 
-map Z zi
+cmd sort-by-extension :{{ set sortby ext; set info; }}
+map se sort-by-extension
 
-map gd cd ~/.config
+cmd sort-by-modification :{{ set sortby time; set info time; }}
+map st sort-by-modification
 
-# Mapping
-map D delete
-map az archiveToZip
-map a7 archiveTo7zip
-map ax extract
-map sw set-wallpaper
-map ad extractToDir
+cmd sort-by-name :{{ set sortby name; set info; }}
+map sN sort-by-name
+
+cmd sort-by-natural-name :{{ set sortby natural; set info; }}
+map sn sort-by-natural-name
+
+cmd sort-by-size :{{ set sortby size; set info size; }}
+map ss sort-by-size
+
+map sb
