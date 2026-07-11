@@ -14,94 +14,87 @@ map ` !true
 set previewer ~/.config/lf/preview
 
 cmd open &{{
-    case $(file --mime-type -Lb $f) in
-        text/*) lf -remote "send $id \$$EDITOR \$fx";;
-        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
-    esac
+  case $(file --mime-type -Lb $f) in
+    text/*) lf -remote "send $id \$$EDITOR \$fx";;
+    *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+  esac
 }}
 
 map o &mimeopen $f
 map O $mimeopen --ask $f
 
 cmd extractToDir ${{
-    read -p "Directory: " directory
-    mkdir -p "$directory"
-    set -f
-    case $f in
-        *.rar|*.7z|*.zip)
-					7z x "$f" -o"$directory"
-					;;
-				*.tar|*.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz)
-					tar -xf "$f" -C "$directory"
-					;;
-    esac
+  read -p "Directory: " directory
+  mkdir -p "$directory"
+  set -f
+  case $f in
+    *.rar|*.7z|*.zip)
+      7z x "$f" -o"$directory"
+      ;;
+    *.tar|*.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz)
+      tar -xf "$f" -C "$directory"
+      ;;
+  esac
 }}
 
 cmd extract ${{
-    set -f
-    case $f in
-        *.rar|*.7z|*.zip)
-					7z x "$f"
-					;;
-				*.tar|*.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz)
-					tar -xf "$f"
-					;;
-    esac
-}}
-
-cmd delete ${{
-    set -f
-    printf "%s\n" "$fx"
-    read -p "Delete [y/N] " -n 1 -r ans
-    [[ "$ans" =~ ^[Yy]$ ]] && rm -rf $fx || :
+  set -f
+  case $f in
+    *.rar|*.7z|*.zip)
+      7z x "$f"
+      ;;
+    *.tar|*.tar.bz|*.tar.bz2|*.tbz|*.tbz2|*.tar.gz|*.tgz|*.tar.xz|*.txz)
+      tar -xf "$f"
+      ;;
+  esac
 }}
 
 cmd archiveToZip ${{
-    set -f
-        printf "$fx\n"
-        printf "archive to zip? [y/N]"
-        read ans
-        if [[ $ans = "y" ]] then
-        read -p "Archive name:" name
-        7z a ${name}.zip -tzip $fx -mx=0
-        fi
+  set -f
+  printf "$fx\n"
+  printf "archive to zip? [y/N]"
+  read ans
+  if [[ $ans = "y" ]] then
+    read -p "Archive name:" name
+    7z a ${name}.zip -tzip $fx -mx=0
+  fi
 }}
 
 cmd archiveTo7zip ${{
-    set -f
-        printf "$fx\n"
-        printf "archive to 7zip?[y/n]"
-        read ans
-        if [[ $ans = "y" ]] then
-        read -p "Archive name:" name
-        7z a ${name}.7z -t7z $fx
-        fi
+  set -f
+  printf "$fx\n"
+  printf "archive to 7zip?[y/n]"
+  read ans
+  if [[ $ans = "y" ]] then
+    read -p "Archive name:" name
+    7z a ${name}.7z -t7z $fx
+  fi
 }}
 
 cmd zi ${{
-    result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
-    lf -remote "send $id cd \"$result\""
+  result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+  lf -remote "send $id cd \"$result\""
 }}
 
 cmd on-cd &{{
-    zoxide add "$PWD"
+  zoxide add "$PWD"
 }}
 
 cmd set-wallpaper ${{
-    if ! command -v setwall &>/dev/null; then
-		  printf "%s\n" "setwall not found" >&2
-      return 1
-    fi
+  if ! command -v setwall &>/dev/null; then
+    printf "%s\n" "setwall not found" >&2
+    return 1
+  fi
 
-    set -f
-    case $f in
-        *.jpg|*.jpeg|*.png|*.avif|*.webp|*.heif)
-					nohup setwall "$f" &>/dev/null & disown
-					;;
-				*)
-					printf "%s\n" "File not supported" >&2
-					;;
-    esac
+  set -f
+  case $f in
+    *.jpg|*.jpeg|*.png|*.avif|*.webp|*.heif)
+      nohup setwall "$f" &>/dev/null & disown
+      ;;
+    *)
+      printf "%s\n" "File not supported" >&2
+      ;;
+  esac
 }}
 
 map Z zi
