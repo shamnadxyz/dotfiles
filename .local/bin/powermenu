@@ -6,7 +6,7 @@ lockscreen() {
   elif command -v swaylock >/dev/null 2>&1; then
     swaylock -c 000000 &
   else
-    notify-send "Error" "No lock application found" \
+    fyi "Error" "No lock application found" \
       "Install 'swaylock' or 'hyprlock'"
   fi
 }
@@ -58,7 +58,7 @@ exec_action() {
     lockscreen
     ;;
   *)
-    notify-send "Invalid option"
+    fyi "Invalid option"
     exit 1
     ;;
   esac

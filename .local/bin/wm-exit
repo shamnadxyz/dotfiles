@@ -6,7 +6,7 @@ check_wm() {
   local error_message="Unknown WM: $WM"
   if [[ ! "$WM" =~ ^(Hyprland|sway)$ ]]; then
     echo "$error_message" >&2
-    notify-send "$error_message"
+    fyi "$error_message"
   fi
 }
 

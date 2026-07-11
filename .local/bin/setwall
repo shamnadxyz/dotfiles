@@ -11,7 +11,7 @@ readonly WALLPAPER_PATH="$HOME/.cache/wallpaper"
 
 notify_error() {
   echo "$*" >&2
-  notify-send -u critical "  Error" "$*"
+  fyi --urgency critical "  Error" "$*"
 }
 
 check_dependencies() {
@@ -89,11 +89,15 @@ main() {
     exit 1
   fi
 
-  notify-send "Wallpaper Selector" "Press 'Shift+Return' to select"
+  nid="$(fyi --print-id "Wallpaper Selector" "Press 'Shift+Return' to select")"
+  # print-id currently prints id=ID on stdout
+  nid="${nid##*=}"
 
   # Launch swayimg to pick wallpaper
   wallpaper="$(swayimg -g "$wallpapers_path" --config ~/.config/swayimg/pick.lua)" \
     || notify_error "Unexpected Error"
+
+  fyi --close="$nid"
 
   if [[ -f "$wallpaper" ]]; then
     set_wallpaper "$wallpaper"

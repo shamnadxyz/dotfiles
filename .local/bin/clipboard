@@ -8,7 +8,7 @@ ENTRY=""
 
 notify_error() {
   echo "$*" >&2
-  notify-send "Error" "$*"
+  fyi "Error" "$*"
   exit 1
 }
 

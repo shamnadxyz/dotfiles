@@ -15,7 +15,7 @@ get_connections() {
   count="${#CONNECTIONS[@]}"
 
   if ((count == 0)); then
-    notify-send "No connections available"
+    fyi "No connections available"
     exit 1
   fi
 }

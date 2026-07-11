@@ -16,7 +16,7 @@ check_dependencies() {
   done
 
   if ((${#missing[@]})); then
-    notify-send -u critical "  Error" "Missing binaries: ${missing[*]}"
+    fyi --urgency critical "  Error" "Missing binaries: ${missing[*]}"
     exit 1
   fi
 }
@@ -57,7 +57,7 @@ take_screenshot() {
     grim -g "$(slurp)" "${SCREENSHOT_PATH}/${FILENAME}"
     ;;
   *)
-    notify-send "Invalid option" "$mode"
+    fyi "Invalid option" "$mode"
     exit 1
     ;;
   esac
@@ -65,7 +65,7 @@ take_screenshot() {
   status=$?
 
   if [[ "$status" -eq 0 ]]; then
-    notify-send " Screenshot Captured" "$FILENAME"
+    fyi " Screenshot Captured" "$FILENAME"
   fi
 }
 
