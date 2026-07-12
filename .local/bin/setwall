@@ -1,31 +1,28 @@
 #!/usr/bin/env bash
-#
-# A wallpaper selector script for setting the wallpaper using swaybg
-# swayimg is used for picker and wallust to generate colorscheme
-# Dependencies:
-#   swaybg and swayimg
-# Optional dependencies:
-#   libnotify, dunst, and wallust
 
 readonly WALLPAPER_PATH="$HOME/.cache/wallpaper"
+readonly DEPENDENCIES=("swayimg" "swaybg")
+WALLPAPERS_PATH="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
 
 notify_error() {
   echo "$*" >&2
-  fyi --urgency critical "  Error" "$*"
+  fyi --urgency critical "Error" "$*"
+}
+
+bin_exist() {
+  command -v "$1" &>/dev/null
 }
 
 check_dependencies() {
   declare -a missing_deps
 
-  if ! command -v "swayimg" &>/dev/null; then
-    missing_deps+=("swayimg")
-  fi
+  for dep in "${DEPENDENCIES[@]}";do
+    if ! bin_exist "$dep";then
+      missing_deps+=("$dep")
+    fi
+  done
 
-  if ! command -v "swaybg" &>/dev/null; then
-    missing_deps+=("swaybg")
-  fi
-
-  if [[ "${#missing_deps[@]}" -gt 0 ]]; then
+  if (("${#missing_deps[@]}")); then
     notify_error "Missing dependencies: ${missing_deps[*]}"
     exit 1
   fi
@@ -36,13 +33,8 @@ reload_waybar() {
 }
 
 update_colorscheme() {
-  if ! command -v wallust &>/dev/null; then
-    notify_error "Wallust not found"
-    return 1
-  fi
-
-  if ! wallust run "$WALLPAPER_PATH" -q &>/dev/null; then
-    notify_error "Failed to update colorscheme"
+  if ! wallust run "$WALLPAPER_PATH" -q; then
+    notify_error "Failed to update the colorscheme"
     return 1
   fi
 
@@ -50,58 +42,61 @@ update_colorscheme() {
 }
 
 set_wallpaper() {
-  local wallpaper="$1"
+  local wallpaper absolute_path
+  wallpaper="$1"
 
-  local absolute_path
+  if [[ ! -f "$wallpaper" ]]; then
+    notify_error "$wallpaper: No such file"
+    return 1
+  fi
+
   absolute_path="$(realpath "$wallpaper")"
-
   ln -sf "$absolute_path" "$WALLPAPER_PATH"
 
-  pkill dunst
   pkill swaybg
-
   swaybg -i "$WALLPAPER_PATH" -m fill &>/dev/null &
   disown
 
   update_colorscheme
 }
 
-main() {
-  check_dependencies
-
-  local wallpapers_path="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
-
-  local path="$1"
-
-  if [[ -f "$path" ]]; then
-    set_wallpaper "$path"
-    return 0
-  elif [[ -d "$path" ]]; then
-    wallpapers_path="$path"
-  fi
-
-  if pgrep --exact "swayimg" >/dev/null; then
+pick_wallpaper() {
+  if [[ ! -d "$WALLPAPERS_PATH" ]]; then
+    notify_error "'$WALLPAPER_PATH': No such directory"
     exit 1
   fi
 
-  if [[ ! -d "$wallpapers_path" ]]; then
-    notify_error "Wallpapers directory does not exist: $wallpapers_path"
-    exit 1
-  fi
-
+  # print-id option currently prints id=ID on stdout
   nid="$(fyi --print-id "Wallpaper Selector" "Press 'Shift+Return' to select")"
-  # print-id currently prints id=ID on stdout
   nid="${nid##*=}"
 
-  # Launch swayimg to pick wallpaper
-  wallpaper="$(swayimg -g "$wallpapers_path" --config ~/.config/swayimg/pick.lua)" \
-    || notify_error "Unexpected Error"
+  wallpaper="$(swayimg -g "$WALLPAPERS_PATH" --config ~/.config/swayimg/pick.lua)" \
+    || { notify_error "Unexpected Error"; exit 1; }
 
   fyi --close="$nid"
+  set_wallpaper "$wallpaper"
+}
 
-  if [[ -f "$wallpaper" ]]; then
-    set_wallpaper "$wallpaper"
-  fi
+show_help() {
+  printf "Usage: %s [-f IMAGE] [-d WALLPAPERS_DIR]\n" "$0"
+}
+
+handle_args() {
+  while getopts f:d:h opt; do 
+    case "$opt" in
+      f) set_wallpaper "$OPTARG"; exit ;;
+      d) WALLPAPERS_PATH="$OPTARG" ;;
+      h) show_help; exit; ;;
+      ?) show_help >&2; exit 2; ;;
+    esac
+  done
+  shift $((OPTIND - 1))
+}
+
+main() {
+  check_dependencies
+  (($#)) && handle_args "$@"
+  pick_wallpaper
 }
 
 main "$@"
