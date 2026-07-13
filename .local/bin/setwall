@@ -74,6 +74,11 @@ pick_wallpaper() {
     || { notify_error "Unexpected Error"; exit 1; }
 
   fyi --close="$nid"
+
+  if [[ -z "$wallpaper" ]];then
+    exit
+  fi
+
   set_wallpaper "$wallpaper"
 }
 
