@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# DEPENDENCIES: fuzzel wl-clipboard
 
 readonly DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/clipboard"
 readonly CLIPBOARD="${DATA_HOME}/clipboard"
@@ -12,29 +13,8 @@ notify_error() {
   exit 1
 }
 
-bin_exist() {
-  command -v "$1" &>/dev/null
-}
-
-check_dependencies() {
-  declare -a missing_deps
-
-  bin_exist "fuzzel" || missing_deps+=("fuzzel")
-  bin_exist "wl-copy" || missing_deps+=("wl-clipboard")
-
-  if ((${#missing_deps[@]})); then
-    notify_error "Missing dependencies: ${missing_deps[*]}"
-  fi
-}
-
-check_fuzzel_running() {
-  if pgrep -x "fuzzel" >/dev/null; then
-    notify_error "Fuzzel is already running"
-  fi
-}
-
 show_help() {
-  printf "Usage: clipboard <OPTION>
+  printf "Usage: clipboard [OPTION]
 
   -a, --add       add clipboard content to the storage
 
@@ -96,20 +76,12 @@ handle_args() {
   -a | --add) add_to_storage ;;
   -d | --delete) delete_from_storage ;;
   -c | --copy) copy_to_clipboard ;;
-  -h | --help)
-    show_help
-    exit 0
-    ;;
-  *)
-    show_help
-    exit 1
-    ;;
+  -h | --help) show_help ;;
+  *) show_help; exit 1 ;;
   esac
 }
 
 main() {
-  check_fuzzel_running
-  check_dependencies
   mkdir -p "$DATA_HOME"
   handle_args "$@"
 }

@@ -1,25 +1,10 @@
 #!/usr/bin/env bash
+# DEPENDENCIES: fuzzel slurp grim
 
 SCREENSHOT_PATH="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
 
 # Generate timestamped filename
 FILENAME="$(date '+%Y-%m-%d-%H-%M-%S-%N.png')"
-
-DEPENDENCIES=("fuzzel" "slurp" "grim")
-
-check_dependencies() {
-  local missing=()
-  for cmd in "${DEPENDENCIES[@]}"; do
-    if ! command -v "${cmd}" &>/dev/null; then
-      missing+=("$cmd")
-    fi
-  done
-
-  if ((${#missing[@]})); then
-    fyi --urgency critical "  Error" "Missing binaries: ${missing[*]}"
-    exit 1
-  fi
-}
 
 pick_mode() {
   local modes
@@ -72,8 +57,6 @@ take_screenshot() {
 main() {
   # Ensure directory exists
   mkdir -p "$SCREENSHOT_PATH"
-
-  check_dependencies
 
   local mode
   mode="$1"
