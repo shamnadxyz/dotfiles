@@ -1,40 +1,21 @@
 #!/usr/bin/env bash
+# DEPENDENCIES: swayimg swaybg
 
-readonly WALLPAPER_PATH="$HOME/.cache/wallpaper"
-readonly DEPENDENCIES=("swayimg" "swaybg")
-WALLPAPERS_PATH="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
+readonly WALLPAPER="$HOME/.cache/wallpaper"
+WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
+
+update_colorscheme=0
 
 notify_error() {
   echo "$*" >&2
   fyi --urgency critical "Error" "$*"
 }
 
-bin_exist() {
-  command -v "$1" &>/dev/null
-}
+reload_waybar() { pkill -SIGUSR2 waybar; }
 
-check_dependencies() {
-  declare -a missing_deps
-
-  for dep in "${DEPENDENCIES[@]}";do
-    if ! bin_exist "$dep";then
-      missing_deps+=("$dep")
-    fi
-  done
-
-  if (("${#missing_deps[@]}")); then
-    notify_error "Missing dependencies: ${missing_deps[*]}"
-    exit 1
-  fi
-}
-
-reload_waybar() {
-  pkill -SIGUSR2 waybar
-}
-
-update_colorscheme() {
-  if ! wallust run "$WALLPAPER_PATH" -q; then
-    notify_error "Failed to update the colorscheme"
+generate_colorscheme() {
+  if ! wallust run "$WALLPAPER" -q; then
+    notify_error "Failed to generate the colorscheme"
     return 1
   fi
 
@@ -51,33 +32,30 @@ set_wallpaper() {
   fi
 
   absolute_path="$(realpath "$wallpaper")"
-  ln -sf "$absolute_path" "$WALLPAPER_PATH"
+  ln -sf "$absolute_path" "$WALLPAPER"
 
   pkill swaybg
-  swaybg -i "$WALLPAPER_PATH" -m fill &>/dev/null &
+  swaybg -i "$WALLPAPER" -m fill &>/dev/null &
   disown
 
-  update_colorscheme
+  ((update_colorscheme)) && generate_colorscheme
 }
 
 pick_wallpaper() {
-  if [[ ! -d "$WALLPAPERS_PATH" ]]; then
-    notify_error "'$WALLPAPER_PATH': No such directory"
+  if [[ ! -d "$WALLPAPERS" ]]; then
+    notify_error "'$WALLPAPERS': No such directory"
     exit 1
   fi
 
-  # print-id option currently prints id=ID on stdout
+  local nid
   nid="$(fyi --print-id "Wallpaper Selector" "Press 'Shift+Return' to select")"
   nid="${nid##*=}"
 
-  wallpaper="$(swayimg -g "$WALLPAPERS_PATH" --config ~/.config/swayimg/pick.lua)" \
-    || { notify_error "Unexpected Error"; exit 1; }
+  wallpaper="$(swayimg -g "$WALLPAPERS" --config ~/.config/swayimg/pick.lua)"
 
   fyi --close="$nid"
 
-  if [[ -z "$wallpaper" ]];then
-    exit
-  fi
+  [[ -n "$wallpaper" ]] || exit
 
   set_wallpaper "$wallpaper"
 }
@@ -87,19 +65,19 @@ show_help() {
 }
 
 handle_args() {
-  while getopts f:d:h opt; do 
+  while getopts f:d:uh opt; do
     case "$opt" in
       f) set_wallpaper "$OPTARG"; exit ;;
-      d) WALLPAPERS_PATH="$OPTARG" ;;
-      h) show_help; exit; ;;
-      ?) show_help >&2; exit 2; ;;
+      d) WALLPAPERS="$OPTARG" ;;
+      u) update_colorscheme=1 ;;
+      h) show_help; exit ;;
+      ?) show_help >&2; exit 2 ;;
     esac
   done
   shift $((OPTIND - 1))
 }
 
 main() {
-  check_dependencies
   (($#)) && handle_args "$@"
   pick_wallpaper
 }
