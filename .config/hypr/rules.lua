@@ -31,14 +31,6 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	-- Ignore maximize requests from all apps. You'll probably like this.
-	name = "suppress-maximize-events",
-	match = { class = ".*" },
-
-	suppress_event = "maximize",
-})
-
-hl.window_rule({
 	name = "brave",
 	match = { class = "brave-browser" },
 	workspace = 2,
@@ -61,22 +53,6 @@ hl.window_rule({
 	match = { class = "org.pulseaudio.pavucontrol" },
 	float = true,
 	center = true,
-})
-
-hl.window_rule({
-	name = "proton-settings",
-	match = { class = "protonvpn-app", title = "Settings" },
-	float = true,
-	center = true,
-	size = "720 720",
-})
-
-hl.window_rule({
-	name = "proton",
-	match = { class = "protonvpn-app", title = "Proton VPN" },
-	float = true,
-	center = true,
-	size = "0 720",
 })
 
 hl.window_rule({
@@ -105,19 +81,6 @@ hl.window_rule({
 	fullscreen_state = "0 1",
 })
 
-hl.window_rule({
-	name = "obsidian",
-	match = { class = "obsidian" },
-	workspace = 7,
-})
-
-hl.layer_rule({
-	name = "wofi",
-	blur = true,
-	ignore_alpha = 0,
-	match = { namespace = "wofi" },
-})
-
 hl.layer_rule({
 	name = "fuzzel",
 	blur = true,
@@ -126,21 +89,14 @@ hl.layer_rule({
 })
 
 hl.layer_rule({
-	name = "rofi-blur",
-	blur = true,
-	ignore_alpha = 0,
-	match = { namespace = "rofi" },
-})
-
-hl.layer_rule({
-	name = "dunst",
+	name = "notification",
 	blur = true,
 	ignore_alpha = 0,
 	match = { namespace = "notifications" },
 })
 
 hl.layer_rule({
-	name = "waybar-blur",
+	name = "waybar",
 	blur = true,
 	ignore_alpha = 0,
 	match = { namespace = "waybar" },
