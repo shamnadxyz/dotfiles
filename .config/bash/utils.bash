@@ -11,15 +11,8 @@ lfcd() {
   cd "$(command lf -print-last-dir "$@")" || return
 }
 
-f() {
-  if command -v yazi &>/dev/null; then
-    ycd "$@"
-  elif command -v lf &>/dev/null; then
-    lfcd "$@"
-  else
-    printf "%s\n" "f: could not find yazi or lf"
-  fi
-}
+alias f=ycd
+
 gcp() {
   source_code="$1"
   if [[ ! -f "$source_code" ]]; then
