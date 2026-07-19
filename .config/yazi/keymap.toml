@@ -6,8 +6,8 @@
 [mgr]
 
 prepend_keymap = [
-	{ on = [ "a", "a" ], run = "shell '7z a .zip %s' --cursor=5 --interactive --block", desc = "Add to archive" },
-	{ on = [ "a", "x" ], run = "shell '7z x %s' --block", desc = "Extract archives" },
-	{ on = [ "a", "d" ], run = "shell '7z x %s -o' --cursor=10 --interactive --block", desc = "Extract archives to directory" },
+	{ on = [ "A", "a" ], run = "shell '7z a .zip %s' --cursor=5 --interactive --block", desc = "Add to archive" },
+	{ on = [ "A", "x" ], run = "shell '7z x %s' --block", desc = "Extract archives" },
+	{ on = [ "A", "d" ], run = "shell '7z x %s -o' --cursor=10 --interactive --block", desc = "Extract archives to directory" },
 	{ on = [ "i", "v" ], run = "shell 'swayimg %s' --orphan", desc = "Open with image viewer" },
 ]
