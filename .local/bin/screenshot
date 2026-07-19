@@ -1,48 +1,42 @@
 #!/usr/bin/env bash
-# DEPENDENCIES: fuzzel slurp grim
+# DEPENDENCIES: fuzzel fyi grim slurp
 
-SCREENSHOT_PATH="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
-
-# Generate timestamped filename
-FILENAME="$(date '+%Y-%m-%d-%H-%M-%S-%N.png')"
+readonly SCREENSHOT_PATH="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
+readonly -a MODES=(
+  "󰍺  Desktop"
+  "󰍹  Output"
+  "󰒅  Region"
+)
 
 pick_mode() {
-  local modes
-  modes=(
-    "󰍺  Desktop"
-    "󰍹  Output"
-    "󰒅  Region"
-  )
+  local mode selection
 
-  local selection
-  selection="$(printf '%s\n' "${modes[@]}" |
-    fuzzel --dmenu --minimal-lines --only-match --width 20)" || exit 1
+  selection="$(printf '%s\n' "${MODES[@]}" |
+    fuzzel --dmenu --minimal-lines --only-match --width 20)"
 
-  local mode
-  # Remove the icon from the selected mode
-  mode="${selection#*  }"
+  mode="${selection##* }"
 
-  # Make it lowercase
+  # Convert to lowercase
   printf '%s' "${mode,,}"
 }
 
 take_screenshot() {
-  local mode
+  local mode filename
   mode="$1"
+  filename="$(date '+%Y-%m-%d-%H-%M-%S-%N.png')"
 
   case "$mode" in
   desktop)
-    sleep 0.3
-    grim "${SCREENSHOT_PATH}/${FILENAME}"
+    grim "${SCREENSHOT_PATH}/${filename}"
     ;;
   output)
-    grim -g "$(slurp -o)" "${SCREENSHOT_PATH}/${FILENAME}"
+    grim -g "$(slurp -o)" "${SCREENSHOT_PATH}/${filename}"
     ;;
   region)
-    grim -g "$(slurp)" "${SCREENSHOT_PATH}/${FILENAME}"
+    grim -g "$(slurp)" "${SCREENSHOT_PATH}/${filename}"
     ;;
   *)
-    fyi "Invalid option" "$mode"
+    printf "%s\n" "screenshot: '$mode': invalid option" >&2
     exit 1
     ;;
   esac
@@ -50,19 +44,20 @@ take_screenshot() {
   status=$?
 
   if [[ "$status" -eq 0 ]]; then
-    fyi " Screenshot Captured" "$FILENAME"
+    fyi "Screenshot Captured" "$filename"
+  else
+    fyi "Screenshot Failed" "$filename"
   fi
 }
 
 main() {
-  # Ensure directory exists
   mkdir -p "$SCREENSHOT_PATH"
 
   local mode
   mode="$1"
 
   if [ -z "$mode" ]; then
-    mode="$(pick_mode)" || exit 1
+    mode="$(pick_mode)"
   fi
 
   take_screenshot "$mode"
