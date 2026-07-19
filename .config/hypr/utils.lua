@@ -29,6 +29,7 @@ M.toggle_fullscreen = function()
 	end
 end
 
+--- Turns off the laptop monitor if we have two monitors
 M.handle_lid_close = function()
 	local monitors = hl.get_monitors()
 	local laptop_monitor_spec = var.laptop_monitor_spec
