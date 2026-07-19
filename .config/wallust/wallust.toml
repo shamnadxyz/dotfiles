@@ -6,16 +6,6 @@ check_contrast = true
 
 [templates]
 
-dunst = {
-  template = 'dunst',
-  target = '~/.config/dunst/dunstrc.d/99-colors.conf' 
-}
-
-foot = {
-  template = 'foot.ini',
-  target = '~/.config/foot/colors.ini' 
-}
-
 fuzzel = {
   template = 'fuzzel.ini',
   target = '~/.config/fuzzel/colors.ini' 
@@ -36,22 +26,28 @@ neovim = {
   target = '~/.config/nvim/colors/wallust.lua' 
 }
 
-rofi = {
-  template = 'rofi.rasi',
-  target = '~/.config/rofi/current.rasi' 
-}
-
-sway = {
-  template = 'sway',
-  target = '~/.config/sway/colors' 
-}
-
 waybar = {
   template = 'waybar.css',
   target = '~/.config/waybar/colors.css' 
 }
 
-wofi = {
-  template = 'wofi',
-  target = '~/.config/wofi/colors' 
-}
+# foot = {
+#   template = 'foot.ini',
+#   target = '~/.config/foot/colors.ini' 
+# }
+# dunst = {
+#   template = 'dunst',
+#   target = '~/.config/dunst/dunstrc.d/99-colors.conf' 
+# }
+# rofi = {
+#   template = 'rofi.rasi',
+#   target = '~/.config/rofi/current.rasi' 
+# }
+# sway = {
+#   template = 'sway',
+#   target = '~/.config/sway/colors' 
+# }
+# wofi = {
+#   template = 'wofi',
+#   target = '~/.config/wofi/colors' 
+# }
