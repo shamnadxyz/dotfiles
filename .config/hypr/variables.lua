@@ -12,7 +12,7 @@ M.pickers = {
 	window = "rofi -show window",
 	network = "connmenu",
 	power = "powermenu",
-	wallpaper = "setwall",
+	wallpaper = "GENERATE_COLORSCHEME=1 setwall",
 }
 
 M.apps = {
@@ -66,6 +66,6 @@ M.laptop_monitor_spec = {
 	scale = "1.2",
 }
 
-M.wallpaper_cmd = 'swaybg -i "${HOME}/.cache/wallpaper" -m fill &'
+M.wallpaper_cmd = 'wbg --stretch "${HOME}/.cache/wallpaper"'
 
 return M
