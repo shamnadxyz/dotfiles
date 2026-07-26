@@ -1,4 +1,4 @@
-local var = require("variables")
+local constants = require("constants")
 
 require("ui")
 require("rules")
@@ -14,7 +14,7 @@ hl.monitor({
 	scale = "auto",
 })
 
-hl.monitor(var.laptop_monitor_spec)
+hl.monitor(constants.laptop_monitor_spec)
 
 -- ENVIRONMENT VARIABLES
 hl.env("XCURSOR_SIZE", "24")

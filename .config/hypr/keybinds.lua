@@ -1,13 +1,13 @@
-local var = require("variables")
+local constants = require("constants")
 local utils = require("utils")
 
-local pickers = var.pickers
-local apps = var.apps
-local cmd = var.commands
+local pickers = constants.pickers
+local apps = constants.apps
+local cmd = constants.commands
 
 local main_mod = "ALT"
 
-hl.bind(main_mod .. " + RETURN", hl.dsp.exec_cmd(var.terminal))
+hl.bind(main_mod .. " + RETURN", hl.dsp.exec_cmd(constants.terminal))
 hl.bind(main_mod .. " + D", hl.dsp.exec_cmd(pickers.app))
 hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(apps.file_manager))
 hl.bind(main_mod .. " + B", hl.dsp.exec_cmd(apps.browser))
