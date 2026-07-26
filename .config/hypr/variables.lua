@@ -1,7 +1,7 @@
 local M = {}
 
 M.laptop_monitor = "eDP-1"
-M.terminal = "kitty"
+M.terminal = "foot"
 
 local function term_app(app)
 	return string.format("%s --app-id %s -T %s %s", M.terminal, app, app, app)
