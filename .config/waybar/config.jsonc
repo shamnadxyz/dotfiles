@@ -37,7 +37,7 @@
   "clock": {
     "interval": 60,
     "format": "{:%I:%M %p}",
-    "format-alt": " {:L%a, %B %d, %Y  %I:%M %p}",
+    "format-alt": "{:%b %d  %I:%M %p}",
     "tooltip-format": "{calendar}",
     "calendar": {
       "mode": "month",
