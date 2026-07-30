@@ -9,6 +9,7 @@ swayimg.decoration = false
 
 swayimg.gallery.border_size = 2
 swayimg.gallery.border_color = 0xffaaaaaa
+swayimg.gallery.aspect = 'keep'
 
 swayimg.viewer.set_text('bottomleft', {
   '{name}',
@@ -68,6 +69,9 @@ swayimg.gallery.on_key('j', function() swayimg.gallery.select 'down' end)
 swayimg.gallery.on_key('k', function() swayimg.gallery.select 'up' end)
 swayimg.gallery.on_key('h', function() swayimg.gallery.select 'left' end)
 swayimg.gallery.on_key('l', function() swayimg.gallery.select 'right' end)
+
+swayimg.gallery.on_key('g', function() swayimg.gallery.select 'first' end)
+swayimg.gallery.on_key('Shift+G', function() swayimg.gallery.select 'last' end)
 
 swayimg.gallery.on_key('q', function() swayimg.exit(0) end)
 swayimg.viewer.on_key('q', function() swayimg.exit(0) end)
