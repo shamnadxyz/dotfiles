@@ -1,24 +1,24 @@
-hl.config({
-	input = {
-		kb_layout = "us",
-		kb_variant = "",
-		kb_model = "",
-		kb_options = "caps:ctrl_modifier",
-		kb_rules = "",
+hl.config {
+  input = {
+    kb_layout = 'us',
+    kb_variant = '',
+    kb_model = '',
+    kb_options = 'caps:ctrl_modifier',
+    kb_rules = '',
 
-		follow_mouse = 1,
+    follow_mouse = 1,
 
-		sensitivity = 0,
+    sensitivity = 0,
 
-		accel_profile = "flat",
+    accel_profile = 'flat',
 
-		touchpad = {
-			natural_scroll = true,
-		},
-	},
-})
+    touchpad = {
+      natural_scroll = true,
+    },
+  },
+}
 
-hl.device({
-	name = "epic-mouse-v1",
-	sensitivity = -0.5,
-})
+hl.device {
+  name = 'epic-mouse-v1',
+  sensitivity = -0.5,
+}

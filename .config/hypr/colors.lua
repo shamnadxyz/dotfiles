@@ -1,4 +1,4 @@
 return {
-	primary = "rgba(EFE3E833)",
-	secondary = "rgba(00001033)",
+  primary = 'rgba(C6E7F533)',
+  secondary = 'rgba(43464833)',
 }

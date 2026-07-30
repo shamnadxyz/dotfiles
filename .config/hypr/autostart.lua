@@ -1,7 +1,7 @@
-local constants = require("constants")
-hl.on("hyprland.start", function()
-	hl.exec_cmd(constants.terminal)
-	hl.exec_cmd(constants.apps.bar)
-	hl.exec_cmd(constants.wallpaper_cmd)
-	hl.exec_cmd(constants.apps.music_daemon)
+local constants = require 'constants'
+hl.on('hyprland.start', function()
+  hl.exec_cmd(constants.terminal)
+  hl.exec_cmd(constants.apps.bar)
+  hl.exec_cmd(constants.wallpaper_cmd)
+  hl.exec_cmd(constants.apps.music_daemon)
 end)
