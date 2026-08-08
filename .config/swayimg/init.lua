@@ -3,13 +3,15 @@ swayimg.imagelist.order = 'mtime'
 -- set font size
 swayimg.text.size = 12
 swayimg.text.color = 0xe0e2eaff
+swayimg.text.background = 0xff141923
 
 swayimg.overlay = false
 swayimg.decoration = false
 
 swayimg.gallery.border_size = 2
-swayimg.gallery.border_color = 0xffaaaaaa
+swayimg.gallery.border_color = 0xffDBE3F1
 swayimg.gallery.aspect = 'keep'
+swayimg.gallery.window_color = 0xff141923
 
 swayimg.viewer.set_text('bottomleft', {
   '{name}',
