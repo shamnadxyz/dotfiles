@@ -8,6 +8,7 @@ screenshot.avif
 \.gitmodules
 
 \.luarc.json
+\.stylua.toml
 
 ^/README.*
 ^/LICENSE.*
