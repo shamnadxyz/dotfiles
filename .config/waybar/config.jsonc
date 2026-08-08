@@ -44,10 +44,10 @@
       "mode-mon-col": 3,
       "on-scroll": 1,
       "format": {
-        "months": "<span color='#cdd6f4'><b>{}</b></span>",
-        "days": "<span color='#bac2de'><b>{}</b></span>",
-        "weekdays": "<span color='#89b4fa'><b>{}</b></span>",
-        "today": "<span color='#a6e3a1'><b><u>{}</u></b></span>"
+        "months": "<span color='#DBE3F1'>{}</span>",
+        "days": "<span color='#DBE3F1' weight='normal'>{}</span>",
+        "weekdays": "<span color='#A1D6FD'>{}</span>",
+        "today": "<span color='#B0DDB0' weight='bold'>{}</span>"
       }
     },
     "actions": {
@@ -91,7 +91,7 @@
     "icon-size": 18
   },
   "battery": {
-    "format": "{icon} {capacity}%",
+    "format": "{icon} {capacity}",
     "format-icons": {
       "not-charging": "",
       "plugged": "",
@@ -149,7 +149,7 @@
   },
   "cpu": {
     "interval": 10,
-    "format": " {usage}%"
+    "format": "  {usage}%"
   },
   "memory": {
     "interval": 30,
@@ -157,15 +157,13 @@
     "tooltip-format": "Memory: {used}G / {total}G ({percentage}%)\nAvailable: {avail}G\nSwap: {swapUsed}G / {swapTotal}G ({swapPercentage}%)"
   },
   "temperature": {
+    "thermal-zone": 1,
     "format": "{icon} {temperatureC}°C",
     "format-icons": [
       "",
       "",
       ""
     ],
-    // "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input",
-    // "critical-threshold": 80,
-    "tooltip": false
   },
   "custom/power": {
     "format": "",
@@ -197,17 +195,13 @@
     ]
   },
   "pulseaudio#sink": {
-    "format": "{icon} {volume}%",
+    "format": "{icon} {volume}",
     "format-muted": " ",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "reverse-scrolling": true,
     "format-icons": {
-      "headphone": " ",
-      "hands-free": " ",
-      "headset": " ",
-      "phone": " ",
-      "portable": " ",
-      "car": " ",
+      "headphone": " ",
+      "headset": " ",
       "default": [
         " ",
         " ",
@@ -217,7 +211,7 @@
   },
   "pulseaudio#source": {
     "format": "{format_source}",
-    "format-source": " {volume}%",
+    "format-source": " {volume}",
     "format-source-muted": " ",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 1%+",
