@@ -1,6 +1,5 @@
 local M = {}
 
-M.laptop_monitor = 'eDP-1'
 M.terminal = 'foot'
 
 local function term_app(app) return string.format('%s --app-id %s -T %s %s', M.terminal, app, app, app) end
@@ -10,7 +9,7 @@ M.pickers = {
   window = 'rofi -show window',
   network = 'connmenu',
   power = 'powermenu',
-  wallpaper = 'GENERATE_COLORSCHEME=1 setwall',
+  wallpaper = 'setwall',
 }
 
 M.apps = {
@@ -58,10 +57,11 @@ M.commands = {
 }
 
 M.laptop_monitor_spec = {
-  output = M.laptop_monitor,
+  output = 'eDP-1',
   mode = 'preferred',
   position = 'auto',
   scale = '1.2',
+  disabled = false
 }
 
 M.wallpaper_cmd = 'wbg --stretch "${HOME}/.cache/wallpaper"'
