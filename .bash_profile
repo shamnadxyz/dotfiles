@@ -5,8 +5,8 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 
 export EDITOR=nvim
-export MANPAGER='nvim +Man! --clean'
-export PAGER='less'
+export PAGER='nvim -R'
+export MANPAGER='nvim +Man!'
 export VISUAL=nvim
 export WM=Hyprland
 
