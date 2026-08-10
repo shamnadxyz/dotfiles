@@ -35,7 +35,6 @@ update_prompt() {
 
 PROMPT_COMMAND=update_prompt
 
-shopt -s autocd
 shopt -s checkwinsize
 shopt -s cmdhist
 shopt -s extglob
