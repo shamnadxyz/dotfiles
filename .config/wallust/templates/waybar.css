@@ -1,6 +1,6 @@
 @define-color background {{background}};
 @define-color foreground {{foreground}};
-@define-color text {foreground}};
+@define-color text {{foreground}};
 @define-color text-light alpha({{foreground}}, 0.8);
 @define-color green #A0FFA0;
 @define-color red #FFA0A0;
