@@ -1,19 +1,14 @@
 #!/usr/bin/env bash
-# DEPENDENCIES: fyi wbg swayimg wallust
 
 readonly wallpaper_path="$HOME/.cache/wallpaper"
 WALLPAPERS="${WALLPAPERS:-$HOME/Pictures/Wallpapers}"
 GENERATE_COLORSCHEME="${GENERATE_COLORSCHEME:-0}"
 
-log_err() {
-  printf 'setwall: %s\n' "$*" >&2
-}
-
 reload_waybar() { pkill -SIGUSR2 waybar; }
 
 generate_colorscheme() {
   if ! wallust run "$wallpaper_path" -q; then
-    log_err "Failed to generate the colorscheme"
+    log error "Failed to generate the colorscheme"
     return 1
   fi
 
@@ -25,7 +20,7 @@ set_wallpaper() {
   wallpaper="$1"
 
   if [[ ! -f "$wallpaper" ]]; then
-    log_err "$wallpaper: No such file"
+    log error "$wallpaper: No such file"
     return 1
   fi
 
@@ -33,7 +28,7 @@ set_wallpaper() {
   ln -sf "$absolute_path" "$wallpaper_path"
 
   pkill --exact wbg
-  wbg --stretch "$wallpaper_path" &>/dev/null &
+  wbg --stretch "$wallpaper_path" &
   disown
 }
 
@@ -49,7 +44,7 @@ pick_wallpaper() {
   local wallpaper hint_id
 
   if [[ ! -d "$WALLPAPERS" ]]; then
-    log_err "'$WALLPAPERS': No such directory"
+    log error "'$WALLPAPERS': No such directory"
     exit 1
   fi
 
@@ -64,17 +59,24 @@ pick_wallpaper() {
 main() {
   local wallpaper
 
+  local missing
+  missing="$(check_cmd "wallust" "fyi" "wbg" "swayimg")"
+
+  if [[ ! -z "$missing" ]]; then
+    log error "missing commands: $missing"
+  fi
+
   if [[ -f "$1" ]]; then
     wallpaper="$1"
   elif [[ -d "$1" ]]; then
     WALLPAPERS="$1"
   elif [[ ! -z "$1" ]]; then
-    log_err "'$1' No such file or directory"
+    log error "'$1' No such file or directory"
     return 1
   fi
 
   if [[ -z "$wallpaper" ]]; then
-    wallpaper="$(pick_wallpaper)"
+    wallpaper="$(pick_wallpaper)" || exit
   fi
 
   if set_wallpaper "$wallpaper"; then
