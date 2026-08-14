@@ -22,6 +22,7 @@ M.apps = {
 
 M.commands = {
   exit = 'wm-exit',
+  dismiss_notification = 'fnottctl dismiss',
   clipboard = {
     add = 'clipboard -a',
     copy = 'clipboard -c',

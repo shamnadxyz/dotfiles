@@ -22,13 +22,14 @@ hl.bind(mod .. ' + SHIFT + N', hl.dsp.exec_cmd(pickers.network))
 hl.bind('PRINT', hl.dsp.exec_cmd(cmd.screenshot.desktop))
 
 hl.bind('SUPER + SUPER_L', utils.toggle_waybar, { description = 'Toggle waybar visibility' })
+hl.bind(mod .. ' + SHIFT +  D', hl.dsp.exec_cmd(cmd.dismiss_notification))
 
-hl.bind(mod .. '+ SHIFT + C', hl.dsp.exec_cmd(cmd.clipboard.add))
-hl.bind(mod .. '+ SHIFT + V', hl.dsp.exec_cmd(cmd.clipboard.copy))
-hl.bind(mod .. '+ SHIFT + X', hl.dsp.exec_cmd(cmd.clipboard.delete))
+hl.bind(mod .. ' + SHIFT + C', hl.dsp.exec_cmd(cmd.clipboard.add))
+hl.bind(mod .. ' + SHIFT + V', hl.dsp.exec_cmd(cmd.clipboard.copy))
+hl.bind(mod .. ' + SHIFT + X', hl.dsp.exec_cmd(cmd.clipboard.delete))
 
 hl.bind(
-  mod .. '+ F',
+  mod .. ' + F',
   hl.dsp.window.fullscreen_state {
     internal = 3,
     client = 0,
@@ -39,8 +40,8 @@ hl.bind(
   }
 )
 
-hl.bind(mod .. '+ F', utils.toggle_fullscreen, { description = 'Toggle fullscreen and waybar' })
-hl.bind(mod .. '+ SHIFT + F', hl.dsp.window.float { action = 'toggle' })
+hl.bind(mod .. ' + F', utils.toggle_fullscreen, { description = 'Toggle fullscreen and waybar' })
+hl.bind(mod .. ' + SHIFT + F', hl.dsp.window.float { action = 'toggle' })
 hl.bind(mod .. ' + P', hl.dsp.window.pseudo())
 hl.bind(mod .. ' + S', hl.dsp.layout 'togglesplit')
 
@@ -63,7 +64,7 @@ hl.bind(
 )
 
 hl.bind(
-  mod .. '+ SHIFT + space',
+  mod .. ' + SHIFT + space',
   hl.dsp.window.cycle_next(),
   { description = 'Cycle focus between windows in the workspace' }
 )
