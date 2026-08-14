@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+log_stderr() {
+  printf "%s\n" "$@" >&2
+}
+
+log_stdout() {
+  printf "%s\n" "$@"
+}
+
+main() {
+  if [[ $# -eq 0 ]]; then
+    exit 1
+  fi
+
+  local level="$1"
+
+  case "$level" in
+  error | debug)
+    shift
+    log_stderr "$@"
+    ;;
+  info)
+    shift
+    log_stdout "$@"
+    ;;
+  *)
+    log_stdout "$@"
+    ;;
+  esac
+}
+
+main "$@"

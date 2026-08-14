@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Checks if the provided shell commands are available and
+# returns the list of missing commands
+
+declare -a missing
+
+commands=($@)
+
+for cmd in "${commands[@]}"; do
+  command -v "$cmd" &>/dev/null || missing+=("$cmd")
+done
+
+if [[ "${#missing[@]}" -ne 0 ]]; then
+  printf "%s\n" "${missing[@]}"
+  exit 1
+fi

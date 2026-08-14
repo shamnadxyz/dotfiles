@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+for i in {0..7}; do
+  # regular
+  printf "\e[3%sm████\e[0m" "$i"
+  # bright
+  printf "\e[9%sm████\e[0m\n" "$i"
+done
