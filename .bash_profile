@@ -5,23 +5,16 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 
 export EDITOR=nvim
-export PAGER='nvim -R'
 export MANPAGER='nvim +Man!'
+export PAGER=less
 export VISUAL=nvim
-export WM=Hyprland
-
-# Start WM automatically on tty1
-if [[ "$(tty)" == "/dev/tty1" ]]; then
-  case "$WM" in
-    Hyprland)
-      command -v start-hyprland &>/dev/null \
-        && start-hyprland
-      ;;
-    sway) 
-      command -v sway &>/dev/null \
-        && sway
-      ;;
-  esac
-fi
 
 [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+
+if [[ "$(tty)" == "/dev/tty1" ]]; then
+  if command -v start-hyprland &>/dev/null; then
+    start-hyprland
+  elif command -v sway &>/dev/null; then
+    sway
+  fi
+fi
