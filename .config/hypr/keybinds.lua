@@ -21,7 +21,7 @@ hl.bind(mod .. ' + SHIFT + W', hl.dsp.exec_cmd(pickers.wallpaper))
 hl.bind(mod .. ' + SHIFT + N', hl.dsp.exec_cmd(pickers.network))
 hl.bind('PRINT', hl.dsp.exec_cmd(cmd.screenshot.desktop))
 
-hl.bind('SUPER + SUPER_L', utils.toggle_waybar, { description = 'Toggle waybar visibility' })
+hl.bind('SUPER + SUPER_L', hl.dsp.exec_cmd(cmd.toggle_waybar), { description = 'Toggle waybar visibility' })
 hl.bind(mod .. ' + SHIFT +  D', hl.dsp.exec_cmd(cmd.dismiss_notification))
 
 hl.bind(mod .. ' + SHIFT + C', hl.dsp.exec_cmd(cmd.clipboard.add))
@@ -40,7 +40,7 @@ hl.bind(
   }
 )
 
-hl.bind(mod .. ' + F', utils.toggle_fullscreen, { description = 'Toggle fullscreen and waybar' })
+hl.bind(mod .. ' + F', hl.dsp.window.fullscreen { action = 'toggle' }, { description = 'Toggle fullscreen and waybar' })
 hl.bind(mod .. ' + SHIFT + F', hl.dsp.window.float { action = 'toggle' })
 hl.bind(mod .. ' + P', hl.dsp.window.pseudo())
 hl.bind(mod .. ' + S', hl.dsp.layout 'togglesplit')

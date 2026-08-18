@@ -23,6 +23,7 @@ M.apps = {
 M.commands = {
   exit = 'wm-exit',
   dismiss_notification = 'fnottctl dismiss',
+  toggle_waybar = 'pkill -SIGUSR1 waybar',
   clipboard = {
     add = 'clipboard -a',
     copy = 'clipboard -c',
@@ -62,7 +63,7 @@ M.laptop_monitor_spec = {
   mode = 'preferred',
   position = 'auto',
   scale = '1.2',
-  disabled = false
+  disabled = false,
 }
 
 M.wallpaper_cmd = 'wbg --stretch "${HOME}/.cache/wallpaper"'
