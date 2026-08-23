@@ -31,12 +31,6 @@ hl.window_rule {
 }
 
 hl.window_rule {
-  name = 'brave',
-  match = { class = 'brave-browser' },
-  workspace = 2,
-}
-
-hl.window_rule {
   name = 'signal',
   match = { class = 'signal' },
   workspace = 4,
