@@ -30,7 +30,7 @@ update_prompt() {
     remote=" 󰖟 \h"
   fi
 
-  PS1="\n${cyan}\w${end_seq}${blue}${remote}${end_seq}\n${sym_color}\\$ ${end_seq}"
+  PS1="\n${blue}\w${end_seq}${blue}${remote}${end_seq}\n${sym_color}\\$ ${end_seq}"
 }
 
 PROMPT_COMMAND=update_prompt
