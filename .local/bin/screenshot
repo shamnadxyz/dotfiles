@@ -25,6 +25,8 @@ take_screenshot() {
   mode="$1"
   filename="$(date '+%Y-%m-%d-%H-%M-%S-%N.png')"
 
+  sleep 0.1
+
   case "$mode" in
   desktop)
     grim "${SCREENSHOT_PATH}/${filename}"
