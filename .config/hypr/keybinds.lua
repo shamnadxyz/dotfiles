@@ -6,7 +6,7 @@ local pickers = constants.pickers
 local apps = constants.apps
 local cmd = constants.commands
 
-local mod = 'ALT'
+local mod = 'SUPER'
 
 hl.bind(mod .. ' + Q', hl.dsp.window.close())
 hl.bind(mod .. ' + SHIFT + E', hl.dsp.exec_cmd(cmd.exit))
