@@ -95,18 +95,7 @@
     "format-icons": {
       "not-charging": "",
       "plugged": "",
-      "charging": [
-        "󰢜",
-        "󰂆",
-        "󰂇",
-        "󰂈",
-        "󰢝",
-        "󰂉",
-        "󰢞",
-        "󰂊",
-        "󰂋",
-        "󰂅"
-      ],
+      "charging": "",
       "default": [
         "󰁺",
         "󰁻",
