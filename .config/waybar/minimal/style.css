@@ -1,0 +1,103 @@
+@import "../yoru.css";
+
+* {
+  font-family: "IosevkaTerm NF";
+  color: @text;
+  font-size: 12px;
+}
+
+window#waybar {
+  background: @background;
+  border-bottom: 1px solid alpha(@foreground, 0.10);
+  color: @text;
+}
+
+#backlight,
+#battery,
+#bluetooth,
+#clock, 
+#cpu,
+#custom-distro,
+#custom-power,
+#idle_inhibitor,
+#memory,
+#mpd,
+#network,
+#privacy,
+#pulseaudio,
+#temperature,
+#tray,
+.module {
+  padding: 8px;
+  color: @text-light;
+  margin: 0px 4px;
+}
+
+#custom-power {
+  margin-right: 8px;
+}
+
+#custom-distro {
+  margin-left: 8px;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+
+#battery.critical:not(.charging) {
+  color: @red;
+}
+
+#privacy {
+  padding: 0px;
+}
+
+#privacy-item * {
+  padding: 0px 8px;
+  color: @red;
+}
+
+#mpd {
+  padding: 0px;
+}
+
+tooltip {
+  color: @text;
+  background: @background;
+  border-radius: 0px;
+  border: 1px solid alpha(@foreground, 0.1);
+}
+
+tooltip * {
+  padding: 8px;
+  font-size: 14px;
+}
+
+menu * {
+  font-size: 14px;
+}
+
+menu {
+  color: @foreground;
+  background: @background;
+  border-radius: 12px;
+}
+
+menuitem {
+  color: @foreground;
+  margin: 2px;
+  border-radius: 8px;
+}
+
+menuitem:hover {
+  background: alpha(@foreground, 0.05);
+}
+
+separator {
+  margin: 0px;
+  background-color: transparent;
+  padding: 0px;
+  border: none;
+}
