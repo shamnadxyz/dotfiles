@@ -6,7 +6,7 @@ local pickers = constants.pickers
 local apps = constants.apps
 local cmd = constants.commands
 
-local mod = 'SUPER'
+local mod = 'ALT'
 
 hl.bind(mod .. ' + Q', hl.dsp.window.close())
 hl.bind(mod .. ' + SHIFT + E', hl.dsp.exec_cmd(cmd.exit))
@@ -24,7 +24,7 @@ hl.bind(mod .. ' + SHIFT + W', hl.dsp.exec_cmd(pickers.wallpaper))
 hl.bind(mod .. ' + SHIFT + N', hl.dsp.exec_cmd(pickers.network))
 hl.bind('PRINT', hl.dsp.exec_cmd(cmd.screenshot.desktop))
 
-hl.bind(mod .. ' + W', hl.dsp.exec_cmd(cmd.toggle_waybar), { description = 'Toggle waybar visibility' })
+hl.bind('SUPER + SUPER_L', hl.dsp.exec_cmd(cmd.toggle_waybar), { description = 'Toggle waybar visibility' })
 hl.bind(mod .. ' + SHIFT +  D', hl.dsp.exec_cmd(cmd.dismiss_notification))
 
 hl.bind(mod .. ' + SHIFT + C', hl.dsp.exec_cmd(cmd.clipboard.add))
