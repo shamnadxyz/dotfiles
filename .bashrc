@@ -18,14 +18,11 @@ update_prompt() {
   end_seq="\[\e[0m\]"
 
   if ((status == 0)); then
-    # White
     sym_color="$white"
   else
-    # Red
     sym_color="$red"
   fi
 
-  # Display hostname if connected via ssh
   if [[ -n "$SSH_CONNECTION" ]]; then
     remote=" 󰖟 \h"
   fi
