@@ -1,19 +1,13 @@
 #!/usr/bin/env bash
 
-readonly OS_RELEASE="/etc/os-release" 
-
-print() {
-  printf "%s" "$1"
-  exit 0
-}
+readonly OS_RELEASE="/etc/os-release"
 
 [[ -r "$OS_RELEASE" ]] && . "$OS_RELEASE"
 
 case "$ID" in
-  arch) print " " ;;
-  debian) print " " ;;
-  nixos) print " " ;;
-  void) print " " ;;
+  arch) echo " " ;;
+  debian) echo " " ;;
+  nixos) echo " " ;;
+  void) echo " " ;;
+  *) echo " " ;;
 esac
-
-print " "
