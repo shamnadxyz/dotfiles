@@ -235,6 +235,6 @@
     "exec": "distro-icon",
     "interval": "once",
     "tooltip-format": "Open window switcher",
-    "on-click": "rofi -show window"
+    "on-click": "window-switcher"
   }
 }

@@ -2,11 +2,11 @@ local M = {}
 
 M.terminal = 'foot'
 
-local function term_app(app) return string.format('%s --app-id %s -T %s %s', M.terminal, app, app, app) end
+local function term_app(app) return string.format('%s -T %s %s', M.terminal, app, app) end
 
 M.pickers = {
   app = 'fuzzel',
-  window = 'rofi -show window',
+  window = 'window-switcher',
   network = 'connmenu',
   power = 'powermenu',
   wallpaper = 'setwall',

@@ -63,7 +63,7 @@ hl.window_rule {
 
 hl.window_rule {
   name = 'bluetui',
-  match = { class = 'bluetui' },
+  match = { initial_title = 'bluetui' },
   float = true,
   center = true,
   size = '1000 700',
