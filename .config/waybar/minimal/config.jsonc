@@ -88,7 +88,8 @@
     "max-length": 20
   },
   "tray": {
-    "icon-size": 12
+    "icon-size": 12,
+    "spacing": 4
   },
   "battery": {
     "format": "{icon} {capacity}",
