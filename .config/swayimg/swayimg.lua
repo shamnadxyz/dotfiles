@@ -79,13 +79,6 @@
 ---| "fill" # Fill square thumbnail with the image
 ---| "keep" # Adjust thumbnail size to the aspect ratio of the image
 
----Position of text block.
----@alias block_position_t
----| "topleft"      # Top left corner of the window
----| "topright"     # Top right corner of the window
----| "bottomleft"   # Bottom left corner of the window
----| "bottomright"  # Bottom right corner of the window
-
 ---Mouse buttons.
 ---@alias mbutton_t
 ---| "MouseLeft"    # Left mouse button
@@ -97,37 +90,6 @@
 ---| "ScrollDown"   # Scroll down
 ---| "ScrollLeft"   # Scroll left
 ---| "ScrollRight"  # Scroll right
-
----Template for text overlay line.
----The template includes text and fields surrounded by curly braces.
----The following fields are supported:
----* `{name}`: File name of the currently viewed/selected image
----* `{dir}`: Parent directory name of the currently viewed/selected image
----* `{path}`: Absolute path to the currently viewed/selected image
----* `{size}`: File size in bytes
----* `{sizehr}`: File size in human-readable format
----* `{time}`: File modification time
----* `{format}`: Brief image format descriptio
----* `{scale}`: Current image scale in percent
----* `{list.index}`: Current index of image in the image list
----* `{list.total}`: Total number of files in the image list
----* `{frame.index}`: Current frame index
----* `{frame.total}`: Total number of frames
----* `{frame.width}`: Current frame width in pixels
----* `{frame.height}`: Current frame height in pixels
----* `{meta.*}`: Image meta info: EXIF, tags etc. List of available EXIF tags
----  can be found at [Exiv2 website](https://exiv2.org/tags.html) or printed
----  using utility exiv2: `exiv2 -pa photo.jpg`
----
----To print `{` character escape it with `{{`.
----
----The template string may contain a tab character to separate key/value pairs.
----In this case, the text block will be aligned with the longest key.
----If the value cannot be output (for example, the specified EXIF tag is
----missing), then the entire string including the key is ignored upon printing.
----
----Example: `Path to image:\t{path}`
----@alias text_template_t string
 
 --------------------------------------------------------------------------------
 
@@ -195,6 +157,26 @@
 ---Write-only field.
 ---@field exif_orientation boolean
 ---
+---Custom image format parameters.
+---Since 5.6.
+---Write-only field.
+---Supported parameters:
+---* `raw`:
+---  * `enable`: Enable decoder
+---  * `camera_wb`: Fix colors using white balance from camera
+---* `ttf`:
+---  * `enable`: Enable decoder
+---  * `text`: Text to render
+---  * `color`: Text color
+---  * `background`: Background color
+---* `video`:
+---  * `enable`: Enable decoder
+---  * `size`: Size (width) of a single tile (frame)
+---  * `columns`: Number of columns in storyboard
+---  * `rows`: Number of rows in storyboard
+---  * `padding`: Gap between frames in pixels
+---@field format_conf table
+---
 ---Window title.
 ---Since 5.5.
 ---Write-only field.
@@ -243,16 +225,6 @@ function swayimg.on_redrawn(fn) end
 ---@param seconds number Delay in seconds (can be fractional)
 ---@param fn function Function to execute
 function swayimg.defer(seconds, fn) end
-
----Setting format parameters.
----Since 5.3.
----
----Supported parameters:
----* `raw`:
----  * `camera_wb`: Fix colors using white balance from camera
----@param name string Format name (e.g. `raw`)
----@param params table Table of parameters (e.g. `{ camera_wb = true }`)
-function swayimg.set_format_params(name, params) end
 
 --------------------------------------------------------------------------------
 
@@ -383,6 +355,40 @@ swayimg.text = {}
 ---Write-only field.
 ---@field pinch_factor number
 ---
+---Text layer scheme.
+---Since 5.6.
+---Write-only field.
+---The scheme is described as a map "block position -> array of string templates".
+---The block position can be one of the following:
+---* `topleft`: Top left corner of the window
+---* `topright`: Top right corner of the window
+---* `bottomleft`: Bottom left corner of the window
+---* `bottomright`: Bottom right corner of the window
+---The template string includes text and fields surrounded by curly braces:
+---* `{name}`: File name of the currently viewed/selected image
+---* `{dir}`: Parent directory name of the currently viewed/selected image
+---* `{path}`: Absolute path to the currently viewed/selected image
+---* `{size}`: File size in bytes
+---* `{sizehr}`: File size in human-readable format
+---* `{time}`: File modification time
+---* `{format}`: Brief image format descriptio
+---* `{scale}`: Current image scale in percent
+---* `{list.index}`: Current index of image in the image list
+---* `{list.total}`: Total number of files in the image list
+---* `{frame.index}`: Current frame index
+---* `{frame.total}`: Total number of frames
+---* `{frame.width}`: Current frame width in pixels
+---* `{frame.height}`: Current frame height in pixels
+---* `{meta.*}`: Image meta info:  EXIF, XMP, IPTC tags, free text tags etc
+---To print `{` character escape it with `{{`.
+---The template string may contain a tab character to separate key/value pairs,
+---in this case the text block will be aligned with the longest key.
+---If the value cannot be output (for example, the specified EXIF tag ismissing),
+---then the entire string including the key is ignored upon printing.
+---List of available EXIF/XMP/IPTC tags can be found at [Exiv2 website](https://exiv2.org/tags.html)
+---or printed using utility exiv2: `exiv2 -pa photo.jpg`.
+---@field text table
+---
 local swayimg_appmode = {}
 
 ---Set, clear or toggle mark for currently viewed/selected image.
@@ -396,9 +402,14 @@ function swayimg_appmode.bind_reset() end
 
 ---Bind the key press event to a handler.
 ---Since 5.0.
----@param key string Key description, for example `Ctrl-a`
+---@param key string|string[] Key description, for example `Ctrl-a`
 ---@param fn function Key press handler
 function swayimg_appmode.on_key(key, fn) end
+
+---Set handler for unassigned keys.
+---Since 5.6.
+---@param fn function Key press handler, the first arg contains key name
+function swayimg_appmode.on_unassigned_key(fn) end
 
 ---Bind the mouse button press event to a handler.
 ---Since 5.0.
@@ -416,12 +427,6 @@ function swayimg_appmode.on_signal(signal, fn) end
 ---Since 5.0.
 ---@param fn function|nil Handler for notifications about changing the current image
 function swayimg_appmode.on_image_change(fn) end
-
----Set text layer scheme.
----Since 5.0.
----@param pos block_position_t Text block position
----@param scheme text_template_t[] Array of line templates with overlay scheme
-function swayimg_appmode.set_text(pos, scheme) end
 
 --------------------------------------------------------------------------------
 
