@@ -9,7 +9,7 @@ handle_binary() {
 
   case "$mime_type" in
     image/*)
-      chafa -s "${width}x${height}" --animate=off -- "$file"
+      chafa -s "${width}x${height}" --dither=none --animate=off  --format=sixels -- "$file"
       ;;
     application/zip | application/x-tar | application/x-xz | application/x-rar | application/gzip | application/x-7z-compressed)
       7z l -- "$file" || 7zz l -- "$file"
