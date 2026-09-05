@@ -74,7 +74,7 @@ def get_active_windows() -> list[Window] | None:
 
         text = (
             f"{workspace_name:>{workspace_width}}  {c_class}"
-            if title == c_class or title is None
+            if title == c_class or title is None or title == ""
             else f"{workspace_name:>{workspace_width}}  {c_class} - {title}"
         )
 
