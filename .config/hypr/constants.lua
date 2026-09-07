@@ -9,7 +9,7 @@ M.pickers = {
   window = 'window-switcher',
   network = 'connmenu',
   power = 'powermenu',
-  wallpaper = 'setwall',
+  wallpaper = 'wallctl pick',
 }
 
 M.apps = {
@@ -22,6 +22,7 @@ M.apps = {
 
 M.commands = {
   exit = 'wm-exit',
+  restore_wallpaper = 'wallctl restore',
   dismiss_notification = 'fnottctl dismiss',
   toggle_waybar = 'pkill -SIGUSR1 waybar',
   clipboard = {
@@ -65,7 +66,5 @@ M.laptop_monitor_spec = {
   scale = '1.2',
   disabled = false,
 }
-
-M.wallpaper_cmd = 'wbg --stretch "${HOME}/.cache/wallpaper"'
 
 return M

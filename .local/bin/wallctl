@@ -1,0 +1,136 @@
+#!/usr/bin/env bash
+
+state_dir="${HOME}/.local/state/wallctl"
+wallpaper="${state_dir}/wallpaper"
+generate_colors=0
+wallpapers="${WALLPAPERS:-${HOME}/Pictures/Wallpapers}"
+
+print_help() {
+  echo "Usage: wallctl set <filepath> | pick [<directory>] | restore
+
+Options:
+  --generate-colors, -g        Generate color scheme using wallust
+  --help, -h                   Print help
+"
+}
+
+notify() {
+  local nid
+  nid="$(fyi --print-id "$@")"
+  printf '%s' "${nid#*=}"
+}
+
+close_notification() { fyi --close="$1"; }
+
+set_wallpaper() {
+  local image="$1"
+  if [[ -z "$image" ]]; then
+    log error "set_wallpaper: missing required argument"
+    return 1
+  fi
+
+  if [[ ! -f "$image" ]]; then
+    log error "set_wallpaper: $image: No such file"
+    return 1
+  fi
+
+  local current_wallpaper
+  current_wallpaper="$(readlink "$wallpaper")"
+
+  local image_path
+  image_path="$(realpath "$image")"
+
+  if [[ "$image_path" == "$current_wallpaper" ]]; then
+    if pgrep swaybg &>/dev/null; then
+      log debug "Selected the current wallpaper"
+      return 1
+    fi
+    swaybg --mode fill --image "$wallpaper" &
+    disown
+  fi
+
+  ln -sf "$image_path" "$wallpaper"
+  pkill swaybg
+  swaybg --mode fill --image "$wallpaper" &
+  disown
+}
+
+pick_wallpaper() {
+  local directory
+  directory="${1:-$wallpapers}"
+  local pick_config="${HOME}/.config/swayimg/pick.lua"
+
+  if [[ ! -f "$pick_config" ]]; then
+    log error "pick_wallpaper: '$pick_config' swayimg pick config not found"
+    return 1
+  fi
+
+  local id
+  id="$(notify "Wallpaper Selector" "Select: 'Shift+Return'")"
+  local image
+  image="$(swayimg --gallery --config "$pick_config" "$directory")"
+  close_notification "$id"
+
+  if [[ -z "$image" ]]; then
+    log debug "pick_wallpaper: no image selected"
+    return 1
+  fi
+
+  set_wallpaper "$image"
+}
+
+main() {
+  mkdir -p "$state_dir"
+  local image
+
+  if [[ $# -eq 0 ]]; then
+    print_help >&2
+    exit 1
+  fi
+
+  while [[ $# -ne 0 ]]; do
+    case "$1" in
+      restore)
+        set_wallpaper "$wallpaper"
+        break
+        ;;
+      set)
+        if [[ $# -lt 2 ]]; then
+          log error "Missing required argument: filepath"
+          print_help >&2
+          return 1
+        fi
+        image="$2"
+        set_wallpaper "$image"
+        shift 2
+        ;;
+      pick)
+        if [[ $# -ge 2 ]] && [[ -d "$2" ]]; then
+          local directory="$2"
+          pick_wallpaper "$directory" || exit
+          shift 2
+        else
+          pick_wallpaper || exit
+          shift 1
+        fi
+        ;;
+      --generate-colors | -g)
+        generate_colors=1
+        shift 1
+        ;;
+      --help | -h)
+        print_help
+        exit 0
+        ;;
+      *)
+        log error "wallctl: invalid option: '$1'"
+        print_help >&2
+        exit 1
+        ;;
+    esac
+  done
+
+  [[ "$generate_colors" -eq 1 ]] && wallust run "$wallpaper" && pkill --exact -SIGUSR2 waybar
+}
+
+main "$@"
