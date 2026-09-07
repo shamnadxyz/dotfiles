@@ -14,7 +14,7 @@ Options:
 "
 }
 
-notify() {
+show_hint() {
   local nid
   nid="$(fyi --print-id "$@")"
   printf '%s' "${nid#*=}"
@@ -66,7 +66,7 @@ pick_wallpaper() {
   fi
 
   local id
-  id="$(notify "Wallpaper Selector" "Select: 'Shift+Return'")"
+  id="$(show_hint "Wallpaper Selector" "Select: 'Shift+Return'")"
   local image
   image="$(swayimg --gallery --config "$pick_config" "$directory")"
   close_notification "$id"
@@ -80,6 +80,12 @@ pick_wallpaper() {
 }
 
 main() {
+  readarray -t missing_commands < <(check_cmd "swaybg" "swayimg" "log" "fyi" "wallust")
+  if [[ "${#missing_commands[@]}" -gt 0 ]]; then
+    fyi "Missing commands" "${missing_commands[*]}"
+    return 1
+  fi
+
   mkdir -p "$state_dir"
   local image
 
