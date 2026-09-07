@@ -1,4 +1,4 @@
-ycd() {
+y() {
   local tmp cwd
   tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
   command yazi "$@" --cwd-file="$tmp"
@@ -7,11 +7,9 @@ ycd() {
   rm -f -- "$tmp"
 }
 
-lfcd() {
+f() {
   cd "$(command lf -print-last-dir "$@")" || return
 }
-
-alias f=ycd
 
 gcp() {
   source_code="$1"
