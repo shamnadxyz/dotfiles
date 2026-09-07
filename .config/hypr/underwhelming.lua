@@ -6,14 +6,14 @@ local smart_gaps_rules = nil
 
 local focus_mode = false
 
-local minimal_bar = 'waybar --config ${HOME}/.config/waybar/minimal/config.jsonc --style ${HOME}/.config/waybar/minimal/style.css'
+local minimal_bar =
+  'waybar --config ${HOME}/.config/waybar/minimal/config.jsonc --style ${HOME}/.config/waybar/minimal/style.css'
 local minimal_term = 'foot --config=${HOME}/.config/foot/minimal.ini'
 
-M.exec_term = function()
+M.get_term = function()
   local term = constants.terminal
   if focus_mode then term = minimal_term end
-
-  hl.exec_cmd(term)
+  return term
 end
 
 local minimal_config = {

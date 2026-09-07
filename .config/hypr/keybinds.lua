@@ -13,7 +13,11 @@ hl.bind(mod .. ' + SHIFT + E', hl.dsp.exec_cmd(cmd.exit))
 
 hl.bind(mod .. ' + SHIFT + U', uw.toggle_focus_mode)
 
-hl.bind(mod .. ' + RETURN', uw.exec_term)
+hl.bind(mod .. ' + RETURN', function()
+  local term = uw.get_term()
+  hl.exec_cmd(term)
+end)
+
 hl.bind(mod .. ' + D', hl.dsp.exec_cmd(pickers.app))
 hl.bind(mod .. ' + E', hl.dsp.exec_cmd(apps.file_manager))
 hl.bind(mod .. ' + B', hl.dsp.exec_cmd(apps.browser))
