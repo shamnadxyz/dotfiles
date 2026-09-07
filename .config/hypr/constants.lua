@@ -15,7 +15,7 @@ M.pickers = {
 M.apps = {
   browser = 'brave',
   music = term_app 'rmpc',
-  file_manager = term_app 'yazi',
+  file_manager = term_app 'lf',
   bar = 'waybar',
   music_daemon = 'mpd',
 }
