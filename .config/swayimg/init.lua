@@ -13,43 +13,39 @@ swayimg.gallery.border_color = 0xffDBE3F1
 swayimg.gallery.aspect = 'keep'
 swayimg.gallery.window_color = 0xff141923
 
-swayimg.viewer.set_text('bottomleft', {
-  '{name}',
-})
-swayimg.viewer.set_text('bottomright', {
-  '{list.index}/{list.total}',
-})
-swayimg.viewer.set_text('topleft', {})
-swayimg.viewer.set_text('topright', {})
-
-swayimg.gallery.set_text('bottomleft', {
-  '{name}',
-})
-swayimg.gallery.set_text('bottomright', {
-  '{list.index}/{list.total}',
-})
-swayimg.gallery.set_text('topleft', {})
-swayimg.gallery.set_text('topright', {})
+swayimg.viewer.text = {
+  bottomleft = { '{name}' },
+  bottomright = { '{list.index}/{list.total}' },
+  topright = {},
+  topleft = {},
+}
+swayimg.gallery.text = {
+  bottomleft = { '{name}' },
+  bottomright = { '{list.index}/{list.total}' },
+  topleft = {},
+  topright = {},
+}
 
 -- Move image position using [hljk]
+local offset = 64
 swayimg.viewer.on_key('h', function()
   local pos = swayimg.viewer.get_position()
-  swayimg.viewer.set_abs_position(pos.x + 10, pos.y)
+  swayimg.viewer.set_abs_position(pos.x + offset, pos.y)
 end)
 
 swayimg.viewer.on_key('l', function()
   local pos = swayimg.viewer.get_position()
-  swayimg.viewer.set_abs_position(pos.x - 10, pos.y)
+  swayimg.viewer.set_abs_position(pos.x - offset, pos.y)
 end)
 
 swayimg.viewer.on_key('j', function()
   local pos = swayimg.viewer.get_position()
-  swayimg.viewer.set_abs_position(pos.x, pos.y - 10)
+  swayimg.viewer.set_abs_position(pos.x, pos.y - offset)
 end)
 
 swayimg.viewer.on_key('k', function()
   local pos = swayimg.viewer.get_position()
-  swayimg.viewer.set_abs_position(pos.x, pos.y + 10)
+  swayimg.viewer.set_abs_position(pos.x, pos.y + offset)
 end)
 
 -- Zoom in and out
