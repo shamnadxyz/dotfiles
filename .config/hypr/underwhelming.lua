@@ -17,6 +17,10 @@ M.get_term = function()
 end
 
 local minimal_config = {
+  general = {
+    gaps_in = 0,
+    gaps_out = 0,
+  },
   decoration = {
     rounding = 0,
     shadow = {
@@ -33,6 +37,10 @@ local minimal_config = {
 
 local function get_decorations_config()
   return {
+    general = {
+      gaps_in = hl.get_config 'general.gaps_in',
+      gaps_out = hl.get_config 'general.gaps_out',
+    },
     decoration = {
       rounding = hl.get_config 'decoration.rounding',
       shadow = {
