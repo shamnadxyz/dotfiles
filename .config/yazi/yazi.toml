@@ -22,7 +22,6 @@ wrap            = "no"
 tab_size        = 2
 max_width       = 1000
 max_height      = 1200
-cache_dir       = "~/.cache/yazi"
 image_delay     = 100
 image_filter    = "nearest"
 image_quality   = 50
@@ -34,3 +33,6 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 prepend_rules = [
   { url = "*.cbz", use = "open" }
 ]
+
+[plugin]
+preloaders = []
