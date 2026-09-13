@@ -38,7 +38,7 @@ cmd extract-to-dir ${{
       ;;
   esac
 }}
-map ad extract-to-dir
+map Ad extract-to-dir
 
 cmd extract-here ${{
   set -f
@@ -51,7 +51,7 @@ cmd extract-here ${{
       ;;
   esac
 }}
-map ax extract-here
+map Ax extract-here
 
 cmd add-to-archive ${{
   set -f
@@ -59,7 +59,7 @@ cmd add-to-archive ${{
   read -p "Archive name:" name
   7z a "$name" "$fx"
 }}
-map aa add-to-archive
+map Aa add-to-archive
 
 cmd zi ${{
   result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
@@ -70,6 +70,25 @@ map Z zi
 cmd on-cd &{{
   zoxide add "$PWD"
 }}
+
+# Create a file or directory
+# create directory with trailing /
+# else creates the file.
+cmd create %{{
+  new=$(IFS=' ';printf "%s" "$*")
+  if [[ -e "$new" ]];then
+    echo "$new already exists"
+    return 1
+  fi
+
+  if [[ "$new" =~ /$ ]];then
+    mkdir -p "$new"
+  else
+    touch "$new"
+  fi
+}}
+
+map a push :create<space>
 
 # Sort
 cmd sort-by-access :{{ set sortby atime; set info atime; }}
