@@ -36,3 +36,16 @@ prepend_rules = [
 
 [plugin]
 preloaders = []
+
+prepend_previewers = [
+  # Archive
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "noop" },
+	{ mime = "application/{debian*-package,redhat-package-manager,rpm,android.package-archive}", run = "noop" },
+	{ url = "*.{AppImage,appimage}", run = "noop" },
+  # Virtual Disk / Disk Image
+	{ mime = "application/{iso9660-image,qemu-disk,ms-wim,apple-diskimage}", run = "noop" },
+	{ mime = "application/virtualbox-{vhd,vhdx}", run = "noop" },
+	{ url = "*.{img,fat,ext,ext2,ext3,ext4,squashfs,ntfs,hfs,hfsx}", run = "noop" },
+  # PDF
+  { mime = "application/pdf", run = "noop" },
+]
