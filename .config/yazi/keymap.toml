@@ -1,13 +1,27 @@
-# A TOML linter such as https://github.com/tombi-toml/tombi can use this schema to validate your config.
-# If you encounter any problems, please make an issue at https://github.com/yazi-rs/schemas.
-
 #:schema https://yazi-rs.github.io/schemas/keymap.json
 
 [mgr]
-
 prepend_keymap = [
-	{ on = [ "A", "a" ], run = "shell '7z a .zip %s' --cursor=5 --interactive --block", desc = "Add to archive" },
-	{ on = [ "A", "x" ], run = "shell '7z x %s' --block", desc = "Extract archives" },
-	{ on = [ "A", "d" ], run = "shell '7z x %s -o' --cursor=10 --interactive --block", desc = "Extract archives to directory" },
-	{ on = [ "i", "v" ], run = "shell 'swayimg %s' --orphan", desc = "Open with image viewer" },
+  # Remap cut to d
+  { on = "x", run = "noop" },
+  { on = "X", run = "noop" },
+  { on = "d", run = "yank --cut", desc = "Yank selected files (cut)" },
+
+  { on = [
+    "x",
+    "a",
+  ], run = "shell '7z a .zip %s' --cursor=5 --interactive --block", desc = "Add selected files to the archive" },
+  { on = [
+    "x",
+    "x",
+  ], run = "shell '7z x %s' --block", desc = "Extract archives" },
+  { on = [
+    "x",
+    "d",
+  ], run = "shell '7z x %s -o' --cursor=10 --interactive --block", desc = "Extract archives to a directory" },
+
+  { on = [
+    "i",
+    "v",
+  ], run = "shell 'swayimg %s' --orphan", desc = "Open selected images using swayimg" },
 ]
