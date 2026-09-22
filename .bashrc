@@ -35,6 +35,7 @@ PROMPT_COMMAND=update_prompt
 shopt -s checkwinsize
 shopt -s cmdhist
 shopt -s extglob
+shopt -s globstar
 shopt -s histappend
 
 # History
