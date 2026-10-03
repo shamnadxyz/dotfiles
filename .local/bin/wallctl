@@ -51,7 +51,7 @@ set_wallpaper() {
 
   ln -sf "$image_path" "$wallpaper"
   pkill swaybg
-  swaybg --mode fill --image "$wallpaper" &
+  swaybg --mode fill --image "$image_path" &
   disown
 }
 
