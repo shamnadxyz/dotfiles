@@ -16,3 +16,4 @@ swayimg.viewer.on_key('Shift+Return', function()
 end)
 
 swayimg.gallery.pstore = true
+swayimg.gallery.pstore_path = '/tmp/swayimg'
