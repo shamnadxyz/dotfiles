@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 
-state_dir="${HOME}/.local/state/wallctl"
-wallpaper="${state_dir}/wallpaper"
+STATE_DIR="${HOME}/.local/state/wallctl"
+WALLPAPER="${STATE_DIR}/wallpaper"
+WALLPAPERS_DIR="${WALLPAPERS:-${HOME}/Pictures/Wallpapers}"
+
 generate_colors=0
-wallpapers="${WALLPAPERS:-${HOME}/Pictures/Wallpapers}"
+persist=1
 
 print_help() {
   echo "Usage: wallctl set <filepath> | pick [<directory>] | restore
 
 Options:
   --generate-colors, -g        Generate color scheme using wallust
+  --once, -n                   Set wallpaper for just this instance
   --help, -h                   Print help
 "
 }
@@ -22,42 +25,50 @@ show_hint() {
 
 close_notification() { fyi --close="$1"; }
 
-set_wallpaper() {
-  local image="$1"
+save_wallpaper() {
+  local image wallpaper image_path current_wallpaper
+
+  image="$1"
+
   if [[ -z "$image" ]]; then
-    log error "set_wallpaper: missing required argument"
+    log error "save_wallpaper: missing required argument"
     return 1
   fi
 
   if [[ ! -f "$image" ]]; then
-    log error "set_wallpaper: $image: No such file"
+    log error "save_wallpaper: $image: No such file"
     return 1
   fi
 
-  local current_wallpaper
-  current_wallpaper="$(readlink "$wallpaper")"
-
-  local image_path
+  current_wallpaper="$(readlink "$WALLPAPER")"
   image_path="$(realpath "$image")"
 
   if [[ "$image_path" == "$current_wallpaper" ]]; then
-    if pgrep swaybg &>/dev/null; then
-      log debug "Selected the current wallpaper"
-      return 1
-    fi
-    swaybg --mode fill --image "$wallpaper" &
-    disown
+    log info "save_wallapper: selected current wallpaper"
   fi
 
-  ln -sf "$image_path" "$wallpaper"
+  ln -sf "$image_path" "$WALLPAPER"
+}
+
+apply_wallpaper() {
+  local image="$1"
   pkill swaybg
-  swaybg --mode fill --image "$image_path" &
+  swaybg --mode fill --image "$image" &
   disown
+}
+
+set_wallpaper() {
+  image="$1"
+  if [[ "$persist" == 1 ]]; then
+    save_wallpaper "$image"
+  fi
+
+  apply_wallpaper "$image"
 }
 
 pick_wallpaper() {
   local directory
-  directory="${1:-$wallpapers}"
+  directory="${1:-$WALLPAPERS_DIR}"
   local pick_config="${HOME}/.config/swayimg/pick.lua"
 
   if [[ ! -f "$pick_config" ]]; then
@@ -86,7 +97,7 @@ main() {
     return 1
   fi
 
-  mkdir -p "$state_dir"
+  mkdir -p "$STATE_DIR"
   local image
 
   if [[ $# -eq 0 ]]; then
@@ -94,31 +105,39 @@ main() {
     exit 1
   fi
 
+  local selected_command
+  local command_argument
+
   while [[ $# -ne 0 ]]; do
     case "$1" in
       restore)
-        set_wallpaper "$wallpaper"
-        break
+        selected_command=restore
+        shift
         ;;
       set)
+        selected_command=set
         if [[ $# -lt 2 ]]; then
           log error "Missing required argument: filepath"
           print_help >&2
           return 1
         fi
-        image="$2"
-        set_wallpaper "$image"
+        command_argument="$2"
         shift 2
         ;;
       pick)
-        if [[ $# -ge 2 ]] && [[ -d "$2" ]]; then
-          local directory="$2"
-          pick_wallpaper "$directory" || exit
-          shift 2
-        else
-          pick_wallpaper || exit
+        selected_command=pick
+        if [[ $# -lt 2 ]]; then
           shift 1
+        elif [[ "$2" =~ ^(-|--)[a-zA-Z]+$ ]]; then
+          shift 1
+        else
+          command_argument="$2"
+          shift 2
         fi
+        ;;
+      --once | -n)
+        persist=0
+        shift 1
         ;;
       --generate-colors | -g)
         generate_colors=1
@@ -136,7 +155,13 @@ main() {
     esac
   done
 
-  [[ "$generate_colors" -eq 1 ]] && wallust run "$wallpaper" && pkill --exact -SIGUSR2 waybar
+  case "$selected_command" in
+    set) set_wallpaper "$command_argument" ;;
+    pick) pick_wallpaper "$command_argument" ;;
+    restore) apply_wallpaper "$WALLPAPER" ;;
+  esac
+
+  [[ "$generate_colors" -eq 1 ]] && wallust run "$WALLPAPER" && pkill --exact -SIGUSR2 waybar
 }
 
 main "$@"
