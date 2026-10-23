@@ -35,7 +35,7 @@ add_to_storage() {
   [ -z "$text" ] && exit 1
 
   # replace newlines with literal \n
-  compact_text="$(printf "%s" "$text" | awk 'NR>1 {printf "\\n" {printf "%s", $0')"
+  compact_text="$(printf "%s" "$text" | awk 'NR>1 {printf "\\n"} {printf "%s", $0}')"
 
   if ! grep -Fx "$compact_text" "$CLIPBOARD" &>/dev/null; then
     printf "%s\n" "$compact_text" >>"$CLIPBOARD"
