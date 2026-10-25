@@ -25,6 +25,10 @@ image_quality = 90
 ueberzug_scale = 1
 ueberzug_offset = [0, 0, 0, 0]
 
+[tasks]
+# Disable image preview size limit
+image_bound = [0, 0]
+
 [open]
 
 prepend_rules = [{ url = "*.cbz", use = "open" }]
