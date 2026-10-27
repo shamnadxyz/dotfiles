@@ -1,39 +1,43 @@
 #!/usr/bin/env bash
 
-readonly WM="${WM:-Hyprland}"
+WM=""
 
-check_wm() {
-  local error_message="Unknown WM: $WM"
-  if [[ ! "$WM" =~ ^(Hyprland|sway)$ ]]; then
-    echo "$error_message" >&2
+set_wm() {
+  if [[ -n "$SWAYSOCK" ]]; then
+    WM="sway"
+  elif [[ -n "$HYPRLAND_CMD" ]]; then
+    WM="Hyprland"
+  else
+    local error_message="No supported window manager found"
+    log error "$error_message"
     fyi "$error_message"
+    return 1
   fi
 }
 
-PROMPT="You pressed the exit shortcut.
-Do want to exit $WM?"
-
-OPTIONS=$'No\nYes'
-
 pick_option() {
+  local PROMPT="You pressed the exit shortcut.
+  Do want to exit $WM?"
+  local OPTIONS=$'No\nYes'
+
   printf "%s" "$OPTIONS" | fuzzel --dmenu --minimal-lines --only-match --mesg "$PROMPT"
 }
 
 exit_wm() {
   case "$WM" in
-  sway)
-    swaymsg exit
-    ;;
-  Hyprland)
-    hyprctl dispatch 'hl.dsp.exit()'
-    ;;
+    sway)
+      swaymsg exit
+      ;;
+    Hyprland)
+      hyprctl dispatch 'hl.dsp.exit()'
+      ;;
   esac
 }
 
 main() {
   local option
 
-  check_wm
+  set_wm
 
   option="$(pick_option)"
 
