@@ -16,9 +16,10 @@ set $down j
 set $up k
 set $right l
 
-set $terminal foot
+set $terminal foot -c ~/.config/foot/minimal.ini
 set $menu fuzzel
 set $fileManager $terminal --app-id lf -T lf lf
+set $toggle_waybar pkill -SIGUSR1 waybar
 
 ### Output configuration
 # output HDMI-A1 pos 0 0 res 1920x1080 scale 1.0
@@ -85,7 +86,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec brightnessctl s 5%+
 bindsym XF86MonBrightnessDown exec brightnessctl s 5%- --min-value=4800
 bindsym $mod+shift+n exec connmenu
-bindsym Mod4+w exec pkill -SIGUSR1 waybar
+bindsym Mod4+w exec $toggle_waybar
 
 floating_modifier $mod normal
 
@@ -224,7 +225,7 @@ exec wallctl restore
 
 # Status Bar:
 bar {
-  swaybar_command waybar
+  swaybar_command waybar_minimal
   mode hide
 }
 # colors

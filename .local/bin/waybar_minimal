@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec waybar -s ~/.config/waybar/minimal/style.css -c ~/.config/waybar/minimal/config.jsonc
