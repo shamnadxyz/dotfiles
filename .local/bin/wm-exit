@@ -16,8 +16,7 @@ set_wm() {
 }
 
 pick_option() {
-  local PROMPT="You pressed the exit shortcut.
-  Do want to exit $WM?"
+  local PROMPT="Exit $WM?"
   local OPTIONS=$'No\nYes'
 
   printf "%s" "$OPTIONS" | fuzzel --dmenu --minimal-lines --only-match --mesg "$PROMPT"
