@@ -117,7 +117,7 @@ hl.define_submap(
   function() hl.bind(mod .. ' + SHIFT + R', hl.dsp.submap 'reset', { description = 'Restore keymaps' }) end
 )
 
-hl.bind(mod .. ' + R', hl.dsp.submap('resize', { description = 'Resize windows' }))
+hl.bind(mod .. ' + R', hl.dsp.submap 'resize', { description = 'Resize windows' })
 hl.define_submap('resize', function()
   -- Set repeating binds for resizing the active window.
   hl.bind('l', hl.dsp.window.resize { x = 10, y = 0, relative = true }, { repeating = true })
