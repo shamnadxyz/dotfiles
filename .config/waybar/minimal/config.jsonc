@@ -89,7 +89,7 @@
   },
   "tray": {
     "icon-size": 12,
-    "spacing": 4
+    "spacing": 8
   },
   "battery": {
     "format": "{icon} {capacity}",
