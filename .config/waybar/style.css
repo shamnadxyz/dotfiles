@@ -4,7 +4,6 @@
   font-family: "IosevkaTerm NF";
   color: @text;
   font-size: 14px;
-  padding: 4px;
 }
 
 window#waybar {
@@ -21,7 +20,7 @@ window#waybar {
   border-radius: 24px;
   border: 1px solid alpha(@foreground, 0.05);
   padding: 0px 12px;
-  margin: 0px 4px;
+  margin: 8px 4px;
 }
 
 #idle_inhibitor {
@@ -54,13 +53,14 @@ window#waybar {
 }
 
 #custom-power {
-  padding: 8px 15px;
+  padding: 8px 10px;
   padding-left: 12px;
-  margin-right: 2px;
+  margin-right: 10px;
 }
 
 #custom-distro {
   font-size: 16px;
+  margin-left: 10px;
   background: none;
   border: none;
 }
@@ -76,15 +76,17 @@ window#waybar {
 }
 
 #privacy {
-  padding: 0px 1px;
   background-color: alpha(@red, 0.1);
-  color: @red;
+  margin: 8px 4px;
+  padding: 8px;
   border-radius: 24px;
-  margin: 0px 4px;
+  color: @red;
 }
 
-#privacy-item {
-  padding: 0px 4px;
+#privacy-item *{
+  color: @red;
+  margin: 0px 6px;
+  border-radius: 24px;
 }
 
 #tray {
